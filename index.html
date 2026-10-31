@@ -432,7 +432,7 @@ $("run").onclick = async () => {
     if (!resp.ok){
       const raw = String(data.detail || "");
       const capped = /neurons|allocation|4006|daily limit/.test(raw);
-      if (capped) err.textContent = "The panel hit its daily limit. Your words were not stored. Try again later.";
+      if (capped) err.innerHTML = "The panel hit its daily limit. Your words were not stored. While you wait, <a href=\"examples.html\">see six real panel runs</a>.";
       else if (resp.status >= 500) err.textContent = "The panel did not answer. Your words were not stored. Try again in a moment.";
       else err.textContent = raw || "Something broke. Try again in a moment.";
       err.style.display = "block";
