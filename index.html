@@ -61,7 +61,7 @@
   @media(min-width:760px){.cols{grid-template-columns:1fr 1fr}}
   .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
   .chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
-  .chip{font:inherit;font-size:14px;background:#fff;border:1.5px solid #d8cdb2;border-radius:999px;padding:7px 13px;cursor:pointer;color:var(--ink)}
+  .chip{font:inherit;font-size:14px;background:#fff;border:1.5px solid #d8cdb2;border-radius:999px;padding:7px 13px;cursor:pointer;color:var(--ink);min-height:44px}
   .chip[aria-pressed="true"]{background:var(--amber);border-color:var(--amber-deep);font-weight:700}
   .card h3{margin:0 0 6px;font-size:15px;text-transform:uppercase;letter-spacing:.08em;color:var(--amber-deep)}
   .card p{margin:0;font-size:18px}
@@ -286,7 +286,11 @@ $("run").onclick = async () => {
     clearTimeout(timer);
     const data = await resp.json();
     if (!resp.ok){
-      err.textContent = data.detail || "Something broke. Try again in a moment.";
+      const raw = String(data.detail || "");
+      const capped = /neurons|allocation|4006/.test(raw);
+      if (capped) err.textContent = "The panel hit its daily limit. Your words were not stored. Try again later.";
+      else if (resp.status >= 500) err.textContent = "The panel did not answer. Your words were not stored. Try again in a moment.";
+      else err.textContent = raw || "Something broke. Try again in a moment.";
       err.style.display = "block";
       return;
     }
