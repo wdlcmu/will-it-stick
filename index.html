@@ -50,6 +50,7 @@
   .samples{font-size:15px;color:var(--soft);margin:10px 2px 0}
   .samples button{font:inherit;font-size:15px;background:none;border:none;padding:6px 4px;
     color:var(--amber-deep);text-decoration:underline;cursor:pointer;min-height:44px}
+  .samples a{color:var(--amber-deep);display:inline-block;padding:12px 4px;min-height:44px}
   .err{display:none;background:#fdeeee;border:1px solid #efc4c4;color:#7c2222;
     border-radius:10px;padding:12px;margin-top:14px;font-size:16px}
   h2{font-size:24px;margin:34px 0 8px}
@@ -94,6 +95,16 @@
   .fix{border-left:5px solid var(--amber);background:#fff8e6}
   .deal{margin-top:22px;font-size:19px;font-weight:bold}
   .fineprint{color:var(--soft);font-size:14px}
+  .story{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:16px 18px;margin:0 0 20px;box-shadow:0 2px 14px rgba(90,70,20,.06)}
+  .story h2{margin:0 0 8px;font-size:24px}
+  .story p{font-size:17px;margin:4px 0;max-width:38em}
+  .story h3{margin:11px 0 5px;font-size:15px;text-transform:uppercase;letter-spacing:.08em;color:var(--amber-deep)}
+  .story .quote{font-size:17px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px 11px;margin:0}
+  .story .afterbox{border-left:5px solid var(--amber);background:#fff8e6;border-radius:10px;padding:9px 11px}
+  .story .afterbox p{margin:0;font-size:17px}
+  .story .try{display:inline-block;margin-top:8px;font-weight:bold;font-size:17px;line-height:1.2;
+    color:var(--amber-deep);padding:12px 4px;min-height:44px}
   .spin{display:inline-block;width:18px;height:18px;border:3px solid #fff3;
     border-top-color:#241a02;border-radius:50%;vertical-align:-3px;
     animation:sp 0.8s linear infinite;margin-right:8px}
@@ -106,6 +117,22 @@
     <h1>Afraid they'll forget it?</h1>
     <p class="sub">Paste yours. Find the one line they keep.</p>
   </header>
+
+  <section class="story" aria-label="A real check">
+    <h2>One real check</h2>
+    <p>A friend asked what was new. Rather than say &ldquo;good, busy,&rdquo; he let three cold readers judge his own line.</p>
+    <h3>The words</h3>
+    <p class="quote">&ldquo;I am starting basketball on my leave of work&rdquo;</p>
+    <h3>What they heard</h3>
+    <p class="quote">&ldquo;The author starts basketball on leave.&rdquo;</p>
+    <p>The sport stuck, but no scene came with it. Stories scored 1 of 10.</p>
+    <h3>The one fix</h3>
+    <p>Say, &ldquo;I am playing basketball during my time off.&rdquo;</p>
+    <h3>With the one fix</h3>
+    <div class="afterbox"><p>&ldquo;I am playing basketball on my leave of work.&rdquo;</p></div>
+    <p>One line changed. The rest stayed his.</p>
+    <a class="try" href="#tool">Try yours below</a> · <a class="try" href="examples.html">All six real runs</a>
+  </section>
 
   <section class="tool" id="tool">
     <div class="chips" role="group" aria-label="Common moments">
@@ -127,15 +154,19 @@
       <button type="button" id="sample-strong">A repair night note</button> ·
       <button type="button" id="sample-weak">A work memo</button>
     </p>
+    <p class="samples">Not ready to paste yours? <a href="examples.html">See six real panel runs</a> first.</p>
     <div class="err" id="err"></div>
   </section>
 
   <section id="results" aria-live="polite">
-    <h2>Six scores</h2>
-    <div class="bars" id="bars"></div>
-
     <h2>The core</h2>
     <div id="core"></div>
+
+    <h2>The one fix</h2>
+    <div class="card fix"><p id="fix"></p></div>
+
+    <h2>Six scores</h2>
+    <div class="bars" id="bars"></div>
 
     <h2>Before and after</h2>
     <div class="ba-grid">
@@ -159,9 +190,6 @@
         <div class="card"><h3>Concrete swaps</h3><ul class="swaps" id="swaps"></ul></div>
       </div>
     </div>
-
-    <h2>The one fix</h2>
-    <div class="card fix"><p id="fix"></p></div>
 
     <p class="deal">We don't write it for you. You stay the author.</p>
     <p class="fineprint" id="fineprint"></p>
