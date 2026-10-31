@@ -59,6 +59,15 @@
   .split li{margin:6px 0;font-size:17px}
   .cols{display:grid;gap:14px}
   @media(min-width:760px){.cols{grid-template-columns:1fr 1fr}}
+  .ba-grid{display:grid;gap:14px}
+  @media(min-width:760px){.ba-grid{grid-template-columns:1fr 1fr}}
+  .ba-main,.ba-side{display:grid;gap:14px;align-content:start}
+  .pin{border:2px solid var(--amber);background:#fff8e6;border-radius:10px;padding:10px 12px;margin-bottom:12px}
+  .pin p{font-size:19px;font-weight:bold}
+  .count-line{font-size:15px;color:var(--soft);margin:10px 0 0;font-weight:bold}
+  .orig mark{background:#ffe08a;border-radius:3px;padding:0 1px;color:inherit}
+  .orig mark.out{background:#f3c2c2;text-decoration:line-through}
+  .starters-note p{font-size:16px;color:var(--soft)}
   .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
   .chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
   .chip{font:inherit;font-size:14px;background:#fff;border:1.5px solid #d8cdb2;border-radius:999px;padding:7px 13px;cursor:pointer;color:var(--ink);min-height:44px}
@@ -114,16 +123,28 @@
     <h2>The core</h2>
     <div id="core"></div>
 
-    <h2>Small strong starts</h2>
-    <div class="cols">
-      <div class="card"><h3>The proverb</h3><p id="proverb"></p></div>
-      <div class="card"><h3>The gap opener</h3><p id="gap"></p></div>
-      <div class="card"><h3>The story</h3><p id="story"></p></div>
-      <div class="card"><h3>Your words, as pasted</h3><p class="orig" id="orig"></p></div>
+    <h2>Before and after</h2>
+    <div class="ba-grid">
+      <div class="ba-main">
+        <div class="card"><h3>Your words</h3><p class="orig" id="orig"></p></div>
+        <div class="card" id="after-card">
+          <div class="pin" id="lead-pin" hidden>
+            <h3>Lead with this.</h3>
+            <p id="lead-text"></p>
+          </div>
+          <h3>With the one fix</h3>
+          <p class="orig" id="after"></p>
+          <p class="count-line" id="count-line"></p>
+        </div>
+      </div>
+      <div class="ba-side">
+        <div class="card starters-note"><h3>Starters</h3><p>Shapes to start from. Not your text.</p></div>
+        <div class="card"><h3>The proverb</h3><p id="proverb"></p></div>
+        <div class="card"><h3>The gap opener</h3><p id="gap"></p></div>
+        <div class="card"><h3>The story</h3><p id="story"></p></div>
+        <div class="card"><h3>Concrete swaps</h3><ul class="swaps" id="swaps"></ul></div>
+      </div>
     </div>
-
-    <h2>Concrete swaps</h2>
-    <div class="card"><ul class="swaps" id="swaps"></ul></div>
 
     <h2>The one fix</h2>
     <div class="card fix"><p id="fix"></p></div>
@@ -206,6 +227,57 @@ tool.ondrop = async (e) => {
 
 function barColor(v){ return v >= 7 ? "var(--good)" : v >= 4 ? "var(--mid)" : "var(--bad)"; }
 
+// Word-level diff for the before/after pair: LCS over word tokens.
+// Returns flags marking the words in each text that are NOT shared.
+// Falls back to a plain set difference on very long texts.
+function diffFlags(aText, bText){
+  const split = (s) => s.split(/(\s+)/).filter((t) => t.length);
+  const aT = split(aText), bT = split(bText);
+  const aW = aT.map((t, i) => ({ t, i })).filter((x) => !/^\s+$/.test(x.t));
+  const bW = bT.map((t, i) => ({ t, i })).filter((x) => !/^\s+$/.test(x.t));
+  const aChanged = new Set(), bChanged = new Set();
+  if (aW.length * bW.length > 120000){
+    const aSet = new Set(aW.map((x) => x.t)), bSet = new Set(bW.map((x) => x.t));
+    aW.forEach((x) => { if (!bSet.has(x.t)) aChanged.add(x.i); });
+    bW.forEach((x) => { if (!aSet.has(x.t)) bChanged.add(x.i); });
+    return { aT, bT, aChanged, bChanged };
+  }
+  const m = aW.length, n = bW.length;
+  const dp = Array.from({length: m + 1}, () => new Array(n + 1).fill(0));
+  for (let i = m - 1; i >= 0; i--)
+    for (let j = n - 1; j >= 0; j--)
+      dp[i][j] = aW[i].t === bW[j].t ? dp[i + 1][j + 1] + 1 : Math.max(dp[i + 1][j], dp[i][j + 1]);
+  let i = 0, j = 0;
+  const aIn = new Set(), bIn = new Set();
+  while (i < m && j < n){
+    if (aW[i].t === bW[j].t){ aIn.add(aW[i].i); bIn.add(bW[j].i); i++; j++; }
+    else if (dp[i + 1][j] >= dp[i][j + 1]) i++;
+    else j++;
+  }
+  aW.forEach((x) => { if (!aIn.has(x.i)) aChanged.add(x.i); });
+  bW.forEach((x) => { if (!bIn.has(x.i)) bChanged.add(x.i); });
+  return { aT, bT, aChanged, bChanged };
+}
+
+function paintDiff(el, tokens, changed, cls){
+  el.innerHTML = "";
+  tokens.forEach((t, i) => {
+    if (changed.has(i)){
+      const mk = document.createElement("mark");
+      if (cls) mk.className = cls;
+      mk.textContent = t;
+      el.appendChild(mk);
+    } else {
+      el.appendChild(document.createTextNode(t));
+    }
+  });
+}
+
+function firstLine(s){
+  const m = String(s || "").match(/[^.!?]+[.!?]+/);
+  return (m ? m[0] : String(s || "")).trim();
+}
+
 function render(r, original){
   const bars = $("bars"); bars.innerHTML = "";
   for (const el of r.elements){
@@ -246,7 +318,31 @@ function render(r, original){
   $("proverb").textContent = r.proverb;
   $("gap").textContent = r.gap_opener;
   $("story").textContent = r.story;
-  $("orig").textContent = original;
+  // The before/after pair: before is the visitor's words, verbatim.
+  // The after card exists only when the server bound kept after_text;
+  // when it is null, the one fix below stands as an instruction only.
+  const afterCard = $("after-card");
+  if (r.after_text){
+    const d = diffFlags(original, r.after_text);
+    paintDiff($("orig"), d.aT, d.aChanged, "out");
+    paintDiff($("after"), d.bT, d.bChanged, "");
+    const n = (typeof r.changed_lines === "number") ? r.changed_lines : 1;
+    $("count-line").textContent = n === 1 ? "1 line changed." : n + " lines changed.";
+    // The core rides on top of the after card. On a split, the panel
+    // names no single core, so the pin shows the line the cut kept:
+    // the first line of the after text itself.
+    const lead = r.core ? r.core : (r.core_split ? firstLine(r.after_text) : null);
+    if (lead){
+      $("lead-text").textContent = "“" + lead + "”";
+      $("lead-pin").hidden = false;
+    } else {
+      $("lead-pin").hidden = true;
+    }
+    afterCard.style.display = "";
+  } else {
+    $("orig").textContent = original;
+    afterCard.style.display = "none";
+  }
   const sw = $("swaps"); sw.innerHTML = "";
   if (r.swaps && r.swaps.length){
     for (const s of r.swaps){
@@ -287,7 +383,7 @@ $("run").onclick = async () => {
     const data = await resp.json();
     if (!resp.ok){
       const raw = String(data.detail || "");
-      const capped = /neurons|allocation|4006/.test(raw);
+      const capped = /neurons|allocation|4006|daily limit/.test(raw);
       if (capped) err.textContent = "The panel hit its daily limit. Your words were not stored. Try again later.";
       else if (resp.status >= 500) err.textContent = "The panel did not answer. Your words were not stored. Try again in a moment.";
       else err.textContent = raw || "Something broke. Try again in a moment.";
