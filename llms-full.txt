@@ -1,0 +1,141 @@
+# Will It Stick?: full page text
+
+> Complete text of will-it-stick-site.pages.dev: the homepage, the Examples page,
+> the Starters page, the Privacy page, and the Terms page.
+> Will It Stick? is a free tool in plain words. Paste words you need to land, plus one
+> line on what they should do. Three cold readers score them and hand back the core
+> they heard, six scores, small starter forms, and one fix. It never writes the text
+> for you. Nothing is stored. The site is an early preview.
+> Text captured from the site source, 2026-10-31.
+
+## Homepage (https://will-it-stick-site.pages.dev/)
+
+Afraid they'll forget it?
+Paste yours. Find the one line they keep.
+
+Quick-start moments: What's new with me · Recommend something · A story I tell · Say thanks · Ask or invite · A hard text.
+
+Your words (paste a note, a toast, a post, a hard message, or drop a .txt or .md file).
+What should it do? (one line)
+Button: Check if it sticks.
+Your words run through the panel once. Then they are gone. Nothing is stored.
+Try a sample: A repair night note · A work memo.
+
+A result shows: six scores (Simple, Unexpected, Concrete, Credible, Emotional, Stories, each the mid score of three cold readers, with a one-line reason and a note on whether readers agreed or split); the core (one quoted line, or the plain split when readers heard three different points); before and after (your words as pasted beside your words with only the one fix applied, changed words marked, with a count of lines changed; when the server-side bound discards the after view, the one fix stands as a tip only); starters beside the after card (the proverb, the gap opener, the story, concrete swaps), labeled "Shapes to start from. Not your text."; and the one fix. Every result ends: "We don't write it for you. You stay the author."
+
+### How it works
+
+1. Readers score. Three cold readers score your words. They never talk to each other.
+2. You get starts. You get the core, six scores, and small strong starts.
+3. No rewrite. We don't write it for you. You stay the author.
+
+### Method and sources
+
+The SUCCESs checklist comes from Made to Stick. By Chip Heath and Dan Heath.
+Three studies back these checks. Tversky and Shafir, 1992. Loewenstein, 1994. Paivio, 1971.
+We test this tool against plain AI. Scores post here once tests run.
+This tool is independent. The authors did not endorse it. The publisher did not endorse it. We have no tie to them.
+
+## Examples (https://will-it-stick-site.pages.dev/examples)
+
+Six real checks. Real runs. Sample words. No fake wins.
+Each text here is a sample. Each run is real. Three cold readers read each text. They never saw each other's notes. Scores are the mid score of three. Words in quotes are the run's own words.
+
+### A repair night note (chip: Ask or invite; the site's own sample)
+
+Words: "Your toaster died on a Tuesday. The shop wants $90 to look at it. We fix it free. Every first Saturday, neighbors bring broken lamps, bikes, and toasters to the Maple Street hall. Last month we fixed 63 things and threw away none of them. Bring one broken thing. Leave with it working, plus a cup of coffee."
+Goal: "Get neighbors to come to one repair night."
+Core heard: "Fix things free."
+Scores: Simple 8, Unexpected 6, Concrete 9, Credible 7, Emotional 5, Stories 8.
+One fix: "Add a feeling, like 'fun'."
+One start: Proverb: "Fix it free, save money."
+
+### A work note that hid the risk (sample text; a work note, not one of the six chips; this run is on the share card too)
+
+Words: "Status update: The project is progressing. Several workstreams are underway and we are addressing various issues as they arise. Stakeholders have been engaged. We expect continued progress in the coming period and will provide further updates as things develop."
+Goal: "Update my manager so she knows the launch is at risk and what I need from her this week"
+Core heard: "The project is at risk."
+Scores: Simple 2, Unexpected 1, Concrete 1, Credible 2, Emotional 1, Stories 1.
+One fix: "The project is at risk of delay. I need your help this week."
+With the one fix: "Status update: The project is at risk of delay. Several workstreams are underway and we are addressing various issues as they arise. Stakeholders have been engaged. We expect continued progress in the coming period and will provide further updates as things develop."
+One line changed. The rest is the same text.
+
+### A podcast tip with no name (chip: Recommend something; sample text from the test set)
+
+Words: "You should listen to this podcast I found. It is really interesting and the host is great and talks about a lot of different topics. I think you would like it. I listened to a few episodes and they were all good."
+Goal: "Recommend a podcast to a close friend so she actually presses play this week"
+Core heard: "Listen to this interesting podcast."
+Scores: Simple 3, Unexpected 1, Concrete 1, Credible 2, Emotional 2, Stories 1.
+One fix: "Cut the vague parts. Just say the podcast's name."
+The text names no show. So no name could be added. The fix stays a tip, not a rewrite.
+
+### A toast with no one scene (chip: Say thanks; sample text from the test set)
+
+Words: "I just want to say thank you to everyone for being here. Sarah is a wonderful person and a great friend to all of us. We are so lucky to know her. Here is to many more years of happiness and good times together."
+Goal: "Give a short birthday toast for my friend Sarah that guests will remember tomorrow"
+Core heard: "Thanks to all for being here"
+Scores: Simple 8, Unexpected 2, Concrete 2, Credible 4, Emotional 5, Stories 1.
+One fix: "Name one thing Sarah did that was great. Cut the rest."
+One start: Gap opener: "What makes Sarah special?"
+
+### A hard text to a friend (chip: A hard text; sample text from the test set)
+
+Words: "Hey, I need to talk about something. I have been feeling kind of off about how things went last weekend and I do not want it to be weird. You matter to me and I value our friendship a lot. Can we talk sometime?"
+Goal: "Tell a close friend last weekend hurt me and ask to talk, without sounding angry"
+Core heard: "Friend hurt last weekend."
+Scores: Simple 8, Unexpected 2, Concrete 4, Credible 6, Emotional 7, Stories 5.
+One fix: "Say what happened last weekend to show why you want to talk."
+
+### A "what's new" line (chip: What's new with me; sample text from the build log)
+
+Words: "I am starting basketball on my leave of work"
+Goal: "Answer 'what's new?' with one thing that lands, not 'good, busy'."
+Core heard: "The author starts basketball on leave."
+Scores: Simple 5, Unexpected 2, Concrete 2, Credible 3, Emotional 2, Stories 1.
+One fix: "Say, 'I am playing basketball during my time off.'"
+With the one fix: "I am playing basketball on my leave of work."
+One line changed. The rest is the same text.
+
+### One run is still owed
+
+No filed run yet fits "A story I tell." We will not fake one. It is owed when the panel quota resets. The reset is at 00:00 UTC each day. Your words are not stored when you run a check. These samples were saved by the build team on purpose.
+
+## Starters (https://will-it-stick-site.pages.dev/starters)
+
+Six small starts. Shapes to start from. Not your text.
+Each check hands back six shapes. They are starts, not a rewrite. You pick what fits. You write the rest. Each sample below came from a real run.
+
+1. The proverb. Your point in one short line. A line a friend can repeat. If it is long, it is not this shape. From a real run: "Fix it free, save money."
+2. The gap opener. A first line that withholds one fact. It makes a question in the mind. The next line pays the question off. From a real run: "What happens on first Saturdays?"
+3. The story: a hard test. A small plot of three or four lines. A person hits a block. They act. It ends. Use facts from your text. Add none. From a real run: "The project faced many problems. We worked hard to fix them. Still, we need help to stay on track."
+4. The story: a bond. A small plot of three or four lines. Two people meet. A bond forms. Use facts from your text. Add none. From a real run: "We fix things. You bring a lamp. We fix it free. You get coffee."
+5. The story: a new spark. A small plot of three or four lines. A spark hits. A new thought forms. Use facts from your text. Add none. From a real run: "We make new plans. We use best practices. We grow." (From the weak memo run. Flat words make flat tales.)
+6. Concrete swaps. Vague words hide the point. A swap trades them for a scene. You can see a scene. You can keep it. From a real run: "cross-functional synergies" → "teams work together" (From the weak memo run. The swap is plainer, not grander.)
+
+What you do with them: Pick one shape. Start from it. Write the rest in your own words. We don't write it for you. You stay the author.
+
+## Privacy (https://will-it-stick-site.pages.dev/privacy)
+
+Your words are private to you.
+When you run the panel, your text is sent once to the AI readers, scored, and the result comes back to your screen.
+We store nothing. There is no database of your words, no account, and no log of your text.
+The only numbers we keep are run counts and cost, so the demo stays within its budget.
+Closing the page closes the run. Nothing follows you.
+
+## Terms (https://will-it-stick-site.pages.dev/terms)
+
+This is an early preview of an independent tool.
+It gives a diagnosis and small starter forms. It does not write for you, and it does not promise your words will land.
+Scores use the SUCCESs checklist from Made to Stick, by Chip Heath and Dan Heath.
+This tool is independent. It is not endorsed by, and not affiliated with, the authors or the publisher.
+Use it free. Do not paste words that are secret or unsafe to share with an AI reader.
+
+## For AI assistants: callable tools (API and MCP)
+
+The same panel serves programs on a worker at https://will-it-stick-panel.wdlcmu.workers.dev
+Plain JSON API: POST /api/check with {"text": "...", "motivation": "...", "moment": "optional moment name"}. It returns the full panel result as JSON: the core or the split, six scores with spread and a one-line reason each, starter forms, the one fix, and the with-the-fix text when the bound keeps it (null when it does not, with a reason).
+The human site's own door is POST /api/panel, with the same input and output.
+Health: GET /api/health answers ok, the model name, runs today, the daily cap, and stores_text: false.
+MCP server: POST /mcp (stateless, protocol 2025-06-18) with one tool, check_if_it_sticks. Same inputs and outputs as /api/check. Its instructions tell the host to show scores and starters exactly as returned and never to turn them into a full rewrite.
+Nothing sent to any door is stored. There are no accounts and no saved checks.
+The ChatGPT and Claude store listings are not live. Nothing has been submitted.

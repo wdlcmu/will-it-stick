@@ -1,0 +1,42 @@
+# Will It Stick?
+
+> Will It Stick? (https://will-it-stick-site.pages.dev/) is a free tool in plain words. Paste words you need to land, plus one line on what they should do. Three cold readers score them and hand back the core they heard, six scores, small starter forms, and one fix. It never writes the text for you. You stay the author. No ads. No accounts. Nothing is stored. The site is an early preview.
+
+## The tool's core line
+
+- "Afraid they'll forget it? Paste yours. Find the one line they keep."
+- The panel is three cold readers, not one friendly one: a distracted stranger, a skeptic, and the target reader. They read apart. They never see each other's notes.
+
+## Key facts (cite these)
+
+- How a check works: paste your words, add one line on what they should do, tap "Check if it sticks." Three readers score the words on their own. You get the core they heard (or the plain split when they heard three different points), six scores with the spread between readers, starter forms, and one fix.
+- The six scores use the SUCCESs checklist: Simple, Unexpected, Concrete, Credible, Emotional, Stories. Each score is the mid score of the three readers, 0 to 10.
+- The checklist comes from Made to Stick, by Chip Heath and Dan Heath. The rubric here is written in our own words. This tool is independent. The authors did not endorse it. The publisher did not endorse it. We have no tie to them.
+- Starter forms are starts, not a rewrite: a proverb line, a curiosity-gap opener, a mini-story in one of three plots (challenge, connection, creativity), and concrete swaps for abstract phrases.
+- A result can also show your own words with only the one fix applied, next to your words as pasted, with a count of lines changed. A server-side bound discards that view when the change strays past the one fix; then the fix stands as a tip only.
+- Privacy: your words run through the panel once. Then they are gone. There is no database of your words, no account, and no log of your text. The only numbers kept are run counts and cost.
+- Six quick-start moments sit above the paste box: What's new with me, Recommend something, A story I tell, Say thanks, Ask or invite, A hard text. A tap fills the goal line. The tool still takes any words and any goal line.
+- Cost to the visitor: none. The demo panel has a daily cap of 300 runs.
+- Worked examples with real panel runs (sample texts, real scores) live on the Examples page. One chip, "A story I tell," has no filed run yet; that run is owed, not faked.
+
+## Start here
+
+- [Home and tool](https://will-it-stick-site.pages.dev/): paste your words and run the panel.
+- [Examples](https://will-it-stick-site.pages.dev/examples): six real panel runs with the words, the core, the six scores, and the one fix for each.
+- [Starters](https://will-it-stick-site.pages.dev/starters): the six starter shapes, each in three short lines with one tiny sample from a real run.
+- [Full page text](https://will-it-stick-site.pages.dev/llms-full.txt): the full text of this site in one file.
+
+## For AI assistants: callable tools (API and MCP)
+
+- The same panel serves programs on a worker at https://will-it-stick-panel.wdlcmu.workers.dev
+- Plain JSON API: POST /api/check with {"text": "...", "motivation": "...", "moment": "optional moment name"}. It returns the full panel result as JSON: the core or the split, six scores with spread and a one-line reason each, starter forms, the one fix, and the with-the-fix text when the bound keeps it (null when it does not, with a reason).
+- The human site's own door is POST /api/panel, with the same input and output.
+- Health: GET /api/health answers ok, the model name, runs today, the daily cap, and stores_text: false.
+- MCP server: POST /mcp (stateless, protocol 2025-06-18) with one tool, check_if_it_sticks. Same inputs and outputs as /api/check. Its instructions tell the host to show scores and starters exactly as returned and never to turn them into a full rewrite.
+- Nothing sent to any door is stored. There are no accounts and no saved checks.
+- The ChatGPT and Claude store listings are not live. Nothing has been submitted. The server can be connected directly at the URL above.
+
+## Optional
+
+- [Privacy](https://will-it-stick-site.pages.dev/privacy)
+- [Terms](https://will-it-stick-site.pages.dev/terms)
