@@ -286,9 +286,7 @@ $("run").onclick = async () => {
     clearTimeout(timer);
     const data = await resp.json();
     if (!resp.ok){
-      err.textContent = data.error === "panel_offline"
-        ? "The panel is off in this early preview. Check back soon."
-        : (data.detail || "Something broke. Try again in a moment.");
+      err.textContent = data.detail || "Something broke. Try again in a moment.";
       err.style.display = "block";
       return;
     }
