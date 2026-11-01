@@ -130,6 +130,34 @@ Scores use the SUCCESs checklist from Made to Stick, by Chip Heath and Dan Heath
 This tool is independent. It is not endorsed by, and not affiliated with, the authors or the publisher.
 Use it free. Do not paste words that are secret or unsafe to share with an AI reader.
 
+## How to make a message stick (https://will-it-stick-site.pages.dev/how-to-make-a-message-stick)
+
+Say one thing. Say it in things you can touch. Leave one gap. End with a scene.
+The four moves: 1. One core — if they can only keep one line, which line? Pick it before you write the rest. 2. Concrete words — swap each big word for a thing, a place, or a time. 3. One gap — open a question your reader wants closed; answer it one beat later than they expect. 4. One scene — end on a moment they can picture, not a summary.
+Before: "Team, going forward we all need to communicate better and stay aligned on priorities." After: "Every Friday at four, one of us reads the week's worst email out loud. Then we fix it together." What changed: "communicate better" became a time, a place, and an act; there is now one line a listener can repeat on Monday. (The pair is written for the page; it is not a panel run.)
+These moves come from the SUCCESs checklist in Made to Stick, by Chip Heath and Dan Heath. This site is independent; the authors did not endorse it.
+
+## Why do people forget what I said? (https://will-it-stick-site.pages.dev/why-do-people-forget-what-i-said)
+
+They rarely forget you. They never got one thing to hold.
+Three reasons it slides off: too many points (a list of five equal points leaves nothing first; memory keeps one core); big abstract words ("improve," "quality," "going forward" — nothing to picture means nothing to keep; concrete words stick better, Paivio 1971); no open question (a small gap makes the mind lean in, Loewenstein 1994).
+Before: "Quick update: the budget is tight, hiring is paused, the move is in June, and please keep receipts for everything this quarter." After: "Keep every receipt this quarter. The budget is tight, hiring is paused, and we move in June — but receipts are the one thing that cannot be fixed later." What changed: four equal facts became one core, said first and said twice. (The pair is written for the page; it is not a panel run.)
+The fix, in one line: say the one thing first, in concrete words, and let the rest support it.
+
+## How to write something people remember (https://will-it-stick-site.pages.dev/how-to-write-something-people-remember)
+
+Write the line you want repeated. Then earn it.
+Four passes over your draft: Pass 1, find the core — cross out every sentence but one; the survivor is your message. Pass 2, swap the fog — trade each abstract word for a scene ("soon" becomes "by Friday"). Pass 3, open one gap — a question, a surprise, a number that begs a second look. Pass 4, test it cold — show it to someone who owes you nothing and ask what they kept; that answer is the grade.
+Before: "Hi all, just a reminder that our annual charity drive is coming up and participation is strongly encouraged this year. Thanks!" After: "Last year, one desk gave a bike to a kid who had never owned one. This year's drive starts Monday. One desk, one kid — sign up by Friday." What changed: a reminder became a scene, a deadline, and one small act. (The pair is written for the page; it is not a panel run.)
+The passes follow the SUCCESs checklist from Made to Stick, by Chip Heath and Dan Heath. This site is independent; the authors did not endorse it.
+
+## What makes an idea stick? (https://will-it-stick-site.pages.dev/what-makes-an-idea-stick)
+
+Six checks. One plain line each. Ideas that pass get repeated.
+Simple: one core, stated first. Unexpected: a break in the pattern. Concrete: things you can touch — "a red door," not "an entrance." Credible: proof a skeptic can check — a source, a test, a number with a name. Emotional: one person, not a crowd. Stories: a small scene with a turn — someone tries, something changes.
+Before: "Our new app helps users manage their tasks more efficiently and stay organized." After: "Your list, on one screen, before your coffee cools. If it takes longer than that, we failed." What changed: "efficiently" passed none of the six; the new line is simple, concrete, and checkable by breakfast. (The pair is written for the page; it is not a panel run.)
+The SUCCESs checklist comes from Made to Stick, by Chip Heath and Dan Heath; the wording here is our own. This tool is independent and not endorsed by or affiliated with the authors or the publisher. On this site, three cold readers score your words on these six.
+
 ## For AI assistants: callable tools (API and MCP)
 
 The same panel serves programs on a worker at https://will-it-stick-panel.wdlcmu.workers.dev
