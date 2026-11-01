@@ -58,7 +58,7 @@ Core heard: "The project is at risk."
 Scores: Simple 2, Unexpected 1, Concrete 1, Credible 2, Emotional 1, Stories 1.
 One fix: "The project is at risk of delay. I need your help this week."
 With the one fix: "Status update: The project is at risk of delay. Several workstreams are underway and we are addressing various issues as they arise. Stakeholders have been engaged. We expect continued progress in the coming period and will provide further updates as things develop."
-One line changed. The rest is the same text.
+One line changed. The rest is the same text. The fix asked for one more line, 'I need your help this week.' The rewrite never added it.
 
 ### A podcast tip with no name (chip: Recommend something; sample text from the test set)
 
@@ -94,7 +94,7 @@ Core heard: "The author starts basketball on leave."
 Scores: Simple 5, Unexpected 2, Concrete 2, Credible 3, Emotional 2, Stories 1.
 One fix: "Say, 'I am playing basketball during my time off.'"
 With the one fix: "I am playing basketball on my leave of work."
-One line changed. The rest is the same text.
+One word changed: starting became playing. The rest is the same text. The fix said 'during my time off.' The rewrite kept 'on my leave of work' instead.
 
 ### One run is still owed
 

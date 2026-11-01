@@ -105,6 +105,23 @@
   .story .afterbox p{margin:0;font-size:17px}
   .story .try{display:inline-block;margin-top:8px;font-weight:bold;font-size:17px;line-height:1.2;
     color:var(--amber-deep);padding:12px 4px;min-height:44px}
+  .hint{font-size:15px;color:var(--soft);margin:-2px 0 8px}
+  /* compact hero before/after strip (replaces the tall story block) */
+  .strip{padding:14px 16px;margin:0 0 16px}
+  .strip h2{font-size:20px;margin:0 0 6px}
+  .strip .for{font-size:16px;margin:0 0 8px}
+  .strip .pair p{font-size:17px;margin:6px 0}
+  .strip .tag{display:inline-block;font-size:12px;font-weight:bold;
+    text-transform:uppercase;letter-spacing:.08em;color:var(--amber-deep);margin-right:8px}
+  .strip mark{background:#ffe08a;border-radius:3px;padding:0 1px;color:inherit}
+  .strip mark.out{background:#f3c2c2;text-decoration:line-through}
+  .strip .heard{font-size:15px;color:var(--soft);margin:6px 0 0}
+  .strip .count-line{margin:6px 0 0}
+  .strip .links{margin:2px 0 0}
+  .copybtn{font:inherit;font-size:16px;font-weight:bold;background:#fff;
+    border:1.5px solid var(--amber-deep);color:var(--amber-deep);border-radius:10px;
+    padding:10px 16px;cursor:pointer;min-height:44px;margin-top:10px}
+  .copybtn:active{transform:translateY(1px)}
   .spin{display:inline-block;width:18px;height:18px;border:3px solid #fff3;
     border-top-color:#241a02;border-radius:50%;vertical-align:-3px;
     animation:sp 0.8s linear infinite;margin-right:8px}
@@ -118,20 +135,16 @@
     <p class="sub">Paste yours. Find the one line they keep.</p>
   </header>
 
-  <section class="story" aria-label="A real check">
+  <section class="story strip" aria-label="A real check">
     <h2>One real check</h2>
-    <p>A friend asked what was new. Rather than say &ldquo;good, busy,&rdquo; he let three cold readers judge his own line.</p>
-    <h3>The words</h3>
-    <p class="quote">&ldquo;I am starting basketball on my leave of work&rdquo;</p>
-    <h3>What they heard</h3>
-    <p class="quote">&ldquo;The author starts basketball on leave.&rdquo;</p>
-    <p>The sport stuck, but no scene came with it. Stories scored 1 of 10.</p>
-    <h3>The one fix</h3>
-    <p>Say, &ldquo;I am playing basketball during my time off.&rdquo;</p>
-    <h3>With the one fix</h3>
-    <div class="afterbox"><p>&ldquo;I am playing basketball on my leave of work.&rdquo;</p></div>
-    <p>One line changed. The rest stayed his.</p>
-    <a class="try" href="#tool">Try yours below</a> · <a class="try" href="examples.html">All six real runs</a>
+    <p class="for">For anyone whose words have to land. His were an answer to a friend asking what was new.</p>
+    <div class="pair">
+      <p><span class="tag">Before</span>&ldquo;I am <mark class="out">starting</mark> basketball on my leave of work.&rdquo;</p>
+      <p><span class="tag">After</span>&ldquo;I am <mark>playing</mark> basketball on my leave of work.&rdquo;</p>
+    </div>
+    <p class="heard">Three cold readers heard the sport, and no scene. Stories scored 1 of 10.</p>
+    <p class="count-line">1 line changed. The rest stayed his.</p>
+    <p class="links"><a class="try" href="#tool">Try yours below</a> &middot; <a class="try" href="examples.html">All six real runs</a></p>
   </section>
 
   <section class="tool" id="tool">
@@ -147,7 +160,8 @@
     <textarea id="text" placeholder="Paste a note, a toast, a post, a hard message…"></textarea>
     <p class="drop">or <u id="drop-link">drop a .txt or .md file</u><input type="file" id="file" accept=".txt,.md,text/plain,text/markdown" hidden></p>
     <label for="motivation">What should it do?</label>
-    <input type="text" id="motivation" maxlength="140" placeholder="Make my partner feel thanked, not lectured.">
+    <p class="hint" id="motivation-hint">One line: who reads it, and what should they do, feel, or remember?</p>
+    <input type="text" id="motivation" maxlength="140" aria-describedby="motivation-hint" placeholder="Make my partner feel thanked, not lectured.">
     <button class="btn" id="run">Check if it sticks</button>
     <p class="privacy">Your words run through the panel once. Then they are gone. Nothing is stored.</p>
     <p class="samples">Try a sample:
@@ -180,6 +194,7 @@
           <h3>With the one fix</h3>
           <p class="orig" id="after"></p>
           <p class="count-line" id="count-line"></p>
+          <button type="button" class="copybtn" id="copy-after" hidden>Copy this version</button>
         </div>
       </div>
       <div class="ba-side">
@@ -321,6 +336,23 @@ function paintDiff(el, tokens, changed, cls){
   });
 }
 
+let lastAfter = "";
+$("copy-after").onclick = async () => {
+  if (!lastAfter) return;
+  const b = $("copy-after");
+  try { await navigator.clipboard.writeText(lastAfter); }
+  catch(e) {
+    const ta = document.createElement("textarea");
+    ta.value = lastAfter;
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand("copy"); } catch(_) {}
+    ta.remove();
+  }
+  b.textContent = "Copied";
+  setTimeout(() => { b.textContent = "Copy this version"; }, 2000);
+};
+
 function firstLine(s){
   const m = String(s || "").match(/[^.!?]+[.!?]+/);
   return (m ? m[0] : String(s || "")).trim();
@@ -386,9 +418,14 @@ function render(r, original){
     } else {
       $("lead-pin").hidden = true;
     }
+    lastAfter = r.after_text;
+    $("copy-after").hidden = false;
+    $("copy-after").textContent = "Copy this version";
     afterCard.style.display = "";
   } else {
     $("orig").textContent = original;
+    lastAfter = "";
+    $("copy-after").hidden = true;
     afterCard.style.display = "none";
   }
   const sw = $("swaps"); sw.innerHTML = "";
@@ -408,6 +445,17 @@ function render(r, original){
   $("fineprint").textContent = "Panel: three cold readers and one builder. Your text was not stored.";
   $("results").style.display = "block";
   $("results").scrollIntoView({behavior:"smooth", block:"start"});
+}
+
+function nextResetText(){
+  const now = new Date();
+  const reset = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1, 0, 0, 0));
+  const time = reset.toLocaleTimeString([], {hour: "numeric", minute: "2-digit"});
+  const sameDay = reset.getFullYear() === now.getFullYear() && reset.getMonth() === now.getMonth() && reset.getDate() === now.getDate();
+  return time + (sameDay ? " today" : " tomorrow");
+}
+function restingText(){
+  return "The panel is resting. It has done its reads for today, and your words were not stored. It wakes up at " + nextResetText() + ".";
 }
 
 $("run").onclick = async () => {
@@ -431,8 +479,8 @@ $("run").onclick = async () => {
     const data = await resp.json();
     if (!resp.ok){
       const raw = String(data.detail || "");
-      const capped = /neurons|allocation|4006|daily limit/.test(raw);
-      if (capped) err.innerHTML = "The panel hit its daily limit. Your words were not stored. While you wait, <a href=\"examples.html\">see six real panel runs</a>.";
+      const capped = String(data.error || "") === "daily_cap" || /daily limit/.test(raw);
+      if (capped) err.innerHTML = restingText() + " While you wait, <a href=\"examples.html\">see six real panel runs</a>.";
       else if (resp.status >= 500) err.textContent = "The panel did not answer. Your words were not stored. Try again in a moment.";
       else err.textContent = raw || "Something broke. Try again in a moment.";
       err.style.display = "block";
@@ -440,7 +488,7 @@ $("run").onclick = async () => {
     }
     render(data, text);
   } catch(e) {
-    err.textContent = "The panel did not answer. Try again in a moment.";
+    err.textContent = "The panel did not answer. Your words were not stored. Try again in a moment.";
     err.style.display = "block";
   } finally {
     btn.disabled = false;
