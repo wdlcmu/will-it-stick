@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://will-it-stick-site.pages.dev/sitemap.xml
+Sitemap: https://willitstick.app/sitemap.xml

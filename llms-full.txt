@@ -1,6 +1,6 @@
 # Will It Stick?: full page text
 
-> Complete text of will-it-stick-site.pages.dev: the homepage, the Examples page,
+> Complete text of willitstick.app: the homepage, the Examples page,
 > the Starters page, the Privacy page, and the Terms page.
 > Will It Stick? is a free tool in plain words. Paste words you need to land, plus one
 > line on what they should do. Three cold readers score them and hand back the core
@@ -8,7 +8,7 @@
 > for you. Nothing is stored. The site is an early preview.
 > Text captured from the site source, 2026-10-31.
 
-## Homepage (https://will-it-stick-site.pages.dev/)
+## Homepage (https://willitstick.app/)
 
 Afraid they'll forget it?
 Paste yours. Find the one line they keep.
@@ -36,7 +36,7 @@ Three studies back these checks. Tversky and Shafir, 1992. Loewenstein, 1994. Pa
 We test this tool against plain AI. Scores post here once tests run.
 This tool is independent. The authors did not endorse it. The publisher did not endorse it. We have no tie to them.
 
-## Examples (https://will-it-stick-site.pages.dev/examples)
+## Examples (https://willitstick.app/examples)
 
 Six real checks. Real runs. Sample words. No fake wins.
 Each text here is a sample. Each run is real. Three cold readers read each text. They never saw each other's notes. Scores are the mid score of three. Words in quotes are the run's own words.
@@ -100,7 +100,7 @@ One word changed: starting became playing. The rest is the same text. The fix sa
 
 No filed run yet fits "A story I tell." We will not fake one. It is owed when the panel quota resets. The reset is at 00:00 UTC each day. Your words are not stored when you run a check. These samples were saved by the build team on purpose.
 
-## Starters (https://will-it-stick-site.pages.dev/starters)
+## Starters (https://willitstick.app/starters)
 
 Six small starts. Shapes to start from. Not your text.
 Each check hands back six shapes. They are starts, not a rewrite. You pick what fits. You write the rest. Each sample below came from a real run.
@@ -114,7 +114,7 @@ Each check hands back six shapes. They are starts, not a rewrite. You pick what 
 
 What you do with them: Pick one shape. Start from it. Write the rest in your own words. We don't write it for you. You stay the author.
 
-## Privacy (https://will-it-stick-site.pages.dev/privacy)
+## Privacy (https://willitstick.app/privacy)
 
 Your words are private to you.
 When you run the panel, your text is sent once to the AI readers, scored, and the result comes back to your screen.
@@ -122,7 +122,7 @@ We store nothing. There is no database of your words, no account, and no log of 
 The only numbers we keep are run counts and cost, so the demo stays within its budget.
 Closing the page closes the run. Nothing follows you.
 
-## Terms (https://will-it-stick-site.pages.dev/terms)
+## Terms (https://willitstick.app/terms)
 
 This is an early preview of an independent tool.
 It gives a diagnosis and small starter forms. It does not write for you, and it does not promise your words will land.
@@ -130,28 +130,28 @@ Scores use the SUCCESs checklist from Made to Stick, by Chip Heath and Dan Heath
 This tool is independent. It is not endorsed by, and not affiliated with, the authors or the publisher.
 Use it free. Do not paste words that are secret or unsafe to share with an AI reader.
 
-## How to make a message stick (https://will-it-stick-site.pages.dev/how-to-make-a-message-stick)
+## How to make a message stick (https://willitstick.app/how-to-make-a-message-stick)
 
 Say one thing. Say it in things you can touch. Leave one gap. End with a scene.
 The four moves: 1. One core — if they can only keep one line, which line? Pick it before you write the rest. 2. Concrete words — swap each big word for a thing, a place, or a time. 3. One gap — open a question your reader wants closed; answer it one beat later than they expect. 4. One scene — end on a moment they can picture, not a summary.
 Before: "Team, going forward we all need to communicate better and stay aligned on priorities." After: "Every Friday at four, one of us reads the week's worst email out loud. Then we fix it together." What changed: "communicate better" became a time, a place, and an act; there is now one line a listener can repeat on Monday. (The pair is written for the page; it is not a panel run.)
 These moves come from the SUCCESs checklist in Made to Stick, by Chip Heath and Dan Heath. This site is independent; the authors did not endorse it.
 
-## Why do people forget what I said? (https://will-it-stick-site.pages.dev/why-do-people-forget-what-i-said)
+## Why do people forget what I said? (https://willitstick.app/why-do-people-forget-what-i-said)
 
 They rarely forget you. They never got one thing to hold.
 Three reasons it slides off: too many points (a list of five equal points leaves nothing first; memory keeps one core); big abstract words ("improve," "quality," "going forward" — nothing to picture means nothing to keep; concrete words stick better, Paivio 1971); no open question (a small gap makes the mind lean in, Loewenstein 1994).
 Before: "Quick update: the budget is tight, hiring is paused, the move is in June, and please keep receipts for everything this quarter." After: "Keep every receipt this quarter. The budget is tight, hiring is paused, and we move in June — but receipts are the one thing that cannot be fixed later." What changed: four equal facts became one core, said first and said twice. (The pair is written for the page; it is not a panel run.)
 The fix, in one line: say the one thing first, in concrete words, and let the rest support it.
 
-## How to write something people remember (https://will-it-stick-site.pages.dev/how-to-write-something-people-remember)
+## How to write something people remember (https://willitstick.app/how-to-write-something-people-remember)
 
 Write the line you want repeated. Then earn it.
 Four passes over your draft: Pass 1, find the core — cross out every sentence but one; the survivor is your message. Pass 2, swap the fog — trade each abstract word for a scene ("soon" becomes "by Friday"). Pass 3, open one gap — a question, a surprise, a number that begs a second look. Pass 4, test it cold — show it to someone who owes you nothing and ask what they kept; that answer is the grade.
 Before: "Hi all, just a reminder that our annual charity drive is coming up and participation is strongly encouraged this year. Thanks!" After: "Last year, one desk gave a bike to a kid who had never owned one. This year's drive starts Monday. One desk, one kid — sign up by Friday." What changed: a reminder became a scene, a deadline, and one small act. (The pair is written for the page; it is not a panel run.)
 The passes follow the SUCCESs checklist from Made to Stick, by Chip Heath and Dan Heath. This site is independent; the authors did not endorse it.
 
-## What makes an idea stick? (https://will-it-stick-site.pages.dev/what-makes-an-idea-stick)
+## What makes an idea stick? (https://willitstick.app/what-makes-an-idea-stick)
 
 Six checks. One plain line each. Ideas that pass get repeated.
 Simple: one core, stated first. Unexpected: a break in the pattern. Concrete: things you can touch — "a red door," not "an entrance." Credible: proof a skeptic can check — a source, a test, a number with a name. Emotional: one person, not a crowd. Stories: a small scene with a turn — someone tries, something changes.

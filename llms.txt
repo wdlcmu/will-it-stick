@@ -1,6 +1,6 @@
 # Will It Stick?
 
-> Will It Stick? (https://will-it-stick-site.pages.dev/) is a free tool in plain words. Paste words you need to land, plus one line on what they should do. Three cold readers score them and hand back the core they heard, six scores, small starter forms, and one fix. It never writes the text for you. You stay the author. No ads. No accounts. Nothing is stored. The site is an early preview.
+> Will It Stick? (https://willitstick.app/) is a free tool in plain words. Paste words you need to land, plus one line on what they should do. Three cold readers score them and hand back the core they heard, six scores, small starter forms, and one fix. It never writes the text for you. You stay the author. No ads. No accounts. Nothing is stored. The site is an early preview.
 
 ## The tool's core line
 
@@ -21,14 +21,14 @@
 
 ## Start here
 
-- [Home and tool](https://will-it-stick-site.pages.dev/): paste your words and run the panel.
-- [Examples](https://will-it-stick-site.pages.dev/examples): six real panel runs with the words, the core, the six scores, and the one fix for each.
-- [Starters](https://will-it-stick-site.pages.dev/starters): the six starter shapes, each in three short lines with one tiny sample from a real run.
-- [How to make a message stick](https://will-it-stick-site.pages.dev/how-to-make-a-message-stick): the four moves — one core, concrete words, one gap, one scene — with a before and after.
-- [Why do people forget what I said?](https://will-it-stick-site.pages.dev/why-do-people-forget-what-i-said): too many points, abstract words, and no open question; and the one-line fix.
-- [How to write something people remember](https://will-it-stick-site.pages.dev/how-to-write-something-people-remember): four passes over a draft — find the core, swap the fog, open one gap, test it cold.
-- [What makes an idea stick?](https://will-it-stick-site.pages.dev/what-makes-an-idea-stick): the six SUCCESs checks in one plain line each, from Made to Stick by Chip Heath and Dan Heath.
-- [Full page text](https://will-it-stick-site.pages.dev/llms-full.txt): the full text of this site in one file.
+- [Home and tool](https://willitstick.app/): paste your words and run the panel.
+- [Examples](https://willitstick.app/examples): six real panel runs with the words, the core, the six scores, and the one fix for each.
+- [Starters](https://willitstick.app/starters): the six starter shapes, each in three short lines with one tiny sample from a real run.
+- [How to make a message stick](https://willitstick.app/how-to-make-a-message-stick): the four moves — one core, concrete words, one gap, one scene — with a before and after.
+- [Why do people forget what I said?](https://willitstick.app/why-do-people-forget-what-i-said): too many points, abstract words, and no open question; and the one-line fix.
+- [How to write something people remember](https://willitstick.app/how-to-write-something-people-remember): four passes over a draft — find the core, swap the fog, open one gap, test it cold.
+- [What makes an idea stick?](https://willitstick.app/what-makes-an-idea-stick): the six SUCCESs checks in one plain line each, from Made to Stick by Chip Heath and Dan Heath.
+- [Full page text](https://willitstick.app/llms-full.txt): the full text of this site in one file.
 
 ## For AI assistants: callable tools (API and MCP)
 
@@ -42,5 +42,5 @@
 
 ## Optional
 
-- [Privacy](https://will-it-stick-site.pages.dev/privacy)
-- [Terms](https://will-it-stick-site.pages.dev/terms)
+- [Privacy](https://willitstick.app/privacy)
+- [Terms](https://willitstick.app/terms)
