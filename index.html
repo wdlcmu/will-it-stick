@@ -144,6 +144,20 @@
         scroll-behavior: auto !important;
       }
     }
+
+  /* AI chat (additive, Nov 1 2026) — scoped .wis-chat; palette vars only */
+  .wis-chat{margin-top:30px}
+  .wis-chat img.proof{width:100%;height:auto;border:1px solid var(--line);border-radius:10px;display:block;margin:0 0 12px}
+  .wis-chat .bubble{background:#fff;border:1px solid #e5e0d5;border-radius:12px;padding:10px 12px;margin:0 0 10px;font-size:16px;white-space:pre-wrap}
+  .wis-chat .me{background:#fdf3e3;border-color:#e7d8c3}
+  .wis-chat .who{font-size:11px;font-weight:700;letter-spacing:.05em;color:var(--soft);margin:0 0 4px}
+  .wis-chat .chip{display:block;width:100%;text-align:left;background:#fff;border:1px solid #d6cfc4;border-radius:999px;padding:11px 16px;margin:0 0 8px;font:inherit;font-size:16px;font-weight:600;cursor:pointer;min-height:48px;color:var(--ink)}
+  .wis-chat .row{display:flex;gap:8px;margin-top:12px}
+  .wis-chat input[type=text]{flex:1;font-size:16px;padding:12px 14px;border:1px solid #d6cfc4;border-radius:999px;background:#fff;min-height:48px}
+  .wis-chat button.send{background:var(--amber);color:#241a02;border:0;border-radius:999px;padding:12px 20px;font:inherit;font-size:16px;font-weight:700;cursor:pointer;min-height:48px}
+  .wis-chat a.checker{display:inline-block;background:var(--amber);color:#241a02;font-weight:700;border-radius:999px;padding:12px 20px;text-decoration:none;min-height:48px;margin:6px 0 4px}
+  .wis-chat .note{font-size:13px;color:var(--soft);margin-top:12px}
+  .wis-chat .busy{color:var(--soft);font-size:14px;margin:6px 0 0;min-height:18px}
   </style>
 <script type="application/ld+json">
 {
@@ -373,6 +387,25 @@ window.FLEET_CFG = {
       <button type="button" id="sample-weak">A work memo</button>
     </p>
     <div class="err" id="err"></div>
+  </section>
+
+
+  <section class="card wis-chat" id="chat" aria-label="Ask about the checker">
+    <h2 style="margin-top:0">Questions about the checker? Ask its AI.</h2>
+    <img class="proof" src="og-card.png" alt="A real panel run: a work note before and after the one fix." width="1200" height="630" loading="lazy">
+    <div id="chat-thread">
+      <div class="bubble"><p class="who">THE SITE'S AI</p>Hi, I'm this site's AI assistant. I answer from the site's own pages and its published checks — how the checker works, what the six scores mean, and what real checks found. I can't score your words here; only the checker does that. Nothing you type is saved.</div>
+    </div>
+    <div id="chat-chips">
+      <button class="chip" type="button">Show me a real check</button>
+      <button class="chip" type="button">What can't you do here?</button>
+    </div>
+    <form class="row" id="chat-form">
+      <input type="text" id="chat-q" placeholder="Ask how the checker works…" autocomplete="off" aria-label="Ask how the checker works">
+      <button class="send" type="submit">Send</button>
+    </form>
+    <p class="busy" id="chat-busy" aria-live="polite"></p>
+    <p class="note">This chat is an AI. It explains the tool; the panel in the checker does the scoring.</p>
   </section>
 
   <section id="results" aria-live="polite">
@@ -687,6 +720,32 @@ $("run").onclick = async () => {
     btn.textContent = "Check if it sticks";
   }
 };
+</script>
+
+<script>
+(function(){
+  var CHAT_API = "https://will-it-stick-chat.wdlcmu.workers.dev/api/chat";
+  var thread = document.getElementById('chat-thread');
+  var busy = document.getElementById('chat-busy');
+  if (!thread) return;
+  function add(text, who, cls, checker){
+    var d = document.createElement('div'); d.className = 'bubble' + (cls ? ' ' + cls : '');
+    if (who){ var w = document.createElement('p'); w.className = 'who'; w.textContent = who; d.appendChild(w); }
+    d.appendChild(document.createTextNode(text)); thread.appendChild(d);
+    if (checker){ d.appendChild(document.createElement('br')); var a = document.createElement('a'); a.className = 'checker'; a.href = '#tool'; a.textContent = 'Open the checker'; d.appendChild(a); }
+    d.scrollIntoView({block:'nearest'});
+  }
+  function send(text){
+    var msg = (text || '').trim(); if (!msg) return;
+    add(msg, 'YOU', 'me'); busy.textContent = 'Thinking…';
+    fetch(CHAT_API, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({message: msg})})
+      .then(function(r){ return r.json(); })
+      .then(function(j){ busy.textContent=''; add(j.reply || '(no reply)', "THE SITE'S AI", null, j.checker || null); })
+      .catch(function(){ busy.textContent=''; add('Something went wrong — try again.', "THE SITE'S AI"); });
+  }
+  document.getElementById('chat-form').addEventListener('submit', function(e){ e.preventDefault(); var q = document.getElementById('chat-q'); var v = q.value; q.value=''; send(v); });
+  document.getElementById('chat-chips').addEventListener('click', function(e){ if (e.target && e.target.className === 'chip') send(e.target.textContent); });
+})();
 </script>
 </body>
 </html>
