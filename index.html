@@ -416,7 +416,7 @@ window.FLEET_CFG = {
       <button class="send" type="submit">Send</button>
     </form>
     <p class="busy" id="chat-busy" aria-live="polite"></p>
-    <p class="note">This chat is an AI. It explains the tool; the panel in the checker does the scoring.</p>
+    <p class="note">This chat is an AI. It explains the tool; the checker itself does the scoring.</p>
   </section>
 
   <section id="results" aria-live="polite">
@@ -753,13 +753,15 @@ $("run").onclick = async () => {
     if (checker){ d.appendChild(document.createElement('br')); var a = document.createElement('a'); a.className = 'checker'; a.href = '#tool'; a.textContent = 'Open the checker'; d.appendChild(a); }
     d.scrollIntoView({block:'nearest'});
   }
+  function track(name, props){ try { if (window.FA && FA.track) FA.track(name, props); } catch(e){} }
   function send(text){
     var msg = (text || '').trim(); if (!msg) return;
     add(msg, 'YOU', 'me'); busy.textContent = 'Thinking…';
+    track("ask_asked", {surface: "ask"});
     fetch(CHAT_API, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({message: msg})})
       .then(function(r){ return r.json(); })
-      .then(function(j){ busy.textContent=''; add(j.reply || '(no reply)', "THE SITE'S AI", null, j.checker || null); })
-      .catch(function(){ busy.textContent=''; add('Something went wrong — try again.', "THE SITE'S AI"); });
+      .then(function(j){ busy.textContent=''; if (!j.reply || /fallback|nomodel/.test(j.route || '')) track("ask_fallback", {surface: "ask", missing: "other"}); else track("ask_answered", {surface: "ask"}); add(j.reply || '(no reply)', "THE SITE'S AI", null, j.checker || null); })
+      .catch(function(){ busy.textContent=''; track("ask_fallback", {surface: "ask", missing: "other"}); add('Something went wrong — try again.', "THE SITE'S AI"); });
   }
   document.getElementById('chat-form').addEventListener('submit', function(e){ e.preventDefault(); var q = document.getElementById('chat-q'); var v = q.value; q.value=''; send(v); });
   document.getElementById('chat-chips').addEventListener('click', function(e){ if (e.target && e.target.className === 'chatchip') send(e.target.textContent); });
@@ -770,6 +772,7 @@ $("run").onclick = async () => {
   var b = document.getElementById('share-site');
   if (!b) return;
   b.addEventListener('click', async function(){
+    try { if (window.FA && FA.track) FA.track("share_intent", {surface: "checker"}); } catch(e){}
     var url = 'https://willitstick.app/';
     try {
       if (navigator.share) { await navigator.share({title: 'Will It Stick?', url: url}); return; }
@@ -781,6 +784,29 @@ $("run").onclick = async () => {
       setTimeout(function(){ b.textContent = 'Share this checker'; }, 2200);
     }
   });
+})();
+</script>
+<script>
+(function(){
+  /* Fleet share/return marks (Nov 1, 2026) — the fleet rollout pattern:
+     a ?via=share arrival, and a return visit when this browser has been
+     here in an earlier session, each once per session. Anonymous counts
+     only; the marker stores no text, only that a visit happened. */
+  function track(name, props){ try { if (window.FA && FA.track) FA.track(name, props); } catch(e){} }
+  try {
+    var params = new URLSearchParams(location.search);
+    if (params.get("via") === "share" && !sessionStorage.getItem("wis_arr")) {
+      sessionStorage.setItem("wis_arr", "1");
+      track("share_arrival", {via: "share-link"});
+    }
+    if (!sessionStorage.getItem("wis_ret")) {
+      sessionStorage.setItem("wis_ret", "1");
+      var seen = null;
+      try { seen = localStorage.getItem("wis_visited"); } catch(e){}
+      if (seen) track("return_visit", {});
+      else { try { localStorage.setItem("wis_visited", "1"); } catch(e){} }
+    }
+  } catch(e){}
 })();
 </script>
 </body>
