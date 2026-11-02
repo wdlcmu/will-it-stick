@@ -337,9 +337,9 @@ window.FLEET_CFG = {
 <body>
 <div class="wrap">
   <header>
-    <h1>Afraid they'll forget it?</h1>
-    <p class="sub">Paste the words you're about to send. Find the one line they'll keep.</p>
-    <a class="go" href="#tool">Paste your words</a>
+    <h1>Will It Stick?</h1>
+    <p class="sub">Paste words you're about to send. See the one line they'll keep.</p>
+    <a class="go" href="#tool">Check my words</a>
   </header>
 
   <h2 class="checks-title">Three real checks</h2>
@@ -373,7 +373,7 @@ window.FLEET_CFG = {
     </div>
     <p class="heard">All three readers kept the same line: &ldquo;Thanks to all for being here.&rdquo; Not one kept a thing about Sarah. Stories scored 1 of 10.</p>
     <p class="fixline"><strong>The one fix</strong>&ldquo;Name one thing Sarah did that was great. Cut the rest.&rdquo;</p>
-    <p class="links"><a class="try" href="#tool">Try it on your words below</a> &middot; <a class="try" href="examples.html">All six real checks</a></p>
+    <p class="links"><a class="try" href="examples.html">All six real checks</a></p>
   </section>
 
   <section class="tool" id="tool">
@@ -388,8 +388,8 @@ window.FLEET_CFG = {
     <label for="text">Your words</label>
     <textarea id="text" placeholder="Paste a note, a toast, a post, a hard message…"></textarea>
     <p class="drop">or <button type="button" class="dropbtn" id="drop-link">drop a text file (.txt or .md)</button><input type="file" id="file" accept=".txt,.md,text/plain,text/markdown" hidden></p>
-    <label for="motivation">What should it do?</label>
-    <p class="hint" id="motivation-hint">One line: who reads it, and what should they do, feel, or remember?</p>
+    <label for="motivation">What should your words do?</label>
+    <p class="hint" id="motivation-hint">One line: who reads them, and what should they do, feel, or remember?</p>
     <input type="text" id="motivation" maxlength="140" aria-describedby="motivation-hint" placeholder="Make my partner feel thanked, not lectured.">
     <button class="btn" id="run">Check if it sticks</button>
     <p class="privacy">Your words run through the panel once. Then they are gone. Nothing is stored.</p>
@@ -416,7 +416,6 @@ window.FLEET_CFG = {
       <button class="send" type="submit">Send</button>
     </form>
     <p class="busy" id="chat-busy" aria-live="polite"></p>
-    <p class="note">This chat is an AI. It explains the tool; the checker itself does the scoring.</p>
   </section>
 
   <section id="results" aria-live="polite">
@@ -467,14 +466,14 @@ window.FLEET_CFG = {
     <h2>How it works</h2>
     <p><strong>1. Three cold readers score your words.</strong> They never see each other's notes.</p>
     <p><strong>2. You get the core they heard,</strong> six scores, and starter shapes.</p>
-    <p><strong>3. No rewrite.</strong> We don't write it for you. You stay the author.</p>
+    <p><strong>3. No rewrite.</strong> You stay the author.</p>
   </section>
 
   <span id="method" aria-hidden="true"></span>
   <section class="method">
     <h2>Method and sources</h2>
     <p>The SUCCESs checklist comes from Made to Stick, by Chip Heath and Dan Heath, backed by Tversky and Shafir (1992), Loewenstein (1994), and Paivio (1971).</p>
-    <p>We test this tool against plain AI. Panel vs one plain AI ask: 1 of 10.</p>
+    <p>We test this tool against plain AI, ten messages head to head. Last run, the panel won 1 of 10.</p>
     <p><strong>This tool is independent.</strong> The authors and the publisher did not endorse it, and we have no tie to them.</p>
   </section>
 
