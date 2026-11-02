@@ -47,6 +47,11 @@
     font-weight:bold;font-size:20px;border-radius:12px;
     padding:15px 10px;text-align:center;text-decoration:none}
 
+
+  /* D7 (Nov 1): real tap targets + touch-action */
+  a,button,input,textarea{touch-action:manipulation}
+  footer a{display:inline-block;padding:12px 4px;min-height:44px}
+  .cta.top{margin:14px 0 4px}
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
@@ -65,6 +70,8 @@
     <p>Each check hands back six shapes: starts, not a rewrite. You pick what fits and write the rest.</p>
     <p>Each sample below came from a real run.</p>
   </header>
+
+  <a class="cta top" href="index.html">Check your own words</a>
 
   <section class="shape">
     <h2>1. The proverb</h2>

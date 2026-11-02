@@ -49,6 +49,11 @@
     font-weight:bold;font-size:20px;border-radius:12px;
     padding:15px 10px;text-align:center;text-decoration:none}
 
+
+  /* D7 (Nov 1): real tap targets + touch-action */
+  a,button,input,textarea{touch-action:manipulation}
+  footer a{display:inline-block;padding:12px 4px;min-height:44px}
+  .qlinks a{display:inline-block;padding:12px 4px;min-height:44px}
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
@@ -89,7 +94,7 @@
     <p>These checks come from the SUCCESs checklist in Made to Stick, by Chip Heath and Dan Heath. This site is independent; the authors did not endorse it.</p>
   </section>
 
-  <section>
+  <section class="qlinks">
     <h2>More questions</h2>
     <p><a href="how-to-make-a-message-stick.html">How to make a message stick</a></p>
     <p><a href="how-to-write-something-people-remember.html">How to write something people remember</a></p>

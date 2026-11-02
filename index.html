@@ -136,6 +136,17 @@
   .strip .fixline strong{display:block;font-size:15px;text-transform:uppercase;
     letter-spacing:.08em;color:var(--amber-deep);margin:0 0 4px}
 
+
+  /* D7 (Nov 1): real tap targets + touch-action */
+  a,button,input,textarea{touch-action:manipulation}
+  footer a{display:inline-block;padding:12px 4px;min-height:44px}
+  .dropbtn{font:inherit;font-size:14px;background:none;border:none;padding:12px 4px;min-height:44px;color:var(--amber-deep);text-decoration:underline;cursor:pointer}
+  .nextsteps{display:grid;gap:8px;margin-top:18px}
+  @media(min-width:760px){.nextsteps{grid-template-columns:1fr 1fr 1fr 1fr}}
+  .next{display:block;background:#fff;border:1.5px solid var(--amber-deep);color:var(--amber-deep);
+    font-weight:bold;font-size:17px;border-radius:12px;padding:12px 10px;text-align:center;
+    text-decoration:none;min-height:48px;cursor:pointer;font-family:inherit}
+  .next.main{background:var(--amber);color:#241a02;border-color:var(--amber)}
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
@@ -151,7 +162,7 @@
   .wis-chat .bubble{background:#fff;border:1px solid #e5e0d5;border-radius:12px;padding:10px 12px;margin:0 0 10px;font-size:16px;white-space:pre-wrap}
   .wis-chat .me{background:#fdf3e3;border-color:#e7d8c3}
   .wis-chat .who{font-size:11px;font-weight:700;letter-spacing:.05em;color:var(--soft);margin:0 0 4px}
-  .wis-chat .chip{display:block;width:100%;text-align:left;background:#fff;border:1px solid #d6cfc4;border-radius:999px;padding:11px 16px;margin:0 0 8px;font:inherit;font-size:16px;font-weight:600;cursor:pointer;min-height:48px;color:var(--ink)}
+  .wis-chat .chatchip{display:block;width:100%;text-align:left;background:#fff;border:1px solid #d6cfc4;border-radius:999px;padding:11px 16px;margin:0 0 8px;font:inherit;font-size:16px;font-weight:600;cursor:pointer;min-height:48px;color:var(--ink)}
   .wis-chat .row{display:flex;gap:8px;margin-top:12px}
   .wis-chat input[type=text]{flex:1;font-size:16px;padding:12px 14px;border:1px solid #d6cfc4;border-radius:999px;background:#fff;min-height:48px}
   .wis-chat button.send{background:var(--amber);color:#241a02;border:0;border-radius:999px;padding:12px 20px;font:inherit;font-size:16px;font-weight:700;cursor:pointer;min-height:48px}
@@ -376,7 +387,7 @@ window.FLEET_CFG = {
     </div>
     <label for="text">Your words</label>
     <textarea id="text" placeholder="Paste a note, a toast, a post, a hard message…"></textarea>
-    <p class="drop">or <u id="drop-link">drop a text file (.txt or .md)</u><input type="file" id="file" accept=".txt,.md,text/plain,text/markdown" hidden></p>
+    <p class="drop">or <button type="button" class="dropbtn" id="drop-link">drop a text file (.txt or .md)</button><input type="file" id="file" accept=".txt,.md,text/plain,text/markdown" hidden></p>
     <label for="motivation">What should it do?</label>
     <p class="hint" id="motivation-hint">One line: who reads it, and what should they do, feel, or remember?</p>
     <input type="text" id="motivation" maxlength="140" aria-describedby="motivation-hint" placeholder="Make my partner feel thanked, not lectured.">
@@ -397,8 +408,8 @@ window.FLEET_CFG = {
       <div class="bubble"><p class="who">THE SITE'S AI</p>Hi, I'm this site's AI assistant. I answer from the site's own pages and its published checks — how the checker works, what the six scores mean, and what real checks found. I can't score your words here; only the checker does that. Nothing you type is saved.</div>
     </div>
     <div id="chat-chips">
-      <button class="chip" type="button">Show me a real check</button>
-      <button class="chip" type="button">What can't you do here?</button>
+      <button class="chatchip" type="button">Show me a real check</button>
+      <button class="chatchip" type="button">What can't you do here?</button>
     </div>
     <form class="row" id="chat-form">
       <input type="text" id="chat-q" placeholder="Ask how the checker works…" autocomplete="off" aria-label="Ask how the checker works">
@@ -444,6 +455,12 @@ window.FLEET_CFG = {
 
     <p class="deal">We don't write it for you. You stay the author.</p>
     <p class="fineprint" id="fineprint"></p>
+    <div class="nextsteps" aria-label="What next">
+      <a class="next main" href="#tool">Check another text</a>
+      <button type="button" class="next" id="share-site">Share this checker</button>
+      <a class="next" href="examples.html">See six real checks</a>
+      <a class="next" href="#method">Read the method</a>
+    </div>
   </section>
 
   <section class="how">
@@ -453,6 +470,7 @@ window.FLEET_CFG = {
     <p><strong>3. No rewrite.</strong> We don't write it for you. You stay the author.</p>
   </section>
 
+  <span id="method" aria-hidden="true"></span>
   <section class="method">
     <h2>Method and sources</h2>
     <p>The SUCCESs checklist comes from Made to Stick, by Chip Heath and Dan Heath, backed by Tversky and Shafir (1992), Loewenstein (1994), and Paivio (1971).</p>
@@ -744,7 +762,25 @@ $("run").onclick = async () => {
       .catch(function(){ busy.textContent=''; add('Something went wrong — try again.', "THE SITE'S AI"); });
   }
   document.getElementById('chat-form').addEventListener('submit', function(e){ e.preventDefault(); var q = document.getElementById('chat-q'); var v = q.value; q.value=''; send(v); });
-  document.getElementById('chat-chips').addEventListener('click', function(e){ if (e.target && e.target.className === 'chip') send(e.target.textContent); });
+  document.getElementById('chat-chips').addEventListener('click', function(e){ if (e.target && e.target.className === 'chatchip') send(e.target.textContent); });
+})();
+</script>
+<script>
+(function(){
+  var b = document.getElementById('share-site');
+  if (!b) return;
+  b.addEventListener('click', async function(){
+    var url = 'https://willitstick.app/';
+    try {
+      if (navigator.share) { await navigator.share({title: 'Will It Stick?', url: url}); return; }
+      throw new Error('no-share');
+    } catch(e) {
+      if (e && e.name === 'AbortError') return;
+      try { await navigator.clipboard.writeText(url); b.textContent = 'Link copied'; }
+      catch(_) { b.textContent = 'Copy this link: willitstick.app'; }
+      setTimeout(function(){ b.textContent = 'Share this checker'; }, 2200);
+    }
+  });
 })();
 </script>
 </body>

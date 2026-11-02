@@ -49,6 +49,11 @@
     font-weight:bold;font-size:20px;border-radius:12px;
     padding:15px 10px;text-align:center;text-decoration:none}
 
+
+  /* D7 (Nov 1): real tap targets + touch-action */
+  a,button,input,textarea{touch-action:manipulation}
+  footer a{display:inline-block;padding:12px 4px;min-height:44px}
+  .qlinks a{display:inline-block;padding:12px 4px;min-height:44px}
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
@@ -92,7 +97,7 @@
     <p>Read the six checks on <a href="what-makes-an-idea-stick.html">what makes an idea stick</a>.</p>
   </section>
 
-  <section>
+  <section class="qlinks">
     <h2>More questions</h2>
     <p><a href="why-do-people-forget-what-i-said.html">Why do people forget what I said?</a></p>
     <p><a href="how-to-write-something-people-remember.html">How to write something people remember</a></p>

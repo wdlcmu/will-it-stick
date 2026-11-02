@@ -64,6 +64,10 @@
   .cta.top{margin:14px 0 4px}
   .run .core{font-size:clamp(22px,5.6vw,30px)}
 
+
+  /* D7 (Nov 1): real tap targets + touch-action */
+  a,button,input,textarea{touch-action:manipulation}
+  footer a{display:inline-block;padding:12px 4px;min-height:44px}
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
