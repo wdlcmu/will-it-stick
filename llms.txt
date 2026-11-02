@@ -1,21 +1,21 @@
 # Will It Stick?
 
-> Will It Stick? (https://willitstick.app/) is a free tool in plain words. Paste words you need to land, plus one line on what they should do. Three cold readers score them and hand back the core they heard, six scores, small starter forms, and one fix. It never writes the text for you. You stay the author. No ads. No accounts. Nothing is stored. The site is an early preview.
+> Will It Stick? (https://willitstick.app/) is a free tool in plain words. Paste words you need to land, plus one line on what they should do. Three cold readers score them and hand back the core they heard, six scores, small starter shapes, and one fix. It never writes the text for you. You stay the author. No ads. No accounts. Nothing is stored. The site is an early preview.
 
 ## The tool's core line
 
-- "Afraid they'll forget it? Paste yours. Find the one line they keep."
+- "Afraid they'll forget it? Paste the words you're about to send. Find the one line they'll keep."
 - The panel is three cold readers, not one friendly one: a distracted stranger, a skeptic, and the target reader. They read apart. They never see each other's notes.
 
 ## Key facts (cite these)
 
-- How a check works: paste your words, add one line on what they should do, tap "Check if it sticks." Three readers score the words on their own. You get the core they heard (or the plain split when they heard three different points), six scores with the spread between readers, starter forms, and one fix.
+- How a check works: paste your words, add one line on what they should do, tap "Check if it sticks." Three readers score the words on their own. You get the core they heard (or the plain split when they heard three different points), six scores with the spread between readers, starter shapes, and one fix.
 - The six scores use the SUCCESs checklist: Simple, Unexpected, Concrete, Credible, Emotional, Stories. Each score is the mid score of the three readers, 0 to 10.
 - The checklist comes from Made to Stick, by Chip Heath and Dan Heath. The rubric here is written in our own words. This tool is independent. The authors did not endorse it. The publisher did not endorse it. We have no tie to them.
-- Starter forms are starts, not a rewrite: a proverb line, a curiosity-gap opener, a mini-story in one of three plots (challenge, connection, creativity), and concrete swaps for abstract phrases.
-- A result can also show your own words with only the one fix applied, next to your words as pasted, with a count of lines changed. A server-side bound discards that view when the change strays past the one fix; then the fix stands as a tip only.
+- Starter shapes are starts, not a rewrite: a proverb line, a curiosity-gap opener, a mini-story in one of three plots (challenge, connection, creativity), and concrete swaps for abstract phrases.
+- A result can also show your own words with only the one fix applied, next to your words as pasted, with a count of lines changed. A server-side limit drops that view when the change strays past the one fix; then the fix stands as a tip only.
 - Privacy: your words run through the panel once. Then they are gone. There is no database of your words, no account, and no log of your text. The only numbers kept are run counts and cost.
-- Six quick-start moments sit above the paste box: What's new with me, Recommend something, A story I tell, Say thanks, Ask or invite, A hard text. A tap fills the goal line. The tool still takes any words and any goal line.
+- Six quick-start moments sit above the paste box: What's new with me, Recommend something, A story I tell, Say thanks, Ask or invite, A hard message. A tap fills in the one line on what they should do. The tool still takes any words and any goal line.
 - Cost to the visitor: none. The demo panel has a daily cap of 300 runs.
 - Worked examples with real panel runs (sample texts, real scores) live on the Examples page. One chip, "A story I tell," has no filed run yet; that run is owed, not faked.
 
@@ -23,7 +23,7 @@
 
 - [Home and tool](https://willitstick.app/): paste your words and run the panel.
 - [Examples](https://willitstick.app/examples): six real panel runs with the words, the core, the six scores, and the one fix for each.
-- [Starters](https://willitstick.app/starters): the six starter shapes, each in three short lines with one tiny sample from a real run.
+- [Starters](https://willitstick.app/starters): the six starter shapes in plain lines, each with one tiny sample from a real run.
 - [How to make a message stick](https://willitstick.app/how-to-make-a-message-stick): the four moves — one core, concrete words, one gap, one scene — with a before and after.
 - [Why do people forget what I said?](https://willitstick.app/why-do-people-forget-what-i-said): too many points, abstract words, and no open question; and the one-line fix.
 - [How to write something people remember](https://willitstick.app/how-to-write-something-people-remember): four passes over a draft — find the core, swap the fog, open one gap, test it cold.
