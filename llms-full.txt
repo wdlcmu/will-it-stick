@@ -99,7 +99,7 @@ One word changed: starting became playing. The rest is the same text. The fix sa
 
 ### One run is still owed
 
-No run yet fits "A story I tell," and we will not fake one. The run is still owed: the panel's daily limit resets at 00:00 UTC each day. Your own check is never stored. These samples were saved by the build team on purpose.
+No run yet fits "A story I tell," and we will not fake one. The run is still owed. The checker runs a limited number of checks a day; if it has hit today's limit when you try, it will say so and ask you to try again later. Your own check is never stored. These samples were saved by the build team on purpose.
 
 ## Starters (https://willitstick.app/starters)
 

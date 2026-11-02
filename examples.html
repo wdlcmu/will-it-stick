@@ -61,7 +61,16 @@
   .cta{display:block;margin-top:22px;background:var(--amber);color:#241a02;
     font-weight:bold;font-size:20px;border-radius:12px;
     padding:15px 10px;text-align:center;text-decoration:none}
-</style>
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
 </head>
 <body>
 <div class="wrap">
@@ -222,7 +231,7 @@
 
   <section>
     <h2>One run is still owed</h2>
-    <p>No run yet fits “A story I tell,” and we will not fake one. The run is still owed: the panel's daily limit resets at 00:00 UTC each day.</p>
+    <p>No run yet fits “A story I tell,” and we will not fake one. The run is still owed. The checker runs a limited number of checks a day; if it has hit today's limit when you try, it will say so and ask you to try again later.</p>
     <p>Your own check is never stored. These samples were saved by the build team on purpose.</p>
   </section>
 
