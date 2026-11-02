@@ -127,6 +127,14 @@
     border-top-color:#241a02;border-radius:50%;vertical-align:-3px;
     animation:sp 0.8s linear infinite;margin-right:8px}
   @keyframes sp{to{transform:rotate(360deg)}}
+  .go{display:block;margin:0 0 22px;background:var(--amber);color:#241a02;
+    font-weight:bold;font-size:20px;border-radius:12px;padding:15px 10px;
+    text-align:center;text-decoration:none;min-height:54px}
+  .strip .pair .afterline{font-size:21px;font-weight:bold;line-height:1.35}
+  .strip .fixline{border-left:5px solid var(--amber);background:#fff8e6;
+    border-radius:10px;padding:10px 12px;font-size:18px;margin:8px 0 0}
+  .strip .fixline strong{display:block;font-size:15px;text-transform:uppercase;
+    letter-spacing:.08em;color:var(--amber-deep);margin:0 0 4px}
 
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -306,6 +314,7 @@ window.FLEET_CFG = {
   <header>
     <h1>Afraid they'll forget it?</h1>
     <p class="sub">Paste the words you're about to send. Find the one line they'll keep.</p>
+    <a class="go" href="#tool">Paste your words</a>
   </header>
 
   <h2 class="checks-title">Three real checks</h2>
@@ -315,7 +324,7 @@ window.FLEET_CFG = {
     <p class="for">A status update to her manager. The launch was at risk, and the note never says so.</p>
     <div class="pair">
       <p><span class="tag">Before</span>&ldquo;Status update: The project is <mark class="out">progressing</mark>.&rdquo;</p>
-      <p><span class="tag">After</span>&ldquo;Status update: The project is <mark>at risk of delay</mark>.&rdquo;</p>
+      <p class="afterline"><span class="tag">After</span>&ldquo;Status update: The project is <mark>at risk of delay</mark>.&rdquo;</p>
     </div>
     <p class="heard">Three cold readers all heard the risk anyway: &ldquo;The project is at risk.&rdquo; Every score was 1 or 2 of 10.</p>
     <p class="count-line">1 line changed. The rest stayed the same.</p>
@@ -328,17 +337,17 @@ window.FLEET_CFG = {
       <p><span class="tag">Before</span>&ldquo;Hey, I need to talk about something. I have been feeling kind of off about how things went last weekend and I do not want it to be weird. You matter to me and I value our friendship a lot. Can we talk sometime?&rdquo;</p>
     </div>
     <p class="heard">Readers kept the hurt, not the reason: &ldquo;Friend hurt last weekend.&rdquo; Feeling scored 7 of 10. The scene scored 4.</p>
-    <p class="count-line">The one fix: &ldquo;Say what happened last weekend to show why you want to talk.&rdquo;</p>
+    <p class="fixline"><strong>The one fix</strong>&ldquo;Say what happened last weekend to show why you want to talk.&rdquo;</p>
   </section>
 
-  <section class="story strip" aria-label="A toast with no one scene">
-    <h2>A toast with no one scene</h2>
+  <section class="story strip" aria-label="A toast with no scene">
+    <h2>A toast with no scene</h2>
     <p class="for">A birthday toast for Sarah, warm from start to finish &mdash; and not one thing she ever did.</p>
     <div class="pair">
       <p><span class="tag">Before</span>&ldquo;Sarah is a wonderful person and a great friend to all of us.&rdquo;</p>
     </div>
     <p class="heard">All three readers kept the same line: &ldquo;Thanks to all for being here.&rdquo; Not one kept a thing about Sarah. Stories scored 1 of 10.</p>
-    <p class="count-line">The one fix: &ldquo;Name one thing Sarah did that was great. Cut the rest.&rdquo;</p>
+    <p class="fixline"><strong>The one fix</strong>&ldquo;Name one thing Sarah did that was great. Cut the rest.&rdquo;</p>
     <p class="links"><a class="try" href="#tool">Try it on your words below</a> &middot; <a class="try" href="examples.html">All six real checks</a></p>
   </section>
 
