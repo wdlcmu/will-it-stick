@@ -4,18 +4,19 @@
 > the Starters page, the Privacy page, and the Terms page, plus the
 > guides, the Method page, Ways to say it, and the question pages.
 > Will It Stick? is a free tool in plain words. Paste words you need to land, plus one
-> line on what they should do. Three cold readers score them and hand back the core
-> they heard, other ways to say it (seven cold read versions of the same words, ranked,
-> with a short question round when the readers hit a gap only you can fill), small starter
-> shapes, one fix, and the six scores last. It names one fix and, when
+> line on what they should do. Cold readers test three transformations of your words and
+> hand back the version that sticks, the winner first with your original alongside;
+> underneath, the check scores your words and hands back the core they heard, small
+> starter shapes, one fix, and the six scores last. Both tools ask a short question
+> round first when the readers hit a gap only you can fill. It names one fix and, when
 > a check passes, shows it applied to your words. Nothing sends itself; what goes out
-> is your call. Your words are not recorded or kept; only a daily count of checks is kept. The site is an early preview.
+> is your call. Your words are not recorded or kept; only a daily count of runs is kept. The site is an early preview.
 > Text captured from the site source, 2026-11-03. The live pages are the record.
 
 ## Homepage (https://willitstick.app/)
 
 Paste words you're about to send.
-See the one line they'll keep.
+Get back the version that sticks.
 
 Quick-start moments: What's new with me · Recommend something · A story I tell · Say thanks · Ask or invite · A hard message.
 
@@ -184,7 +185,9 @@ The three runs, Nov 3, 2026. Run 1: panel wins 7 of 10; remembered core (panel /
 
 What the spread means: the same test, run three times, gave 7, 5, and 7. Run 2 was a coin flip. Scores are draws, and the spread across runs is itself the finding. That is why the homepage prints the spread, not a single best number.
 
-What "applied" means in about two runs of three: every check result carries a dated line: in the Nov 3, 2026 measurements, the server applied the fix itself in about two runs of three (24 of 36, then 22 of 36 on a repeat pass). Applied has a plain meaning here. After the panel names one fix, the server tries to apply that fix to the sender's own words, and two automated guards decide whether the result counts. The length guard: the new text must stay between 0.4 and 1.6 times the length of the original words. The correspondence guard: the change in the new text must be the change the fix named. A change the fix never called for fails, and so does a fix the new text never actually made. When both guards pass, the result shows your words with the fix applied, plus a count of lines changed. When either guard fails, the result carries the fix as an instruction only, with a reason, and no rewritten text. The 36 runs were a fixed set of test inputs measured twice on Nov 3, 2026. The numbers describe that set on that day, not a promise about any single check.
+The transformation test, Nov 3, 2026: the homepage leads with a transformation, not a score: the tool scans a draft for its point, writes three transformations of it (a concrete comparison, the one-line core, a scene), drops any whose numbers the draft does not state or plainly derive, and lets cold readers pick the winner by what they carry away. Your original competes, and can win. The production confirmation run on 32 drafts, fresh readers, blind, ties counted: the transformed version scored 2.91 of 5 on average, the original drafts 2.69, the check's one-fix version 2.63. Draft by draft the transformed version won 14, tied 7, and lost 11 against the originals; on 3 of the 32 the original itself won and was returned unchanged.
+
+What "applied" means in about three runs of five: every check result carries a dated line: in the Nov 3, 2026 measurements, the server applied the fix itself in about three runs of five (22 of 36, then 21 of 36 on a repeat pass). Applied has a plain meaning here. After the panel names one fix, the server tries to apply that fix to the sender's own words, and two automated guards decide whether the result counts. The length guard: the new text must stay between 0.4 and 1.6 times the length of the original words. The correspondence guard: the change in the new text must be the change the fix named. A change the fix never called for fails, and so does a fix the new text never actually made. When both guards pass, the result shows your words with the fix applied, plus a count of lines changed. When either guard fails, the result carries the fix as an instruction only, with a reason, and no rewritten text. The 36 runs were a fixed set of test inputs measured twice on Nov 3, 2026. The numbers describe that set on that day, not a promise about any single check.
 
 Sources: the six scores use the SUCCESs checklist from Made to Stick, by Chip Heath and Dan Heath, backed by Tversky and Shafir (1992), Loewenstein (1994), and Paivio (1971). This tool is independent. The authors and the publisher did not endorse it, and we have no tie to them.
 
@@ -272,6 +275,6 @@ The same panel serves programs on a worker at https://will-it-stick-panel.wdlcmu
 Plain JSON API: POST /api/check with {"text": "...", "motivation": "...", "moment": "optional moment name"}. It returns the full panel result as JSON: the core or the split, six scores with spread and a one-line reason each, starter forms, the one fix, and the with-the-fix text when the limit keeps it (null when it does not, with a reason).
 The human site's own door is POST /api/panel, with the same input and output.
 Health: GET /api/health answers ok, the model name, runs today, the daily cap, and stores_text: false.
-MCP server: POST /mcp (stateless, protocol 2025-06-18) with one tool, check_if_it_sticks. Same inputs and outputs as /api/check. Its instructions tell the host to show scores and starters exactly as returned and never to turn them into a full rewrite.
+MCP server: POST /mcp (stateless, protocol 2025-06-18) with two tools. check_if_it_sticks: same inputs and outputs as /api/check. make_it_stick: hand it a draft and its goal; it scans the draft, writes three transformations (a concrete comparison, the one-line core, a scene), drops any whose numbers the draft does not state or plainly derive, and returns the winner a cold-reader gist test picks, with the original competing and able to win. Its instructions tell the host to show results exactly as returned and never to rewrite the winner or turn the starters into a full rewrite.
 Words sent to any door are not recorded or kept. The server keeps only a daily count of how many checks ran (integers, no text). There are no accounts and no saved checks.
 The ChatGPT and Claude store listings are not live. Nothing has been submitted.

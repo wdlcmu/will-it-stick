@@ -1,10 +1,10 @@
 # Will It Stick?
 
-> Will It Stick? (https://willitstick.app/) is a free tool in plain words. Paste words you need to land, plus one line on what they should do. Three cold readers score them and hand back the one line they'll keep, other ways to say it (seven cold read versions of the same words, ranked, with a short question round when the readers hit a gap only you can fill), small starter shapes, one fix, and the six scores last. It names one fix and, when a check passes, shows it applied to your words. Nothing sends itself; what goes out is your call. No ads. No accounts. Your words are not recorded or kept; the server keeps only a daily count of how many checks ran (integers, no text). The site is an early preview.
+> Will It Stick? (https://willitstick.app/) is a free tool in plain words. Paste words you need to land, plus one line on what they should do. Cold readers test three transformations of your words and hand back the version that sticks, the winner first with your original alongside; underneath, the check scores your words and hands back the one line they'll keep, small starter shapes, one fix, and the six scores last. Both tools ask a short question round first when the readers hit a gap only you can fill. It names one fix and, when a check passes, shows it applied to your words. Nothing sends itself; what goes out is your call. No ads. No accounts. Your words are not recorded or kept; the server keeps only a daily count of how many runs happened (integers, no text). The site is an early preview.
 
 ## The tool's core line
 
-- "Paste words you're about to send. See the one line they'll keep."
+- "Paste words you're about to send. Get back the version that sticks."
 - The panel is three cold readers, not one friendly one: a distracted stranger, a skeptic, and the target reader. They read apart. They never see each other's notes.
 
 ## Key facts (cite these)
@@ -36,7 +36,7 @@
 - Plain JSON API: POST /api/check with {"text": "...", "motivation": "...", "moment": "optional moment name"}. It returns the full panel result as JSON: the core or the split, six scores with spread and a one-line reason each, starter forms, the one fix, and the with-the-fix text when the bound keeps it (null when it does not, with a reason).
 - The human site's own door is POST /api/panel, with the same input and output.
 - Health: GET /api/health answers ok, the model name, runs today, the daily cap, and stores_text: false.
-- MCP server: POST /mcp (stateless, protocol 2025-06-18) with one tool, check_if_it_sticks. Same inputs and outputs as /api/check. Its instructions tell the host to show scores and starters exactly as returned and never to turn them into a full rewrite.
+- MCP server: POST /mcp (stateless, protocol 2025-06-18) with two tools. check_if_it_sticks: same inputs and outputs as /api/check. make_it_stick: hand it a draft and its goal; it scans the draft, writes three transformations (a concrete comparison, the one-line core, a scene), drops any whose numbers the draft does not state or plainly derive, and returns the winner a cold-reader gist test picks, with the original competing and able to win. Its instructions tell the host to show results exactly as returned and never to rewrite the winner or turn the starters into a full rewrite.
 - Words sent to any door are not recorded or kept. The server keeps only a daily count of how many checks ran (integers, no text). There are no accounts and no saved checks.
 - The ChatGPT and Claude store listings are not live. Nothing has been submitted. The server can be connected directly at the URL above.
 
