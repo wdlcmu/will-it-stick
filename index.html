@@ -158,6 +158,19 @@
     min-height:44px;font:inherit;font-size:16px;font-weight:bold;color:var(--amber-deep);
     text-decoration:underline;cursor:pointer}
   .runstatus{display:none;font-size:15px;color:var(--soft);margin:12px 2px 0}
+  .runstatus .live-line{margin-top:6px;color:var(--ink)}
+  /* stepped result beats (steering add, Nov 3, 2026): one beat per
+     screen after a run; before any run the page reads as before. */
+  .beatbar{display:none}
+  #results.stepped .beatbar{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px}
+  #results.stepped .beat{display:none}
+  #results.stepped .beat.on{display:block}
+  .beatbar button{min-height:44px;padding:10px 14px;border-radius:999px;border:1px solid var(--line);
+    background:#fff;color:var(--soft);font:inherit;font-weight:600;font-size:15px;cursor:pointer}
+  .beatbar button.on{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+  .beatnav{margin:18px 0 0}
+  .t-core{font-size:18px;font-weight:700;margin:0 0 10px}
+  .t-core .t-core-label{color:var(--soft);font-weight:600}
   /* reader notes: each seat's own heard line and weakest pick */
   .readernotes{margin-top:12px}
   .readernotes .rn-label{font-size:13px;font-weight:bold;text-transform:uppercase;
@@ -493,7 +506,7 @@ window.FLEET_CFG = {
     <input type="text" id="motivation" maxlength="140" aria-describedby="motivation-hint" placeholder="Make my partner feel thanked, not lectured.">
     <button class="btn" id="run">Make it stick</button>
     <div class="err" id="err"></div>
-    <p class="runstatus" id="run-status" aria-live="polite"></p>
+    <div class="runstatus" id="run-status" aria-live="polite"></div>
     <p class="privacy">Your words are not recorded or kept; only a daily count of checks is kept.</p>
     <p class="samples">Try a sample:
       <button type="button" id="sample-strong">A repair night note</button> ·
@@ -502,15 +515,23 @@ window.FLEET_CFG = {
   </section>
 
   <section id="results" aria-live="polite">
+    <div class="beatbar" id="beatbar" aria-label="Result steps">
+      <button type="button" data-beat="1" class="on">1 · Your version</button>
+      <button type="button" data-beat="2">2 · Other versions</button>
+      <button type="button" data-beat="3">3 · What they'll hear</button>
+      <button type="button" data-beat="4">4 · Grades &amp; the fix</button>
+    </div>
+
+    <div class="beat on" id="beat-1">
     <div id="transform-wrap" hidden>
       <h2>The version that sticks</h2>
       <div id="transform"></div>
     </div>
+    <p class="beatnav"><button type="button" class="waysbtn" data-goto="2">See the other versions</button></p>
+    </div>
 
-    <h2>What they'll hear</h2>
-    <div id="core"></div>
-    <div class="readernotes" id="readernotes"></div>
-
+    <div class="beat" id="beat-2">
+    <div id="transform-others"></div>
     <h2>Other ways to say it</h2>
     <div id="ways">
       <p class="ways-lead">Your words and your goal come with you. Name who it is for, and three readers write seven other ways to say it, each one read cold and ranked as it lands. If they hit a gap only you can fill, they ask here, one question at a time.</p>
@@ -552,6 +573,18 @@ window.FLEET_CFG = {
       </div>
     </div>
 
+    <p class="beatnav"><button type="button" class="waysbtn" data-goto="3">What they'll hear</button></p>
+    </div>
+
+    <div class="beat" id="beat-3">
+    <div id="transform-heard"></div>
+    <h2>What they'll hear</h2>
+    <div id="core"></div>
+    <div class="readernotes" id="readernotes"></div>
+    <p class="beatnav"><button type="button" class="waysbtn" data-goto="4">Grades &amp; the fix</button></p>
+    </div>
+
+    <div class="beat" id="beat-4">
     <h2>The one fix</h2>
     <div class="card fix"><p id="fix"></p></div>
 
@@ -598,6 +631,7 @@ window.FLEET_CFG = {
         <a href="examples.html">See six real checks</a>
         <a href="#method">Read the method</a>
       </div>
+    </div>
     </div>
   </section>
 
@@ -965,6 +999,82 @@ function restingText(){
   return "The panel is resting. It has done its reads for today, and your words were not stored. It wakes up at " + nextResetText() + ".";
 }
 
+function showBeat(n){
+  document.querySelectorAll("#results .beat").forEach(b => b.classList.toggle("on", b.id === "beat-" + n));
+  document.querySelectorAll("#beatbar button").forEach(b => b.classList.toggle("on", Number(b.dataset.beat) === n));
+}
+document.querySelectorAll("#beatbar button").forEach(b => b.addEventListener("click", () => {
+  showBeat(Number(b.dataset.beat));
+  $("results").scrollIntoView({behavior: "smooth", block: "start"});
+}));
+document.querySelectorAll("[data-goto]").forEach(b => b.addEventListener("click", () => {
+  showBeat(Number(b.dataset.goto));
+  $("results").scrollIntoView({behavior: "smooth", block: "start"});
+}));
+
+// The streamed check (steering add, Nov 3, 2026): the waiting
+// state shows the real pipeline as it happens — each AI reader's
+// heard line the moment that reader lands, then the scoring and
+// fix stages — never a timer, never a person implied. If the
+// stream door cannot be used, one plain attempt follows with an
+// honest one-line wait.
+async function runCheckStream(text, motivation, seatLine, stageLine){
+  const ctl = new AbortController();
+  const timer = setTimeout(() => ctl.abort(), 90000);
+  try {
+    const resp = await fetch(API_BASE + "/api/check/stream", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({text, motivation}),
+      signal: ctl.signal
+    });
+    if (!resp.ok){
+      const data = await resp.json().catch(() => ({}));
+      throw { status: resp.status, data };
+    }
+    if (!resp.body || !resp.body.getReader) throw new Error("stream unsupported");
+    const reader = resp.body.getReader();
+    const dec = new TextDecoder();
+    let buf = "", result = null, streamErr = null;
+    for (;;){
+      const { done, value } = await reader.read();
+      if (done) break;
+      buf += dec.decode(value, {stream: true});
+      let idx;
+      while ((idx = buf.indexOf("\n")) >= 0){
+        const line = buf.slice(0, idx).trim();
+        buf = buf.slice(idx + 1);
+        if (!line) continue;
+        let ev;
+        try { ev = JSON.parse(line); } catch { continue; }
+        if (ev.type === "seat") seatLine(ev);
+        else if (ev.type === "stage") stageLine(ev);
+        else if (ev.type === "done") result = ev.result;
+        else if (ev.type === "error") streamErr = ev;
+      }
+    }
+    if (result) return result;
+    if (streamErr) throw { status: 502, data: streamErr };
+    throw new Error("stream ended early");
+  } finally { clearTimeout(timer); }
+}
+
+async function runCheckPlain(text, motivation){
+  const ctl = new AbortController();
+  const timer = setTimeout(() => ctl.abort(), 90000);
+  try {
+    const resp = await fetch(API_BASE + "/api/panel", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({text, motivation}),
+      signal: ctl.signal
+    });
+    const data = await resp.json();
+    if (!resp.ok) throw { status: resp.status, data };
+    return data;
+  } finally { clearTimeout(timer); }
+}
+
 $("run").onclick = async () => {
   const btn = $("run"), err = $("err");
   err.style.display = "none";
@@ -972,40 +1082,61 @@ $("run").onclick = async () => {
   if (text.length < 40){ err.textContent = "Paste a bit more first. A few sentences is enough."; err.style.display = "block"; return; }
   if (!motivation){ err.textContent = "Add one line: what should these words do?"; err.style.display = "block"; return; }
   btn.disabled = true;
-  btn.innerHTML = '<span class="spin"></span>Three readers are reading…';
+  btn.innerHTML = '<span class="spin"></span>Three AI readers are on it…';
   const statusEl = $("run-status");
-  const runT0 = Date.now();
-  const statusTick = () => { statusEl.textContent = "The readers are reading apart. " + Math.floor((Date.now() - runT0) / 1000) + " seconds in. Most checks land in under a minute."; };
+  statusEl.innerHTML = "";
   statusEl.style.display = "block";
-  statusTick();
-  const runTick = setInterval(statusTick, 500);
+  const head = document.createElement("div");
+  head.textContent = "Behind the scenes: three AI readers, each reading on its own. Their lines land here as they finish.";
+  statusEl.appendChild(head);
+  const seatLines = {};
+  const seatLine = (ev) => {
+    let li = seatLines[ev.id];
+    if (!li){
+      li = document.createElement("div");
+      li.className = "live-line";
+      seatLines[ev.id] = li;
+      statusEl.appendChild(li);
+    }
+    li.textContent = "✓ " + ev.name + " heard: \u201C" + (ev.heard || "") + "\u201D";
+  };
+  const stageLine = (ev) => {
+    const li = document.createElement("div");
+    li.className = "live-line";
+    li.textContent = ev.stage === "scoring"
+      ? "Comparing their scores…"
+      : "Choosing the one fix, and trying it on your words…";
+    statusEl.appendChild(li);
+  };
+  const showError = (status, data) => {
+    const raw = String((data && data.detail) || "");
+    const capped = String((data && data.error) || "") === "daily_cap" || /daily limit/.test(raw);
+    if (capped) err.innerHTML = restingText() + " While you wait, <a href=\"examples.html\">see six real panel runs</a>.";
+    else if (status >= 500) err.textContent = "The panel did not answer. Your words were not stored. Try again in a moment.";
+    else err.textContent = raw || "Something broke. Try again in a moment.";
+    err.style.display = "block";
+  };
   try {
-    const ctl = new AbortController();
-    const timer = setTimeout(() => ctl.abort(), 90000);
-    const resp = await fetch(API_BASE + "/api/panel", {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({text, motivation}),
-      signal: ctl.signal
-    });
-    clearTimeout(timer);
-    const data = await resp.json();
-    if (!resp.ok){
-      const raw = String(data.detail || "");
-      const capped = String(data.error || "") === "daily_cap" || /daily limit/.test(raw);
-      if (capped) err.innerHTML = restingText() + " While you wait, <a href=\"examples.html\">see six real panel runs</a>.";
-      else if (resp.status >= 500) err.textContent = "The panel did not answer. Your words were not stored. Try again in a moment.";
-      else err.textContent = raw || "Something broke. Try again in a moment.";
-      err.style.display = "block";
-      return;
+    let data;
+    try {
+      data = await runCheckStream(text, motivation, seatLine, stageLine);
+    } catch (e) {
+      if (e && e.status) throw e;
+      if (e && e.name === "AbortError") throw e;
+      head.textContent = "Three AI readers are on it. This usually takes under a minute.";
+      data = await runCheckPlain(text, motivation);
     }
     lastGoalText = motivation;
+    $("results").classList.add("stepped");
+    showBeat(1);
     render(data, text);
   } catch(e) {
-    err.textContent = "The panel did not answer. Your words were not stored. Try again in a moment.";
-    err.style.display = "block";
+    if (e && e.status) showError(e.status, e.data);
+    else {
+      err.textContent = "The panel did not answer. Your words were not stored. Try again in a moment.";
+      err.style.display = "block";
+    }
   } finally {
-    clearInterval(runTick);
     statusEl.style.display = "none";
     btn.disabled = false;
     btn.textContent = "Make it stick";
@@ -1047,50 +1178,76 @@ $("run").onclick = async () => {
     }
   }
 
+  var othersBox = document.getElementById("transform-others");
+  var heardBox = document.getElementById("transform-heard");
+
   function renderResult(r){
     box.innerHTML = "";
+    if (othersBox) othersBox.innerHTML = "";
+    if (heardBox) heardBox.innerHTML = "";
     if (!r || !r.status){ setStatus("The transformation pass did not answer. Your check below stands."); return; }
     if (r.status === "questions_first"){ renderQuestions(r); return; }
+    // Beat 1: the core idea named first, then the winning version.
+    if (r.core){
+      var coreLine = el("p", "t-core");
+      var lab = el("span", "t-core-label", "The core idea: ");
+      coreLine.appendChild(lab);
+      coreLine.appendChild(document.createTextNode(r.core));
+      box.appendChild(coreLine);
+    }
     var w = r.winner || {};
     var card = el("div", "t-card");
     card.appendChild(el("p", "t-kind", w.label || "The version that sticks"));
     card.appendChild(el("p", "t-win", w.text || ""));
     if (r.status === "already_sticks")
       card.appendChild(el("p", "t-note", "Your original beat every transformation the cold readers tested. Send it as it stands."));
-    if (r.heard && r.heard.winner){
-      var heard = el("p", "t-heard");
-      heard.appendChild(document.createTextNode("A cold reader carried away: "));
-      var em = el("em", null, "\u201C" + r.heard.winner + "\u201D");
-      heard.appendChild(em);
-      card.appendChild(heard);
-    }
+    if (r.note)
+      card.appendChild(el("p", "t-note", r.note));
     var copy = el("button", "copybtn t-copy", "Copy this version");
     copy.type = "button";
     copy.addEventListener("click", function(){ copyText(w.text || "", copy); });
     card.appendChild(copy);
     box.appendChild(card);
 
-    if (r.status !== "already_sticks" && r.original && r.original.text){
-      var orig = el("div", "t-orig");
-      orig.appendChild(el("p", "t-kind", "Your words"));
-      orig.appendChild(el("p", null, r.original.text));
-      box.appendChild(orig);
+    // Beat 3: what a cold reader carried away from the winner.
+    if (heardBox && r.heard && r.heard.winner){
+      var heard = el("p", "t-heard");
+      heard.appendChild(document.createTextNode("From the winning version, a cold reader carried away: "));
+      var em = el("em", null, "\u201C" + r.heard.winner + "\u201D");
+      heard.appendChild(em);
+      heardBox.appendChild(heard);
     }
-    if (r.alternates && r.alternates.length){
+    // Beat 2: the original alongside, the alternates below.
+    if (othersBox && r.status !== "already_sticks" && r.original && r.original.text){
+      var orig = el("div", "t-orig");
+      orig.appendChild(el("p", "t-kind", "Your words, as they stand"));
+      orig.appendChild(el("p", null, r.original.text));
+      othersBox.appendChild(orig);
+    }
+    if (othersBox && r.alternates && r.alternates.length){
       var alts = el("div", "t-alts");
       alts.appendChild(el("p", "t-kind", "The other versions the readers tested"));
       r.alternates.forEach(function(a){
+        if (a.kind === "original") return;
         var c = el("div", "t-alt");
         c.appendChild(el("p", "t-kind", a.label || a.kind || ""));
         c.appendChild(el("p", null, a.text || ""));
         alts.appendChild(c);
       });
-      box.appendChild(alts);
+      if (alts.children.length > 1) othersBox.appendChild(alts);
     }
   }
 
   function renderQuestions(r){
     box.innerHTML = "";
+    if (othersBox) othersBox.innerHTML = "";
+    if (heardBox) heardBox.innerHTML = "";
+    if (r.core){
+      var coreLine = el("p", "t-core");
+      coreLine.appendChild(el("span", "t-core-label", "The core idea: "));
+      coreLine.appendChild(document.createTextNode(r.core));
+      box.appendChild(coreLine);
+    }
     box.appendChild(el("p", "t-status", "Your words need one thing only you can add. Answer what you can; skip the rest."));
     var inputs = [];
     (r.questions || []).forEach(function(q){
@@ -1158,6 +1315,8 @@ $("run").onclick = async () => {
     if (text.length < 40 || !goal){ wrap.hidden = true; return; }
     tState = { text: text, goal: goal };
     wrap.hidden = false;
+    if (othersBox) othersBox.innerHTML = "";
+    if (heardBox) heardBox.innerHTML = "";
     var mine = ++tRun;
     setStatus("Scanning your words for the point\u2026");
     var body = JSON.stringify({ text: text, goal: goal });
@@ -1581,8 +1740,8 @@ $("run").onclick = async () => {
             try { ev = JSON.parse(line); } catch (e) { continue; }
             if (ev.type === "cut_ready"){
               readyCount++;
-              stage.textContent = "Way " + readyCount + " of 7 written. Three cold readers are reading it now\u2026";
-              boardAdd(ev.id, ev.name, ev.text, ev.vehicle, "Written. Three cold readers are reading this one\u2026");
+              stage.textContent = "Way " + readyCount + " of 7 written. Three AI readers are reading it now\u2026";
+              boardAdd(ev.id, ev.name, ev.text, ev.vehicle, "Written. Three AI readers are reading this one\u2026");
             }
             else if (ev.type === "cut_dropped"){ boardDrop(ev.drop); }
             else if (ev.type === "cut_reviewed"){
