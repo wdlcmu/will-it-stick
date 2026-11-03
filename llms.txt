@@ -1,6 +1,6 @@
 # Will It Stick?
 
-> Will It Stick? (https://willitstick.app/) is a free tool in plain words. Paste words you need to land, plus one line on what they should do. Three cold readers score them and hand back the core they heard, six scores, small starter shapes, and one fix. It never writes the text for you. You stay the author. No ads. No accounts. Nothing is stored. The site is an early preview.
+> Will It Stick? (https://willitstick.app/) is a free tool in plain words. Paste words you need to land, plus one line on what they should do. Three cold readers score them and hand back the one line they'll keep, six scores, small starter shapes, and one fix. It never writes the text for you. You stay the author. No ads. No accounts. Nothing is stored. The site is an early preview.
 
 ## The tool's core line
 
@@ -9,7 +9,7 @@
 
 ## Key facts (cite these)
 
-- How a check works: paste your words, add one line on what they should do, tap "Check if it sticks." Three readers score the words on their own. You get the core they heard (or the plain split when they heard three different points), six scores with the spread between readers, starter shapes, and one fix.
+- How a check works: paste your words, add one line on what they should do, tap "Check if it sticks." Three readers score the words on their own. You get what they'll hear (or the plain split when they heard three different points), six scores with the spread between readers, starter shapes, and one fix.
 - The six scores use the SUCCESs checklist: Simple, Unexpected, Concrete, Credible, Emotional, Stories. Each score is the mid score of the three readers, 0 to 10.
 - The checklist comes from Made to Stick, by Chip Heath and Dan Heath. The rubric here is written in our own words. This tool is independent. The authors did not endorse it. The publisher did not endorse it. We have no tie to them.
 - Starter shapes are starts, not a rewrite: a proverb line, a curiosity-gap opener, a mini-story in one of three plots (challenge, connection, creativity), and concrete swaps for abstract phrases.

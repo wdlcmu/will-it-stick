@@ -23,12 +23,12 @@ Button: Check if it sticks.
 Your words run through the panel once. Then they are gone. Nothing is stored.
 Try a sample: A repair night note · A work memo.
 
-A result shows: six scores (Simple, Unexpected, Concrete, Credible, Emotional, Stories, each the mid score of three cold readers, with a one-line reason and a note on whether readers agreed or split); the core (one quoted line, or the plain split when readers heard three different points); before and after (your words as pasted beside your words with only the one fix applied, changed words marked, with a count of lines changed; when the server-side limit drops the after view, the one fix stands as a tip only); starters beside the after card (the proverb, the gap opener, the story, concrete swaps), labeled "Shapes to start from. Not your text."; and the one fix. Every result ends: "We don't write it for you. You stay the author."
+A result shows: six scores (Simple, Unexpected, Concrete, Credible, Emotional, Stories, each the mid score of three cold readers, with a one-line reason and a note on whether readers agreed or split); what they'll hear (one quoted line, or the plain split when readers heard three different points); before and after (your words as pasted beside your words with only the one fix applied, changed words marked, with a count of lines changed; when the server-side limit drops the after view, the one fix stands as a tip only); starters beside the after card (the proverb, start with a question, the story, words you can picture), labeled "Shapes to start from. Not your text."; and the one fix. Every result ends: "We don't write it for you. You stay the author."
 
 ### How it works
 
 1. Three cold readers score your words. They never see each other's notes.
-2. You get the core they heard, six scores, and starter shapes.
+2. You get what they'll hear, the one fix, six scores, and starter shapes.
 3. No rewrite. We don't write it for you. You stay the author.
 
 ### Method and sources
@@ -77,7 +77,7 @@ Goal: "Give a short birthday toast for my friend Sarah that guests will remember
 Core heard: "Thanks to all for being here"
 Scores: Simple 8, Unexpected 2, Concrete 2, Credible 4, Emotional 5, Stories 1.
 One fix: "Name one thing Sarah did that was great. Cut the rest."
-One starter: Gap opener: "What makes Sarah special?"
+One starter: Start with a question: "What makes Sarah special?"
 
 ### A hard message to a friend (chip: A hard message; sample text from the test set)
 
@@ -107,11 +107,11 @@ Six small starts. Shapes to start from. Not your text.
 Each check hands back six shapes: starts, not a rewrite. You pick what fits and write the rest. Each sample below came from a real run.
 
 1. The proverb. Your point in one short line a friend can repeat. Long is not this shape. From a real run: "Fix it free, save money."
-2. The gap opener. A first line that withholds one fact and opens a question. The next line pays it off. From a real run: "What happens on first Saturdays?"
+2. Start with a question. A first line that withholds one fact and opens a question. The next line pays it off. From a real run: "What happens on first Saturdays?"
 3. The story: a challenge. A small plot of three or four lines: a person hits a block, acts, and it ends. Your facts only; add none. From a real run: "The project faced many problems. We worked hard to fix them. Still, we need help to stay on track."
 4. The story: a bond. A small plot of three or four lines: two people meet, and a bond forms. Your facts only; add none. From a real run: "We fix things. You bring a lamp. We fix it free. You get coffee."
 5. The story: a new spark. A small plot of three or four lines: a spark hits, and a new thought forms. Your facts only; add none. From a real run: "We make new plans. We use best practices. We grow." (From the work memo sample in the tool. Flat words make flat tales.)
-6. Concrete swaps. Vague words hide the point. A swap trades them for a scene you can see and keep. From a real run: "cross-functional synergies" → "teams work together" (From the work memo sample in the tool. The swap is plainer, not grander.)
+6. Use words you can picture. Vague words hide the point. A swap trades them for a scene you can see and keep. From a real run: "cross-functional synergies" → "teams work together" (From the work memo sample in the tool. The swap is plainer, not grander.)
 
 What you do with them: Pick one shape and start from it. We don't write the rest for you; you stay the author.
 
