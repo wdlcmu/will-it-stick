@@ -1,6 +1,6 @@
 # Will It Stick?
 
-> Will It Stick? (https://willitstick.app/) is a free tool in plain words. Paste words you need to land, plus one line on what they should do. Three cold readers score them and hand back the one line they'll keep, six scores, small starter shapes, and one fix. It never writes the text for you. You stay the author. No ads. No accounts. Nothing is stored. The site is an early preview.
+> Will It Stick? (https://willitstick.app/) is a free tool in plain words. Paste words you need to land, plus one line on what they should do. Three cold readers score them and hand back the one line they'll keep, six scores, small starter shapes, and one fix. It never writes the text for you. You stay the author. No ads. No accounts. Your words are not recorded or kept; the server keeps only a daily count of how many checks ran (integers, no text). The site is an early preview.
 
 ## The tool's core line
 
@@ -37,7 +37,7 @@
 - The human site's own door is POST /api/panel, with the same input and output.
 - Health: GET /api/health answers ok, the model name, runs today, the daily cap, and stores_text: false.
 - MCP server: POST /mcp (stateless, protocol 2025-06-18) with one tool, check_if_it_sticks. Same inputs and outputs as /api/check. Its instructions tell the host to show scores and starters exactly as returned and never to turn them into a full rewrite.
-- Nothing sent to any door is stored. There are no accounts and no saved checks.
+- Words sent to any door are not recorded or kept. The server keeps only a daily count of how many checks ran (integers, no text). There are no accounts and no saved checks.
 - The ChatGPT and Claude store listings are not live. Nothing has been submitted. The server can be connected directly at the URL above.
 
 ## Optional
