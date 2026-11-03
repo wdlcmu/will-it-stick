@@ -1,6 +1,6 @@
 # Will It Stick?
 
-> Will It Stick? (https://willitstick.app/) is a free tool in plain words. Paste words you need to land, plus one line on what they should do. Three cold readers score them and hand back the one line they'll keep, six scores, small starter shapes, and one fix. It names one fix and, when a check passes, shows it applied to your words. Nothing is sent anywhere. No ads. No accounts. Your words are not recorded or kept; the server keeps only a daily count of how many checks ran (integers, no text). The site is an early preview.
+> Will It Stick? (https://willitstick.app/) is a free tool in plain words. Paste words you need to land, plus one line on what they should do. Three cold readers score them and hand back the one line they'll keep, six scores, small starter shapes, and one fix. It names one fix and, when a check passes, shows it applied to your words. Nothing sends itself; what goes out is your call. No ads. No accounts. Your words are not recorded or kept; the server keeps only a daily count of how many checks ran (integers, no text). The site is an early preview.
 
 ## The tool's core line
 

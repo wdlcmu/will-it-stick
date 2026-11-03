@@ -1,19 +1,21 @@
 # Will It Stick?: full page text
 
 > Complete text of willitstick.app: the homepage, the Examples page,
-> the Starters page, the Privacy page, and the Terms page.
+> the Starters page, the Privacy page, and the Terms page, plus the
+> guides, the Method page, Ways to say it, and the question pages.
 > Will It Stick? is a free tool in plain words. Paste words you need to land, plus one
 > line on what they should do. Three cold readers score them and hand back the core
-> they heard, six scores, small starter shapes, and one fix. It never writes the text
-> for you. Your words are not recorded or kept; only a daily count of checks is kept. The site is an early preview.
-> Text captured from the site source, 2026-11-01, with corrections through 2026-11-03. The live pages are the record.
+> they heard, six scores, small starter shapes, and one fix. It names one fix and, when
+> a check passes, shows it applied to your words. Nothing sends itself; what goes out
+> is your call. Your words are not recorded or kept; only a daily count of checks is kept. The site is an early preview.
+> Text captured from the site source, 2026-11-03. The live pages are the record.
 
 ## Homepage (https://willitstick.app/)
 
 Paste words you're about to send.
 See the one line they'll keep.
 
-Three real checks (from real panel runs; the full runs are on the Examples page). A work note that hid the risk: Before: "Status update: The project is progressing. Several workstreams are underway and we are addressing various issues as they arise. Stakeholders have been engaged. We expect continued progress in the coming period and will provide further updates as things develop." After: "Status update: The project is at risk of delay. Several workstreams are underway and we are addressing various issues as they arise. Stakeholders have been engaged. We expect continued progress in the coming period and will provide further updates as things develop." Three cold readers all heard "The project is at risk." Every score was 1 or 2 of 10. One line changed; the rest stayed the same. A hard text to a friend: the text never says what happened last weekend. Readers kept "Friend hurt last weekend." Feeling scored 7 of 10; the scene scored 4. The one fix: "Say what happened last weekend to show why you want to talk." A toast with no one scene: all three readers kept "Thanks to all for being here," and not one kept a thing about Sarah. Stories scored 1 of 10. The one fix: "Name one thing Sarah did that was great. Cut the rest."
+Three real checks (from real panel runs; the full runs are on the Examples page). A work note that hid the risk: Before: "Status update: The project is progressing. Several workstreams are underway and we are addressing various issues as they arise. Stakeholders have been engaged. We expect continued progress in the coming period and will provide further updates as things develop." After: "Status update: The project is at risk of delay. Several workstreams are underway and we are addressing various issues as they arise. Stakeholders have been engaged. We expect continued progress in the coming period and will provide further updates as things develop." The line the readers kept named the risk her goal named: "The project is at risk." The note itself never said it, and every score was 1 or 2 of 10. 1 line changed. The rest stayed the same. The fix asked for one more line, 'I need your help this week.' The rewrite never added it. A hard text to a friend: the text never says what happened last weekend. Readers kept "Friend hurt last weekend." Feeling scored 7 of 10; the scene scored 4. The one fix: "Say what happened last weekend to show why you want to talk." A toast with no one scene: all three readers kept "Thanks to all for being here," and not one kept a thing about Sarah. Stories scored 1 of 10. The one fix: "Name one thing Sarah did that was great. Cut the rest."
 
 Quick-start moments: What's new with me · Recommend something · A story I tell · Say thanks · Ask or invite · A hard message.
 
@@ -35,6 +37,7 @@ A result shows: six scores (Simple, Unexpected, Concrete, Credible, Emotional, S
 
 The SUCCESs checklist comes from Made to Stick, by Chip Heath and Dan Heath, backed by Tversky and Shafir (1992), Loewenstein (1994), and Paivio (1971).
 We test this tool against plain AI: the same ten messages, the same six-part rubric for both sides, judged blind. Across three runs the panel won 7, 5, and 7 of 10.
+Read the full method: the baseline, the judges, and every run. (https://willitstick.app/method)
 This tool is independent. The authors and the publisher did not endorse it, and we have no tie to them.
 
 ## Examples (https://willitstick.app/examples)
@@ -162,6 +165,99 @@ Six checks. One plain line each. Ideas that pass get repeated.
 Simple: one core, stated first. Unexpected: a break in the pattern. Concrete: things you can touch — "a red door," not "an entrance." Credible: proof a skeptic can check — a source, a test, a number with a name. Emotional: one person, not a crowd. Stories: a small scene with a turn — someone tries, something changes.
 A real check (from a real panel run; the full run is on the Examples page). Before: "I am starting basketball on my leave of work" After: "I am playing basketball on my leave of work." What readers heard: the core, "The author starts basketball on leave." The fix said "during my time off"; the rewrite changed one word only, starting became playing. The six scores: Simple 5, Unexpected 2, Concrete 2, Credible 3, Emotional 2, Stories 1.
 The SUCCESs checklist comes from Made to Stick, by Chip Heath and Dan Heath; the wording here is our own plain English. This tool is independent, with no endorsement from the authors or the publisher and no tie to them.
+
+## Method (https://willitstick.app/method)
+
+How we test this tool. Will It Stick? tests your words before you send them. This page is how we test the tool itself, with every run printed.
+
+The claim being tested: the question is narrow. Given the same words and the same job, does the panel's answer beat a plain AI answer? We run the test, print the runs, and let the spread show. One run is never a record.
+
+The two sides: the panel side runs the production checker, the same tool visitors use, with its dated limitation line in place. The plain AI side runs gpt-4o, a ChatGPT class model. It gets the same job in its prompt: name the core the reader keeps, score all six SUCCESs elements from 1 to 10 with reasons, name the weakest element, and give one fix as an instruction. It may not rewrite the words, and it may not add facts. Both sides get the same ten messages. The ten are frozen in a test kit, so every run answers the same questions. The messages are sample texts, not visitor words.
+
+The judging: judges score the two answers blind. They see Answer A and Answer B, never which side wrote which, and the A and B order flips from case to case and run to run. Each case gets two judge passes from gpt-4o-mini. When the two passes split, a gpt-4o adjudicator settles the case. Ties are counted as ties, never as wins. The judges are models, not people. A benchmark judged by people, on many more messages, is the stronger test. It is planned and not yet run, so this page claims only what the model judged runs show.
+
+The three runs, Nov 3, 2026. Run 1: panel wins 7 of 10; remembered core (panel / plain AI / tie) 6 / 4 / 0; usable fix 5 / 4 / 1. Run 2: panel wins 5 of 10; remembered core 3 / 6 / 1; usable fix 6 / 4 / 0. Run 3: panel wins 7 of 10; remembered core 7 / 3 / 0; usable fix 5 / 5 / 0. A win means the judges picked that side's full answer for the case: the core it named and the one fix it gave.
+
+What the spread means: the same test, run three times, gave 7, 5, and 7. Run 2 was a coin flip. Scores are draws, and the spread across runs is itself the finding. That is why the homepage prints the spread, not a single best number.
+
+What "applied" means in 18 of 36: every check result carries a dated line: in the latest measurement (Nov 3, 2026), the server applied the fix itself in 18 of 36 runs. Applied has a plain meaning here. After the panel names one fix, the server tries to apply that fix to the sender's own words, and two automated guards decide whether the result counts. The length guard: the new text must stay between 0.4 and 1.6 times the length of the original words. The correspondence guard: the change in the new text must be the change the fix named. A change the fix never called for fails, and so does a fix the new text never actually made. When both guards pass, the result shows your words with the fix applied, plus a count of lines changed. When either guard fails, the result carries the fix as an instruction only, with a reason, and no rewritten text. The 36 runs were a fixed set of test inputs measured on Nov 3, 2026. The number describes that set on that day, not a promise about any single check.
+
+Sources: the six scores use the SUCCESs checklist from Made to Stick, by Chip Heath and Dan Heath, backed by Tversky and Shafir (1992), Loewenstein (1994), and Paivio (1971). This tool is independent. The authors and the publisher did not endorse it, and we have no tie to them.
+
+## Ways to say it (https://willitstick.app/ways-to-say-it)
+
+Ways to say it. Spell-check fixes your words. This checks whether anyone will care.
+Write your message. Name who it is for and what you want it to do. You get seven ways to say it — each one cold-tested by three readers and ranked for your audience.
+Takes about half a minute. Cold readers are not instant.
+From your check — your words and your goal came with you. One new question: who is it for?
+Your message, in your own words. Who is it for? Name the person or the group — not "everyone." After they hear it, what should they think, feel, or do? Think. Feel. Do.
+Button: Find my seven ways.
+Your words are not recorded or kept; the server keeps only a daily count of how many runs happened (integers, no text).
+No words handy? Fill in the example.
+Writing seven ways to say it. Cold readers at work — most runs land between 30 and 60 seconds.
+Your seven ways, ranked. Your pick. Copy it. Check this one.
+
+## How does this message come across? (https://willitstick.app/how-does-this-come-across)
+
+How does this message come across? Will It Stick? tests your words before you send them. Three cold readers say what they heard, not what you meant.
+What you are really asking: you are not asking whether the words are good. You are asking what a reader walks away believing. Only one of those can be tested. Three cold readers read your words apart. Each reports the one line they kept. Where their lines split, your message splits too.
+A real check (a real panel run; the full run is on Examples). The goal: "Tell a close friend last weekend hurt me and ask to talk, without sounding angry." The words: "Hey, I need to talk about something. I have been feeling kind of off about how things went last weekend and I do not want it to be weird. You matter to me and I value our friendship a lot. Can we talk sometime?"
+What the three readers kept: the distracted stranger kept "Talk about last weekend." The skeptic kept "Friend hurt last weekend." The target reader kept "Friend hurt me last weekend." Only one reader in three heard the word "me." The other two heard an event, not a hurt. The hurt was the whole point.
+Scores: Simple 8, Unexpected 2, Concrete 4, Credible 6, Emotional 7, Stories 5.
+How this comes across: read cold, the note sounds gentle and vague. A friend could answer "sure, let's talk" and never know anything hurt. Or hear a complaint coming and brace for it.
+The one fix: "Say what happened last weekend to show why you want to talk."
+
+## Does my email sound rude? (https://willitstick.app/does-my-email-sound-rude)
+
+Does my email sound rude? Will It Stick? tests your words before you send them. Three cold readers say what they heard, not what you meant.
+What you are really asking: this test does not grade politeness. It shows what readers took from your words. At work, the bigger risk is rarely rude. It is calm words that hide the point.
+A real check (a real panel run; the full run is on Examples). The goal: "Update my manager so she knows the launch is at risk and what I need from her this week." The words: "Status update: The project is progressing. Several workstreams are underway and we are addressing various issues as they arise. Stakeholders have been engaged. We expect continued progress in the coming period and will provide further updates as things develop."
+What the three readers kept: "The project is at risk." All three readers heard the risk. The note never says it. The goal line did: it told readers what this note was for. Even so, they scored the note itself 1s and 2s.
+Scores: Simple 2, Unexpected 1, Concrete 1, Credible 2, Emotional 1, Stories 1.
+How this email lands: read at speed, this email says "all fine." The ask for help never arrives. The delay shows up later, as a surprise.
+The one fix: "The project is at risk of delay. I need your help this week."
+After the fix: "Status update: The project is at risk of delay. Several workstreams are underway and we are addressing various issues as they arise. Stakeholders have been engaged. We expect continued progress in the coming period and will provide further updates as things develop." One line changed. The note now says the true thing first, in plain words. Nothing rude was added. Nothing needed to be.
+
+## Will my email land well? (https://willitstick.app/will-my-email-land-well)
+
+Will my email land well? Will It Stick? tests your words before you send them. Three cold readers say what they heard, not what you meant.
+What you are really asking: landing well means one line survives the skim. A reader can repeat it tomorrow without trying. Everything else in the message is support for that line.
+A real check (a real panel run, on the site's own sample text; the full run is on Examples). The goal: "Get neighbors to come to one repair night." The words: "Your toaster died on a Tuesday. The shop wants $90 to look at it. We fix it free. Every first Saturday, neighbors bring broken lamps, bikes, and toasters to the Maple Street hall. Last month we fixed 63 things and threw away none of them. Bring one broken thing. Leave with it working, plus a cup of coffee."
+What the three readers kept: "Fix things free." All three readers kept the same line. The skeptic kept it with the day attached: "Fix things free on Saturday". When three cold readers agree, the point has landed.
+Scores: Simple 8, Unexpected 6, Concrete 9, Credible 7, Emotional 5, Stories 8.
+Why it landed: the note is built from things you can see. A $90 quote. A named hall. "63 things" fixed last month. Concrete scored 9 of 10.
+The one fix: "Add a feeling, like 'fun'." Feeling was the lowest score, 5 of 10. Even a strong note gets one fix. The checker's own rewrite of this note was dropped by its limits, so the fix stands as a tip.
+
+## Is my message clear? (https://willitstick.app/is-my-message-clear)
+
+Is my message clear? Will It Stick? tests your words before you send them. Three cold readers say what they heard, not what you meant.
+What you are really asking: clear means a reader can act without asking you a question. If they must ask "which one?", the message was not clear, however smooth it sounded. Vague praise is the usual cause. "Interesting," "great," "a lot": warm words that carry nothing a reader can use.
+A real check (a real panel run; the full run is on Examples). The goal: "Recommend a podcast to a close friend so she actually presses play this week." The words: "You should listen to this podcast I found. It is really interesting and the host is great and talks about a lot of different topics. I think you would like it. I listened to a few episodes and they were all good."
+What the three readers kept: "Listen to this interesting podcast." Every reader kept the same point, word for word. The point arrived. It was just empty: no show name, no episode, no reason to press play.
+Scores: Simple 3, Unexpected 1, Concrete 1, Credible 2, Emotional 2, Stories 1.
+Where it blurs: Concrete scored 1 of 10. Your friend hears "some podcast, sometime." There is nothing to search for and nothing to tap. The tip dies politely.
+The one fix: "Cut the vague parts. Just say the podcast's name." The checker's rewrite could only drop "really." The real fix needs a fact only you hold: the show's name. A checker can flag the hole. It cannot fill it for you.
+
+## Is my pitch convincing? (https://willitstick.app/is-my-pitch-convincing)
+
+Is my pitch convincing? Will It Stick? tests your words before you send them. Three cold readers say what they heard, not what you meant.
+What you are really asking: convincing is not sounding sure of yourself. It is giving the reader a reason to believe that rides inside the words themselves. A pitch can be perfectly clear and still not believed. The check separates those two things, because readers do.
+A real check (a real panel run; the full run is on Examples). The goal: "Answer 'what's new?' with one thing that lands, not 'good, busy'." The words: "I am starting basketball on my leave of work."
+What the three readers kept: the stranger kept "The author starts basketball on leave." The skeptic kept "Starting basketball during work leave." The target reader kept "Starting basketball on my time off." The point landed in all three seats. Simple scored 5 of 10. Belief was another matter.
+Scores: Simple 5, Unexpected 2, Concrete 2, Credible 3, Emotional 2, Stories 1.
+Where belief split: on Credible, one reader scored 0 and two scored 3. Nothing in the line proved anything. It asked to be believed on its own say-so, and one reader declined.
+The one fix: "Say, 'I am playing basketball during my time off.'"
+After the fix: "I am playing basketball on my leave of work." Shown as the checker returned it. Even its own rewrite kept the foggy phrase "on my leave of work." The checker shows its work, flaws included.
+
+## Made to Stick message checker (https://willitstick.app/made-to-stick-message-checker)
+
+Made to Stick message checker. Will It Stick? is a message checker built on the SUCCESs checklist from Made to Stick.
+What this checker is: the checklist is the SUCCESs framework from Made to Stick, by Chip Heath and Dan Heath. This site is independent. The authors did not endorse it. Paste your words and one goal line. Three cold readers (a distracted stranger, a skeptic, your target reader) read them apart. You get the line they kept, six scores, and one fix. Your words are not recorded or kept. The server keeps only a daily count of how many checks ran.
+A real check, start to finish (a real panel run; more are on Examples). The goal: "Give a short birthday toast for my friend Sarah that guests will remember tomorrow." The words: "I just want to say thank you to everyone for being here. Sarah is a wonderful person and a great friend to all of us. We are so lucky to know her. Here is to many more years of happiness and good times together."
+The one point they remembered: "Thanks to all for being here." All three readers kept the same line. It is the greeting, not a memory. Simple scored 8 of 10: the point arrived whole.
+Scores: Simple 8, Unexpected 2, Concrete 2, Credible 4, Emotional 5, Stories 1.
+How to read them: Stories scored 1 of 10. The goal was a toast guests remember tomorrow. Nothing in these words gives them a scene to carry home. The checker also opens one question: "What makes Sarah special?"
+The one fix: "Name one thing Sarah did that was great. Cut the rest."
 
 ## For AI assistants: callable tools (API and MCP)
 

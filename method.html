@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Method: Will It Stick?</title>
+<meta name="description" content="How we test Will It Stick? against plain AI: the same ten messages, gpt-4o as the baseline, blind model judges, and all three runs printed: 7, 5, and 7 of 10.">
+<link rel="canonical" href="https://willitstick.app/method">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Will It Stick?">
+<meta property="og:title" content="Method: Will It Stick?">
+<meta property="og:description" content="How we test Will It Stick? against plain AI: the same ten messages, gpt-4o as the baseline, blind model judges, and all three runs printed: 7, 5, and 7 of 10.">
+<meta property="og:url" content="https://willitstick.app/method">
+<meta property="og:image" content="https://willitstick.app/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A real panel run: a work note before and after the one fix.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Method: Will It Stick?">
+<meta name="twitter:description" content="How we test Will It Stick? against plain AI: the same ten messages, gpt-4o as the baseline, blind model judges, and all three runs printed: 7, 5, and 7 of 10.">
+<meta name="twitter:image" content="https://willitstick.app/og-card.png">
+<style>
+  :root{
+    --paper:#faf6ee; --ink:#221d15; --soft:#6b6151; --line:#e4dcc9;
+    --amber:#f2b437; --amber-deep:#b97e0e; --card:#fffdf8;
+    --good:#3d9970; --mid:#e08a00; --bad:#d64545;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:Georgia,'Times New Roman',serif;line-height:1.45}
+  .wrap{max-width:860px;margin:0 auto;padding:20px 16px 48px}
+  header{padding:28px 0 6px}
+  h1{font-size:clamp(34px,8vw,52px);line-height:1.05;margin:0 0 10px}
+  .sub{font-size:clamp(18px,4.4vw,22px);color:var(--soft);margin:0 0 8px;max-width:34em}
+  h2{font-size:24px;margin:34px 0 8px}
+  p{font-size:17px;margin:4px 0;max-width:38em}
+  table{border-collapse:collapse;margin:12px 0;background:#fff;
+    border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  th,td{font-size:16px;text-align:left;padding:10px 14px;border-bottom:1px solid var(--line)}
+  th{background:#fff8e6}
+  tr:last-child td{border-bottom:none}
+  .note{font-size:15px;color:var(--soft)}
+  footer{margin-top:40px;padding-top:14px;border-top:1px solid var(--line);
+    color:var(--soft);font-size:15px}
+  footer a{color:var(--amber-deep)}
+  a{color:var(--amber-deep)}
+  .cta{display:block;margin-top:22px;background:var(--amber);color:#241a02;
+    font-weight:bold;font-size:20px;border-radius:12px;
+    padding:15px 10px;text-align:center;text-decoration:none}
+  a,button,input,textarea{touch-action:manipulation}
+  footer a{display:inline-block;padding:12px 4px;min-height:44px}
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>How we test this tool</h1>
+    <p class="sub">Will It Stick? tests your words before you send them. This page is how we test the tool itself, with every run printed.</p>
+  </header>
+
+  <h2>The claim being tested</h2>
+  <p>The question is narrow. Given the same words and the same job, does the panel's answer beat a plain AI answer? We run the test, print the runs, and let the spread show. One run is never a record.</p>
+
+  <h2>The two sides</h2>
+  <p>The panel side runs the production checker, the same tool visitors use, with its dated limitation line in place.</p>
+  <p>The plain AI side runs gpt-4o, a ChatGPT class model. It gets the same job in its prompt: name the core the reader keeps, score all six SUCCESs elements from 1 to 10 with reasons, name the weakest element, and give one fix as an instruction. It may not rewrite the words, and it may not add facts.</p>
+  <p>Both sides get the same ten messages. The ten are frozen in a test kit, so every run answers the same questions. The messages are sample texts, not visitor words.</p>
+
+  <h2>The judging</h2>
+  <p>Judges score the two answers blind. They see Answer A and Answer B, never which side wrote which, and the A and B order flips from case to case and run to run.</p>
+  <p>Each case gets two judge passes from gpt-4o-mini. When the two passes split, a gpt-4o adjudicator settles the case. Ties are counted as ties, never as wins.</p>
+  <p>The judges are models, not people. A benchmark judged by people, on many more messages, is the stronger test. It is planned and not yet run, so this page claims only what the model judged runs show.</p>
+
+  <h2>The three runs, Nov 3, 2026</h2>
+  <table>
+    <tr><th>Run</th><th>Panel wins, of 10</th><th>Remembered core (panel / plain AI / tie)</th><th>Usable fix (panel / plain AI / tie)</th></tr>
+    <tr><td>1</td><td>7</td><td>6 / 4 / 0</td><td>5 / 4 / 1</td></tr>
+    <tr><td>2</td><td>5</td><td>3 / 6 / 1</td><td>6 / 4 / 0</td></tr>
+    <tr><td>3</td><td>7</td><td>7 / 3 / 0</td><td>5 / 5 / 0</td></tr>
+  </table>
+  <p>A win means the judges picked that side's full answer for the case: the core it named and the one fix it gave.</p>
+
+  <h2>What the spread means</h2>
+  <p>The same test, run three times, gave 7, 5, and 7. Run 2 was a coin flip. Scores are draws, and the spread across runs is itself the finding. That is why the homepage prints the spread, not a single best number.</p>
+
+  <h2>What "applied" means in 18 of 36</h2>
+  <p>Every check result carries a dated line: in the latest measurement (Nov 3, 2026), the server applied the fix itself in 18 of 36 runs. Applied has a plain meaning here. After the panel names one fix, the server tries to apply that fix to the sender's own words, and two automated guards decide whether the result counts.</p>
+  <p>The length guard: the new text must stay between 0.4 and 1.6 times the length of the original words.</p>
+  <p>The correspondence guard: the change in the new text must be the change the fix named. A change the fix never called for fails, and so does a fix the new text never actually made.</p>
+  <p>When both guards pass, the result shows your words with the fix applied, plus a count of lines changed. When either guard fails, the result carries the fix as an instruction only, with a reason, and no rewritten text. The 36 runs were a fixed set of test inputs measured on Nov 3, 2026. The number describes that set on that day, not a promise about any single check.</p>
+
+  <h2>Sources</h2>
+  <p>The six scores use the SUCCESs checklist from Made to Stick, by Chip Heath and Dan Heath, backed by Tversky and Shafir (1992), Loewenstein (1994), and Paivio (1971). This tool is independent. The authors and the publisher did not endorse it, and we have no tie to them.</p>
+
+  <a class="cta" href="index.html">Check my words</a>
+
+  <footer>
+    Built with Muse. · <a href="index.html">Home</a> · <a href="examples.html">Examples</a> · <a href="starters.html">Starters</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a>
+  </footer>
+</div>
+</body>
+</html>
