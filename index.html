@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Will It Stick? Get the version of your words that sticks.</title>
-<meta name="description" content="Paste your words. Cold readers test three transformations of them and you get back the version that sticks, your original alongside, what they'll hear, one fix shown on your words, and the six scores last. Your words are not recorded or kept; only a daily count of runs is kept.">
+<meta name="description" content="Paste your words. Cold readers test three transformations of them and you get back the version that sticks, your original alongside, what they'll hear, one fix shown on your words, and four plain grades out of 5 last. Your words are not recorded or kept; only a daily count of runs is kept.">
 <link rel="canonical" href="https://willitstick.app/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Will It Stick?">
@@ -583,11 +583,11 @@ window.FLEET_CFG = {
     <p class="deal">One fix, shown applied to your words when it passes. Nothing is sent anywhere; what goes out is your call.</p>
     <p class="fineprint" id="fineprint"></p>
 
-    <h2>Six scores</h2>
+    <h2>Your grades</h2>
     <div class="scorestrip" id="scorestrip"></div>
     <p class="weakline" id="weakline"></p>
     <details class="scores-full" id="scores-full">
-      <summary>See all six scores in full</summary>
+      <summary>See the diagnosis: all six scores in full</summary>
       <div class="bars" id="bars"></div>
     </details>
 
@@ -661,7 +661,7 @@ window.FLEET_CFG = {
     <h2>How it works</h2>
     <p><strong>1. Three cold readers score your words.</strong> They never see each other's notes.</p>
     <p><strong>2. You get what they'll hear first,</strong> then other ways to say it. If the readers hit a gap only you can fill, they ask, and your answers sharpen a second set.</p>
-    <p><strong>3. One fix, shown on your words.</strong> The six scores sit last, in full one tap down. You decide what to send.</p>
+    <p><strong>3. One fix, shown on your words.</strong> Four plain grades out of 5 sit last; the six-score diagnosis is one tap below them. You decide what to send.</p>
   </section>
 
   <span id="method" aria-hidden="true"></span>
@@ -832,16 +832,17 @@ function render(r, original){
     bars.appendChild(row);
   }
   const strip = $("scorestrip"); strip.innerHTML = "";
-  for (const el of r.elements){
+  for (const g of (r.plain_grades || [])){
+    if (g.median === null || g.median === undefined) continue;
     const cell = document.createElement("div"); cell.className = "mini";
     cell.innerHTML =
       '<div class="m-top"><span class="m-name"></span><span class="m-score"></span></div>' +
       '<div class="m-track"><div class="m-fill"></div></div>';
-    cell.querySelector(".m-name").textContent = el.name;
-    cell.querySelector(".m-score").textContent = el.median + " / 10";
+    cell.querySelector(".m-name").textContent = g.name;
+    cell.querySelector(".m-score").textContent = g.median + " / 5";
     const mf = cell.querySelector(".m-fill");
-    mf.style.background = barColor(el.median);
-    requestAnimationFrame(() => { mf.style.width = (el.median * 10) + "%"; });
+    mf.style.background = barColor(g.median * 2);
+    requestAnimationFrame(() => { mf.style.width = (g.median * 20) + "%"; });
     strip.appendChild(cell);
   }
   const wElS = r.elements.find(e => e.key === r.weakest);
