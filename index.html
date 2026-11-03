@@ -394,18 +394,17 @@ window.FLEET_CFG = {
     <p class="hint" id="motivation-hint">One line: who reads them, and what should they do, feel, or remember?</p>
     <input type="text" id="motivation" maxlength="140" aria-describedby="motivation-hint" placeholder="Make my partner feel thanked, not lectured.">
     <button class="btn" id="run">Check if it sticks</button>
+    <div class="err" id="err"></div>
     <p class="privacy">Your words run through the panel once. Then they are gone. Nothing is stored.</p>
     <p class="samples">Try a sample:
       <button type="button" id="sample-strong">A repair night note</button> ·
       <button type="button" id="sample-weak">A work memo</button>
     </p>
-    <div class="err" id="err"></div>
   </section>
 
 
   <section class="card wis-chat" id="chat" aria-label="Ask about the checker">
     <h2 style="margin-top:0">Questions about the checker? Ask its AI.</h2>
-    <img class="proof" src="og-card.png" alt="A real panel run: a work note before and after the one fix." width="1200" height="630" loading="lazy">
     <div id="chat-thread">
       <div class="bubble"><p class="who">THE SITE'S AI</p>Hi, I'm this site's AI assistant. I answer from the site's own pages and its published checks — how the checker works, what the six scores mean, and what real checks found. I can't score your words here; only the checker does that. Nothing you type is saved.</div>
     </div>
