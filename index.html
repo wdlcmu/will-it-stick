@@ -406,14 +406,14 @@ window.FLEET_CFG = {
   <section class="card wis-chat" id="chat" aria-label="Ask about the checker">
     <h2 style="margin-top:0">Questions about the checker? Ask its AI.</h2>
     <div id="chat-thread">
-      <div class="bubble"><p class="who">THE SITE'S AI</p>Hi, I'm this site's AI assistant. I answer from the site's own pages and its published checks — how the checker works, what the six scores mean, and what real checks found. I can't score your words here; only the checker does that. Nothing you type is saved.</div>
+      <div class="bubble"><p class="who">THE SITE'S AI</p>Hi, I'm this site's AI assistant. Paste words you are about to send and I will run the real checker on them right here — the same three cold readers as the checker button — then ask me follow-ups: the weakest part, or the one fix. I also answer from the site's own pages and its published checks. Nothing you type is saved on the server; this page holds our conversation only while it is open.</div>
     </div>
     <div id="chat-chips">
       <button class="chatchip" type="button">Show me a real check</button>
       <button class="chatchip" type="button">What can't you do here?</button>
     </div>
     <form class="row" id="chat-form">
-      <input type="text" id="chat-q" placeholder="Ask how the checker works…" autocomplete="off" aria-label="Ask how the checker works">
+      <input type="text" id="chat-q" placeholder="Paste words to check, or ask a question…" autocomplete="off" aria-label="Paste words to check, or ask a question">
       <button class="send" type="submit">Send</button>
     </form>
     <p class="busy" id="chat-busy" aria-live="polite"></p>
@@ -772,6 +772,7 @@ $("run").onclick = async () => {
 <script>
 (function(){
   var CHAT_API = "https://will-it-stick-chat.wdlcmu.workers.dev/api/chat";
+  var chatState = null;
   var thread = document.getElementById('chat-thread');
   var busy = document.getElementById('chat-busy');
   if (!thread) return;
@@ -787,9 +788,9 @@ $("run").onclick = async () => {
     var msg = (text || '').trim(); if (!msg) return;
     add(msg, 'YOU', 'me'); busy.textContent = 'Thinking…';
     track("ask_asked", {surface: "ask"});
-    fetch(CHAT_API, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({message: msg})})
+    fetch(CHAT_API, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({message: msg, state: chatState})})
       .then(function(r){ return r.json(); })
-      .then(function(j){ busy.textContent=''; if (!j.reply || /fallback|nomodel/.test(j.route || '')) track("ask_fallback", {surface: "ask", missing: "other"}); else track("ask_answered", {surface: "ask"}); add(j.reply || '(no reply)', "THE SITE'S AI", null, j.checker || null); })
+      .then(function(j){ busy.textContent=''; if (j.state) chatState = j.state; if (!j.reply || /fallback|nomodel/.test(j.route || '')) track("ask_fallback", {surface: "ask", missing: "other"}); else track("ask_answered", {surface: "ask"}); add(j.reply || '(no reply)', "THE SITE'S AI", null, j.checker || null); })
       .catch(function(){ busy.textContent=''; track("ask_fallback", {surface: "ask", missing: "other"}); add('Something went wrong — try again.', "THE SITE'S AI"); });
   }
   document.getElementById('chat-form').addEventListener('submit', function(e){ e.preventDefault(); var q = document.getElementById('chat-q'); var v = q.value; q.value=''; send(v); });
