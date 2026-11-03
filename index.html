@@ -171,6 +171,10 @@
   .beatnav{margin:18px 0 0}
   .t-core{font-size:18px;font-weight:700;margin:0 0 10px}
   .t-core .t-core-label{color:var(--soft);font-weight:600}
+  .wa-card{border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:0 0 16px;background:#fff}
+  .wa-card p{margin:6px 0;font-size:18px}
+  .wa-card .wa-k{display:block;font-size:13px;font-weight:700;letter-spacing:.04em;color:var(--soft);text-transform:uppercase}
+  .wa-card .wa-risk{color:#8a4a12}
   /* reader notes: each seat's own heard line and weakest pick */
   .readernotes{margin-top:12px}
   .readernotes .rn-label{font-size:13px;font-weight:bold;text-transform:uppercase;
@@ -577,6 +581,7 @@ window.FLEET_CFG = {
     </div>
 
     <div class="beat" id="beat-3">
+    <div id="walkaway"></div>
     <div id="transform-heard"></div>
     <h2>What they'll hear</h2>
     <div id="core"></div>
@@ -888,6 +893,26 @@ function render(r, original){
   } else {
     $("weakline").textContent = "";
   }
+  const wa = $("walkaway");
+  if (wa){
+    wa.innerHTML = "";
+    if (r.walk_away && (r.walk_away.want || r.walk_away.risk)){
+      const card = document.createElement("div"); card.className = "wa-card";
+      if (r.walk_away.want){
+        const p = document.createElement("p");
+        const k = document.createElement("span"); k.className = "wa-k"; k.textContent = "The thought you want";
+        p.appendChild(k); p.appendChild(document.createTextNode("\u201C" + r.walk_away.want + "\u201D"));
+        card.appendChild(p);
+      }
+      if (r.walk_away.risk){
+        const p = document.createElement("p"); p.className = "wa-risk";
+        const k = document.createElement("span"); k.className = "wa-k"; k.textContent = "The thought you risk";
+        p.appendChild(k); p.appendChild(document.createTextNode("\u201C" + r.walk_away.risk + "\u201D"));
+        card.appendChild(p);
+      }
+      wa.appendChild(card);
+    }
+  }
   const core = $("core"); core.innerHTML = "";
   if (r.core_split){
     const p = document.createElement("p");
@@ -1195,9 +1220,19 @@ $("run").onclick = async () => {
       coreLine.appendChild(document.createTextNode(r.core));
       box.appendChild(coreLine);
     }
+    // Conversation moments (steering add, Nov 3, 2026): frame the
+    // winner as an instead-of / try-saying pair against the words
+    // as they stand.
+    var convoCue = /what'?s new|hard text|conversation|convo|catch[\s-]?up|small talk/i.test(tState.goal || "");
+    if (convoCue && r.status === "transformed" && r.original && r.original.text){
+      var instead = el("p", "t-note");
+      instead.appendChild(el("span", "t-core-label", "Instead of: "));
+      instead.appendChild(document.createTextNode("\u201C" + r.original.text + "\u201D"));
+      box.appendChild(instead);
+    }
     var w = r.winner || {};
     var card = el("div", "t-card");
-    card.appendChild(el("p", "t-kind", w.label || "The version that sticks"));
+    card.appendChild(el("p", "t-kind", (convoCue && r.status === "transformed" ? "Try saying · " : "") + (w.label || "The version that sticks")));
     card.appendChild(el("p", "t-win", w.text || ""));
     if (r.status === "already_sticks")
       card.appendChild(el("p", "t-note", "Your original beat every transformation the cold readers tested. Send it as it stands."));
