@@ -118,9 +118,13 @@ What you do with them: Pick one shape and start from it. We don't write the rest
 ## Privacy (https://willitstick.app/privacy)
 
 Your words are private to you.
-When you run the panel, your text is sent once to the AI readers, scored, and the result comes back to your screen.
-Your words are not recorded or kept. There is no database of your words. There is no account, and there are no saved checks.
+When you run a check, your text goes once to three AI readers. They score it, and the result comes back to your screen.
+We do not record or keep your words. There is no database of your words. There is no account, and there are no saved checks.
+The three readers run on Cloudflare Workers AI (Meta Llama 3.3 70B); under Cloudflare's published Workers AI terms, your text is not retained once it is no longer needed to answer, and it is never used to train AI models. Those terms name narrow exceptions, for safety and legal duties. Cloudflare does keep operational records about each request — its time, its size, and its count — to run and bill the service; those records hold no words.
 Each day, the server keeps one count: how many checks ran. The count is integers only, with no text. It keeps the demo within its budget.
+This site and its server run on Cloudflare, which also processes standard request data — the internet address a page was fetched from, the time, and the page asked for — to deliver and protect the service, as its privacy policy describes.
+Questions about privacy: hello@willitstick.app.
+This page took effect on November 3, 2026.
 Closing the page closes the run. Nothing follows you.
 
 ## Terms (https://willitstick.app/terms)
