@@ -15,17 +15,17 @@
 Paste words you're about to send.
 See the one line they'll keep.
 
-Three real checks (from real panel runs; the full runs are on the Examples page). A work note that hid the risk: Before: "Status update: The project is progressing. Several workstreams are underway and we are addressing various issues as they arise. Stakeholders have been engaged. We expect continued progress in the coming period and will provide further updates as things develop." After: "Status update: The project is at risk of delay. Several workstreams are underway and we are addressing various issues as they arise. Stakeholders have been engaged. We expect continued progress in the coming period and will provide further updates as things develop." The line the readers kept named the risk her goal named: "The project is at risk." The note itself never said it, and every score was 1 or 2 of 10. 1 line changed. The rest stayed the same. The fix asked for one more line, 'I need your help this week.' The rewrite never added it. A hard text to a friend: the text never says what happened last weekend. Readers kept "Friend hurt last weekend." Feeling scored 7 of 10; the scene scored 4. The one fix: "Say what happened last weekend to show why you want to talk." A toast with no one scene: all three readers kept "Thanks to all for being here," and not one kept a thing about Sarah. Stories scored 1 of 10. The one fix: "Name one thing Sarah did that was great. Cut the rest."
-
 Quick-start moments: What's new with me · Recommend something · A story I tell · Say thanks · Ask or invite · A hard message.
 
 Your words (paste a note, a toast, a post, a hard message, or drop a .txt or .md file).
-What should it do? (one line)
+What should your words do? (One line: who reads them, and what should they do, feel, or remember?)
 Button: Check if it sticks.
-Your words run through the panel. Then they are gone. Your words are not recorded or kept; the server keeps only a daily count of how many checks ran (integers, no text).
+Your words are not recorded or kept; only a daily count of checks is kept.
 Try a sample: A repair night note · A work memo.
 
-A result shows: six scores (Simple, Unexpected, Concrete, Credible, Emotional, Stories, each the mid score of three cold readers, with a one-line reason and a note on whether readers agreed or split); what they'll hear (one quoted line, or the plain split when readers heard three different points); before and after (your words as pasted beside your words with only the one fix applied, changed words marked, with a count of lines changed; when the server-side limit drops the after view, the one fix stands as a tip only); starters beside the after card (the proverb, start with a question, the story, words you can picture), labeled "Shapes to start from. Not your text."; and the one fix. Every result ends: "One fix, shown applied to your words when it passes. Nothing is sent anywhere — what goes out is your call."
+Three real checks (from real panel runs; the full runs are on the Examples page). A work note that hid the risk: Before: "Status update: The project is progressing. Several workstreams are underway and we are addressing various issues as they arise. Stakeholders have been engaged. We expect continued progress in the coming period and will provide further updates as things develop." After: "Status update: The project is at risk of delay. Several workstreams are underway and we are addressing various issues as they arise. Stakeholders have been engaged. We expect continued progress in the coming period and will provide further updates as things develop." The line the readers kept named the risk her goal named: "The project is at risk." The note itself never said it, and every score was 1 or 2 of 10. 1 line changed. The rest stayed the same. The fix asked for one more line, 'I need your help this week.' The rewrite never added it. A hard text to a friend: the text never says what happened last weekend. Readers kept "Friend hurt last weekend." Feeling scored 7 of 10; the scene scored 4. The one fix: "Say what happened last weekend to show why you want to talk." A toast with no one scene: all three readers kept "Thanks to all for being here," and not one kept a thing about Sarah. Stories scored 1 of 10. The one fix: "Name one thing Sarah did that was great. Cut the rest."
+
+A result shows: six scores (Simple, Unexpected, Concrete, Credible, Emotional, Stories, each the mid score of three cold readers, with a one-line reason and a note on whether readers agreed or split); what they'll hear (one quoted line, or the plain split when readers heard three different points); before and after (your words as pasted beside your words with only the one fix applied, changed words marked, with a count of lines changed; when the server-side limit drops the after view, the one fix stands as a tip only); starters beside the after card (the proverb, start with a question, the story, words you can picture), labeled "Shapes to start from. Not your text."; and the one fix. Every result ends: "One fix, shown applied to your words when it passes. Nothing is sent anywhere; what goes out is your call."
 
 ### How it works
 
@@ -187,15 +187,18 @@ Sources: the six scores use the SUCCESs checklist from Made to Stick, by Chip He
 ## Ways to say it (https://willitstick.app/ways-to-say-it)
 
 Ways to say it. Spell-check fixes your words. This checks whether anyone will care.
-Write your message. Name who it is for and what you want it to do. You get seven ways to say it — each one cold-tested by three readers and ranked for your audience.
-Takes about half a minute. Cold readers are not instant.
-From your check — your words and your goal came with you. One new question: who is it for?
-Your message, in your own words. Who is it for? Name the person or the group — not "everyone." After they hear it, what should they think, feel, or do? Think. Feel. Do.
+Write your message. Name who it is for and what you want it to do. You get seven ways to say it, each one cold-tested by three readers and ranked for your audience. Your own words are in the running too, and they can win.
+You watch the ways land as they are written. Most full runs finish in under half a minute. Cold readers are not instant.
+From your check: your words and your goal came with you. One new question: who is it for?
+Your message, in your own words. Who is it for? Name the person or the group, not "everyone." What do you want them to walk away with? Think: believe something. Feel: feel something. Do: do something. The readers judge every version against this.
+Not sure? Use the example.
 Button: Find my seven ways.
 Your words are not recorded or kept; the server keeps only a daily count of how many runs happened (integers, no text).
 No words handy? Fill in the example.
-Writing seven ways to say it. Cold readers at work — most runs land between 30 and 60 seconds.
-Your seven ways, ranked. Your pick. Copy it. Check this one.
+Writing seven ways to say it. Each way appears the moment it is written; you are watching the work, not a timer.
+Your ways, ranked. When versions tie, the page says so instead of picking a fake winner.
+Fill the holes? When the readers were guessing where a message runs thin, the page asks a few questions only the writer can answer, then runs the seven ways once more with the answers in hand. One round only, and the new set is labeled as the second version.
+Your pick. Copy it. Check this one.
 
 ## How does this message come across? (https://willitstick.app/how-does-this-come-across)
 

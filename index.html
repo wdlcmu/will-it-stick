@@ -108,6 +108,10 @@
   .story .try{display:inline-block;margin-top:8px;font-weight:bold;font-size:17px;line-height:1.2;
     color:var(--amber-deep);padding:12px 4px;min-height:44px}
   .hint{font-size:15px;color:var(--soft);margin:-2px 0 8px}
+  .strip details.fullcheck{margin:10px 0 0}
+  .strip details.fullcheck summary{min-height:44px;padding:12px 4px;cursor:pointer;
+    font-weight:bold;font-size:16px;color:var(--amber-deep)}
+  .strip details.fullcheck .pair p{font-size:17px;margin:6px 0}
   /* compact hero before/after strip (replaces the tall story block) */
   .strip{padding:14px 16px;margin:0 0 16px}
   .strip h2{font-size:20px;margin:0 0 6px}
@@ -341,42 +345,7 @@ window.FLEET_CFG = {
   <header>
     <h1>Will It Stick?</h1>
     <p class="sub">Paste words you're about to send. See the one line they'll keep.</p>
-    <a class="go" href="#tool">Check my words</a>
   </header>
-
-  <h2 class="checks-title">Three real checks</h2>
-
-  <section class="story strip" aria-label="A work note that hid the risk">
-    <h2>A work note that hid the risk</h2>
-    <p class="for">A status update to her manager. The launch was at risk, and the note never says so. Her goal line did — and the readers still scored the note itself 1s and 2s.</p>
-    <div class="pair">
-      <p><span class="tag">Before</span>&ldquo;Status update: The project is <mark class="out">progressing</mark>. Several workstreams are underway and we are addressing various issues as they arise. Stakeholders have been engaged. We expect continued progress in the coming period and will provide further updates as things develop.&rdquo;</p>
-      <p class="afterline"><span class="tag">After</span>&ldquo;Status update: The project is <mark>at risk of delay</mark>. Several workstreams are underway and we are addressing various issues as they arise. Stakeholders have been engaged. We expect continued progress in the coming period and will provide further updates as things develop.&rdquo;</p>
-    </div>
-    <p class="heard">The line the readers kept named the risk her goal named: &ldquo;The project is at risk.&rdquo; The note itself never said it, and every score was 1 or 2 of 10.</p>
-    <p class="count-line">1 line changed. The rest stayed the same. The fix asked for one more line, 'I need your help this week.' The rewrite never added it.</p>
-  </section>
-
-  <section class="story strip" aria-label="A hard text to a friend">
-    <h2>A hard text to a friend</h2>
-    <p class="for">Something went wrong last weekend. The text never says what.</p>
-    <div class="pair">
-      <p><span class="tag">Before</span>&ldquo;Hey, I need to talk about something. I have been feeling kind of off about how things went last weekend and I do not want it to be weird. You matter to me and I value our friendship a lot. Can we talk sometime?&rdquo;</p>
-    </div>
-    <p class="heard">Readers kept the hurt, not the reason: &ldquo;Friend hurt last weekend.&rdquo; Feeling scored 7 of 10. The scene scored 4.</p>
-    <p class="fixline"><strong>The one fix</strong>&ldquo;Say what happened last weekend to show why you want to talk.&rdquo;</p>
-  </section>
-
-  <section class="story strip" aria-label="A toast with no scene">
-    <h2>A toast with no scene</h2>
-    <p class="for">A birthday toast for Sarah, warm from start to finish &mdash; and not one thing she ever did.</p>
-    <div class="pair">
-      <p><span class="tag">Before</span>&ldquo;I just want to say thank you to everyone for being here. Sarah is a wonderful person and a great friend to all of us. We are so lucky to know her. Here is to many more years of happiness and good times together.&rdquo;</p>
-    </div>
-    <p class="heard">All three readers kept the same line: &ldquo;Thanks to all for being here.&rdquo; Not one kept a thing about Sarah. Stories scored 1 of 10.</p>
-    <p class="fixline"><strong>The one fix</strong>&ldquo;Name one thing Sarah did that was great. Cut the rest.&rdquo;</p>
-    <p class="links"><a class="try" href="examples.html">All six real checks</a></p>
-  </section>
 
   <section class="tool" id="tool">
     <div class="chips" role="group" aria-label="Common moments">
@@ -395,28 +364,11 @@ window.FLEET_CFG = {
     <input type="text" id="motivation" maxlength="140" aria-describedby="motivation-hint" placeholder="Make my partner feel thanked, not lectured.">
     <button class="btn" id="run">Check if it sticks</button>
     <div class="err" id="err"></div>
-    <p class="privacy">Your words run through the panel. Then they are gone. Your words are not recorded or kept; the server keeps only a daily count of how many checks ran (integers, no text).</p>
+    <p class="privacy">Your words are not recorded or kept; only a daily count of checks is kept.</p>
     <p class="samples">Try a sample:
       <button type="button" id="sample-strong">A repair night note</button> ·
       <button type="button" id="sample-weak">A work memo</button>
     </p>
-  </section>
-
-
-  <section class="card wis-chat" id="chat" aria-label="Ask about the checker">
-    <h2 style="margin-top:0">Questions about the checker? Ask its AI.</h2>
-    <div id="chat-thread">
-      <div class="bubble"><p class="who">THE SITE'S AI</p>Hi, I'm this site's AI assistant. Paste words you are about to send and I will run the real checker on them right here — the same three cold readers as the checker button — then ask me follow-ups: the weakest part, or the one fix. I also answer from the site's own pages and its published checks. Nothing you type is saved on the server; this page holds our conversation only while it is open.</div>
-    </div>
-    <div id="chat-chips">
-      <button class="chatchip" type="button">Show me a real check</button>
-      <button class="chatchip" type="button">What can't you do here?</button>
-    </div>
-    <form class="row" id="chat-form">
-      <input type="text" id="chat-q" placeholder="Paste words to check, or ask a question…" autocomplete="off" aria-label="Paste words to check, or ask a question">
-      <button class="send" type="submit">Send</button>
-    </form>
-    <p class="busy" id="chat-busy" aria-live="polite"></p>
   </section>
 
   <section id="results" aria-live="polite">
@@ -454,7 +406,7 @@ window.FLEET_CFG = {
       </div>
     </div>
 
-    <p class="deal">One fix, shown applied to your words when it passes. Nothing is sent anywhere — what goes out is your call.</p>
+    <p class="deal">One fix, shown applied to your words when it passes. Nothing is sent anywhere; what goes out is your call.</p>
     <p class="fineprint" id="fineprint"></p>
     <div class="nextsteps" aria-label="What next">
       <a class="next main" href="#tool">Check another text</a>
@@ -462,6 +414,62 @@ window.FLEET_CFG = {
       <a class="next" href="examples.html">See six real checks</a>
       <a class="next" href="#method">Read the method</a>
     </div>
+  </section>
+
+  <h2 class="checks-title">Three real checks</h2>
+
+  <section class="story strip" aria-label="A work note that hid the risk">
+    <h2>A work note that hid the risk</h2>
+    <p class="for">A status update to her manager. The launch was at risk, and the note never says so. Her goal line did, and the readers still scored the note itself 1s and 2s.</p>
+    <div class="pair">
+      <p><span class="tag">Before</span>&ldquo;Status update: The project is <mark class="out">progressing</mark>. Several workstreams are underway and we are addressing various issues as they arise. Stakeholders have been engaged. We expect continued progress in the coming period and will provide further updates as things develop.&rdquo;</p>
+      <p class="afterline"><span class="tag">After</span>&ldquo;Status update: The project is <mark>at risk of delay</mark>. Several workstreams are underway and we are addressing various issues as they arise. Stakeholders have been engaged. We expect continued progress in the coming period and will provide further updates as things develop.&rdquo;</p>
+    </div>
+    <p class="heard">The line the readers kept named the risk her goal named: &ldquo;The project is at risk.&rdquo; The note itself never said it, and every score was 1 or 2 of 10.</p>
+    <p class="count-line">1 line changed. The rest stayed the same. The fix asked for one more line, 'I need your help this week.' The rewrite never added it.</p>
+  </section>
+
+  <section class="story strip" aria-label="A hard text to a friend">
+    <h2>A hard text to a friend</h2>
+    <p class="fixline"><strong>The one fix</strong>&ldquo;Say what happened last weekend to show why you want to talk.&rdquo;</p>
+    <details class="fullcheck">
+      <summary>Read the full check</summary>
+      <p class="for">Something went wrong last weekend. The text never says what.</p>
+      <div class="pair">
+      <p><span class="tag">Before</span>&ldquo;Hey, I need to talk about something. I have been feeling kind of off about how things went last weekend and I do not want it to be weird. You matter to me and I value our friendship a lot. Can we talk sometime?&rdquo;</p>
+    </div>
+      <p class="heard">Readers kept the hurt, not the reason: &ldquo;Friend hurt last weekend.&rdquo; Feeling scored 7 of 10. The scene scored 4.</p>
+    </details>
+  </section>
+
+  <section class="story strip" aria-label="A toast with no scene">
+    <h2>A toast with no scene</h2>
+    <p class="fixline"><strong>The one fix</strong>&ldquo;Name one thing Sarah did that was great. Cut the rest.&rdquo;</p>
+    <details class="fullcheck">
+      <summary>Read the full check</summary>
+      <p class="for">A birthday toast for Sarah, warm from start to finish, and not one thing she ever did.</p>
+      <div class="pair">
+      <p><span class="tag">Before</span>&ldquo;I just want to say thank you to everyone for being here. Sarah is a wonderful person and a great friend to all of us. We are so lucky to know her. Here is to many more years of happiness and good times together.&rdquo;</p>
+    </div>
+      <p class="heard">All three readers kept the same line: &ldquo;Thanks to all for being here.&rdquo; Not one kept a thing about Sarah. Stories scored 1 of 10.</p>
+    </details>
+    <p class="links"><a class="try" href="examples.html">All six real checks</a></p>
+  </section>
+
+  <section class="card wis-chat" id="chat" aria-label="Ask about the checker">
+    <h2 style="margin-top:0">Questions about the checker? Ask its AI.</h2>
+    <div id="chat-thread">
+      <div class="bubble"><p class="who">THE SITE'S AI</p>Hi, I'm this site's AI assistant. Paste words you are about to send and I will run the real checker on them right here, the same three cold readers as the checker button, then ask me follow-ups: the weakest part, or the one fix. I also answer from the site's own pages and its published checks. Nothing you type is saved on the server; this page holds our conversation only while it is open.</div>
+    </div>
+    <div id="chat-chips">
+      <button class="chatchip" type="button">Show me a real check</button>
+      <button class="chatchip" type="button">What can't you do here?</button>
+    </div>
+    <form class="row" id="chat-form">
+      <input type="text" id="chat-q" placeholder="Paste words to check, or ask a question…" autocomplete="off" aria-label="Paste words to check, or ask a question">
+      <button class="send" type="submit">Send</button>
+    </form>
+    <p class="busy" id="chat-busy" aria-live="polite"></p>
   </section>
 
   <section class="how">
