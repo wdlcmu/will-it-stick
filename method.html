@@ -92,7 +92,7 @@
   <p>The same test, run three times, gave 7, 5, and 7. Run 2 was a coin flip. Scores are draws, and the spread across runs is itself the finding. That is why the homepage prints the spread, not a single best number.</p>
 
   <h2>What "applied" means in about half of runs</h2>
-  <p>Every check result carries a dated line: in the Nov 3, 2026 measurements, the server applied the fix itself in about half of runs (18 of 36, then 19 of 36 on a repeat pass). Applied has a plain meaning here. After the panel names one fix, the server tries to apply that fix to the sender's own words, and two automated guards decide whether the result counts.</p>
+  <p>Every check result carries a dated line: in the Nov 3, 2026 measurements, the server applied the fix itself in about two runs of three (24 of 36, then 22 of 36 on a repeat pass). Applied has a plain meaning here. After the panel names one fix, the server tries to apply that fix to the sender's own words, and two automated guards decide whether the result counts.</p>
   <p>The length guard: the new text must stay between 0.4 and 1.6 times the length of the original words.</p>
   <p>The correspondence guard: the change in the new text must be the change the fix named. A change the fix never called for fails, and so does a fix the new text never actually made.</p>
   <p>When both guards pass, the result shows your words with the fix applied, plus a count of lines changed. When either guard fails, the result carries the fix as an instruction only, with a reason, and no rewritten text. The 36 runs were a fixed set of test inputs measured twice on Nov 3, 2026. The numbers describe that set on that day, not a promise about any single check.</p>
