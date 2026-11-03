@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Will It Stick? Three cold readers score your words.</title>
-<meta name="description" content="Paste your words. Three cold readers show what stuck. You get the one line they heard, other ways to say it, one fix shown on your words, and the six scores last. Your words are not recorded or kept; only a daily count of checks is kept.">
+<title>Will It Stick? Get the version of your words that sticks.</title>
+<meta name="description" content="Paste your words. Cold readers test three transformations of them and you get back the version that sticks, your original alongside, what they'll hear, one fix shown on your words, and the six scores last. Your words are not recorded or kept; only a daily count of runs is kept.">
 <link rel="canonical" href="https://willitstick.app/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Will It Stick?">
@@ -281,6 +281,29 @@
   .wis-chat a.checker{display:inline-block;background:var(--amber);color:#241a02;font-weight:700;border-radius:999px;padding:12px 20px;text-decoration:none;min-height:48px;margin:6px 0 4px}
   .wis-chat .note{font-size:13px;color:var(--soft);margin-top:12px}
   .wis-chat .busy{color:var(--soft);font-size:14px;margin:6px 0 0;min-height:18px}
+
+  /* Transformation result (v0.4.0, Nov 3 2026) — scoped #transform */
+  #transform .t-status{font-size:16px;color:#3d362a;margin:4px 0 10px}
+  #transform .t-card{background:var(--card);border:2px solid var(--good);border-radius:12px;padding:16px 18px;margin:0 0 12px}
+  #transform .t-card.plain{border:1px solid var(--line)}
+  #transform .t-kind{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);margin:0 0 6px}
+  #transform .t-win{font-size:clamp(20px,4.8vw,26px);line-height:1.35;margin:0;white-space:pre-wrap}
+  #transform .t-heard{font-size:16px;color:#3d362a;margin:10px 0 0}
+  #transform .t-heard em{font-style:italic}
+  #transform .t-note{font-size:15px;color:#3d362a;margin:8px 0 0}
+  #transform .t-copy{margin-top:12px}
+  #transform .t-orig{background:var(--card);border:1px dashed var(--line);border-radius:12px;padding:12px 16px;margin:0 0 12px}
+  #transform .t-orig p{margin:0;white-space:pre-wrap}
+  #transform .t-alts{margin:0 0 12px}
+  #transform .t-alt{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:0 0 8px}
+  #transform .t-alt p{margin:0;white-space:pre-wrap}
+  #transform .t-q{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:0 0 10px}
+  #transform .t-q label{font-weight:600;display:block;margin-bottom:6px}
+  #transform .t-q .why{font-size:14px;color:var(--soft);margin:0 0 8px}
+  #transform .t-q input[type=text]{width:100%;font-size:16px;padding:11px 12px;border:1px solid #d6cfc4;border-radius:10px;min-height:48px;box-sizing:border-box}
+  #transform .t-chips{margin:0 0 8px}
+  #transform .t-chip{background:#fff;border:1px solid #d6cfc4;border-radius:999px;padding:8px 14px;margin:0 6px 6px 0;font:inherit;font-size:15px;cursor:pointer;min-height:44px}
+  #transform .t-actions{display:flex;gap:8px;flex-wrap:wrap;margin:4px 0 12px}
   </style>
 <script type="application/ld+json">
 {
@@ -450,7 +473,7 @@ window.FLEET_CFG = {
 <div class="wrap">
   <header>
     <h1>Will It Stick?</h1>
-    <p class="sub">Paste words you're about to send. See the one line they'll keep.</p>
+    <p class="sub">Paste words you're about to send. Get back the version that sticks.</p>
   </header>
 
   <section class="tool" id="tool">
@@ -468,7 +491,7 @@ window.FLEET_CFG = {
     <label for="motivation">What should your words do?</label>
     <p class="hint" id="motivation-hint">One line: who reads them, and what should they do, feel, or remember?</p>
     <input type="text" id="motivation" maxlength="140" aria-describedby="motivation-hint" placeholder="Make my partner feel thanked, not lectured.">
-    <button class="btn" id="run">Check if it sticks</button>
+    <button class="btn" id="run">Make it stick</button>
     <div class="err" id="err"></div>
     <p class="runstatus" id="run-status" aria-live="polite"></p>
     <p class="privacy">Your words are not recorded or kept; only a daily count of checks is kept.</p>
@@ -479,6 +502,11 @@ window.FLEET_CFG = {
   </section>
 
   <section id="results" aria-live="polite">
+    <div id="transform-wrap" hidden>
+      <h2>The version that sticks</h2>
+      <div id="transform"></div>
+    </div>
+
     <h2>What they'll hear</h2>
     <div id="core"></div>
     <div class="readernotes" id="readernotes"></div>
@@ -979,9 +1007,201 @@ $("run").onclick = async () => {
     clearInterval(runTick);
     statusEl.style.display = "none";
     btn.disabled = false;
-    btn.textContent = "Check if it sticks";
+    btn.textContent = "Make it stick";
   }
 };
+</script>
+
+<script>
+(function(){
+  // Transformation flow (v0.4.0): runs beside the check on every
+  // run click. The check below is the test layer; this block is
+  // the lead result: the winning transformation first, the
+  // original alongside, the alternates below.
+  var T_API = "https://mcp.willitstick.app";
+  var wrap = document.getElementById("transform-wrap");
+  var box = document.getElementById("transform");
+  if (!wrap || !box) return;
+  var tRun = 0;
+  var tState = { text: "", goal: "" };
+
+  function el(tag, cls, text){
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function setStatus(msg){
+    box.innerHTML = "";
+    box.appendChild(el("p", "t-status", msg));
+  }
+  function copyText(txt, btn){
+    function done(){ btn.textContent = "Copied"; setTimeout(function(){ btn.textContent = "Copy this version"; }, 1600); }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done, done);
+    else {
+      var ta = document.createElement("textarea");
+      ta.value = txt; document.body.appendChild(ta); ta.select();
+      try { document.execCommand("copy"); } catch(e){}
+      document.body.removeChild(ta); done();
+    }
+  }
+
+  function renderResult(r){
+    box.innerHTML = "";
+    if (!r || !r.status){ setStatus("The transformation pass did not answer. Your check below stands."); return; }
+    if (r.status === "questions_first"){ renderQuestions(r); return; }
+    var w = r.winner || {};
+    var card = el("div", "t-card");
+    card.appendChild(el("p", "t-kind", w.label || "The version that sticks"));
+    card.appendChild(el("p", "t-win", w.text || ""));
+    if (r.status === "already_sticks")
+      card.appendChild(el("p", "t-note", "Your original beat every transformation the cold readers tested. Send it as it stands."));
+    if (r.heard && r.heard.winner){
+      var heard = el("p", "t-heard");
+      heard.appendChild(document.createTextNode("A cold reader carried away: "));
+      var em = el("em", null, "\u201C" + r.heard.winner + "\u201D");
+      heard.appendChild(em);
+      card.appendChild(heard);
+    }
+    var copy = el("button", "copybtn t-copy", "Copy this version");
+    copy.type = "button";
+    copy.addEventListener("click", function(){ copyText(w.text || "", copy); });
+    card.appendChild(copy);
+    box.appendChild(card);
+
+    if (r.status !== "already_sticks" && r.original && r.original.text){
+      var orig = el("div", "t-orig");
+      orig.appendChild(el("p", "t-kind", "Your words"));
+      orig.appendChild(el("p", null, r.original.text));
+      box.appendChild(orig);
+    }
+    if (r.alternates && r.alternates.length){
+      var alts = el("div", "t-alts");
+      alts.appendChild(el("p", "t-kind", "The other versions the readers tested"));
+      r.alternates.forEach(function(a){
+        var c = el("div", "t-alt");
+        c.appendChild(el("p", "t-kind", a.label || a.kind || ""));
+        c.appendChild(el("p", null, a.text || ""));
+        alts.appendChild(c);
+      });
+      box.appendChild(alts);
+    }
+  }
+
+  function renderQuestions(r){
+    box.innerHTML = "";
+    box.appendChild(el("p", "t-status", "Your words need one thing only you can add. Answer what you can; skip the rest."));
+    var inputs = [];
+    (r.questions || []).forEach(function(q){
+      var card = el("div", "t-q");
+      var lab = el("label", null, q.question);
+      card.appendChild(lab);
+      if (q.why) card.appendChild(el("p", "why", q.why));
+      var input = document.createElement("input");
+      input.type = "text"; input.maxLength = 300;
+      input.setAttribute("aria-label", q.question);
+      if (q.chips && q.chips.length){
+        var chips = el("div", "t-chips");
+        q.chips.forEach(function(c){
+          var b = el("button", "t-chip", c);
+          b.type = "button";
+          b.addEventListener("click", function(){ input.value = c; input.focus(); });
+          chips.appendChild(b);
+        });
+        card.appendChild(chips);
+      }
+      card.appendChild(input);
+      inputs.push({ question: q.question, input: input });
+      box.appendChild(card);
+    });
+    var actions = el("div", "t-actions");
+    var use = el("button", "waysbtn", "Use my answers");
+    use.type = "button";
+    use.addEventListener("click", function(){
+      var answers = [];
+      inputs.forEach(function(x){
+        var v = x.input.value.trim();
+        if (v) answers.push({ question: x.question, answer: v });
+      });
+      if (!answers.length){ submitTransform({ skip_questions: true }); return; }
+      submitTransform({ answers: answers });
+    });
+    var skip = el("button", "waysbtn", "Skip the questions");
+    skip.type = "button";
+    skip.addEventListener("click", function(){ submitTransform({ skip_questions: true }); });
+    actions.appendChild(use); actions.appendChild(skip);
+    box.appendChild(actions);
+  }
+
+  function submitTransform(extra){
+    var mine = ++tRun;
+    setStatus("Writing the versions that could beat yours\u2026");
+    var body = { text: tState.text, goal: tState.goal };
+    if (extra && extra.answers) body.answers = extra.answers;
+    if (extra && extra.skip_questions) body.skip_questions = true;
+    fetch(T_API + "/api/transform", {
+      method: "POST", headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(body)
+    }).then(function(resp){ return resp.json(); }).then(function(data){
+      if (mine !== tRun) return;
+      if (data && data.ok) renderResult(data);
+      else setStatus("The transformation pass did not answer. Your check below stands.");
+    }).catch(function(){
+      if (mine === tRun) setStatus("The transformation pass did not answer. Your check below stands.");
+    });
+  }
+
+  function startTransform(){
+    var text = document.getElementById("text").value.trim();
+    var goal = document.getElementById("motivation").value.trim();
+    if (text.length < 40 || !goal){ wrap.hidden = true; return; }
+    tState = { text: text, goal: goal };
+    wrap.hidden = false;
+    var mine = ++tRun;
+    setStatus("Scanning your words for the point\u2026");
+    var body = JSON.stringify({ text: text, goal: goal });
+    fetch(T_API + "/api/transform/stream", {
+      method: "POST", headers: {"Content-Type": "application/json"}, body: body
+    }).then(function(resp){
+      if (!resp.ok || !resp.body) throw new Error("stream");
+      var reader = resp.body.getReader();
+      var dec = new TextDecoder();
+      var buf = "";
+      (function pump(){
+        reader.read().then(function(step){
+          if (mine !== tRun) return;
+          if (step.done) return;
+          buf += dec.decode(step.value, { stream: true });
+          var lines = buf.split("\n");
+          buf = lines.pop();
+          lines.forEach(function(line){
+            if (!line.trim()) return;
+            var ev;
+            try { ev = JSON.parse(line); } catch(e){ return; }
+            if (ev.type === "scan_ready") setStatus("Scanned. Writing three versions of it\u2026");
+            else if (ev.type === "candidate_ready") setStatus("Wrote " + (ev.label || "a version") + ". Cold readers are carrying each version away\u2026");
+            else if (ev.type === "selected") setStatus("A cold reader picked the winner. Finishing\u2026");
+            else if (ev.type === "done") renderResult(ev.result);
+            else if (ev.type === "error") setStatus("The transformation pass did not answer. Your check below stands.");
+          });
+          pump();
+        }).catch(function(){ if (mine === tRun) setStatus("The transformation pass did not answer. Your check below stands."); });
+      })();
+    }).catch(function(){
+      if (mine !== tRun) return;
+      // Stream unavailable: one plain call instead.
+      fetch(T_API + "/api/transform", {
+        method: "POST", headers: {"Content-Type": "application/json"}, body: body
+      }).then(function(resp){ return resp.json(); }).then(function(data){
+        if (mine !== tRun) return;
+        if (data && data.ok) renderResult(data);
+        else setStatus("The transformation pass did not answer. Your check below stands.");
+      }).catch(function(){ if (mine === tRun) setStatus("The transformation pass did not answer. Your check below stands."); });
+    });
+  }
+
+  document.getElementById("run").addEventListener("click", startTransform);
+})();
 </script>
 
 <script>
