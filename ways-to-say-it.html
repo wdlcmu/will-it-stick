@@ -42,10 +42,19 @@
     background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:12px}
   textarea{min-height:130px;resize:vertical}
   textarea:focus,input:focus{outline:2px solid var(--amber);border-color:var(--amber-deep)}
-  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 4px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 4px}
   .chip{font:inherit;font-size:15px;background:#fff;border:1.5px solid #d8cdb2;border-radius:999px;
     padding:7px 16px;cursor:pointer;color:var(--ink);min-height:44px}
+  .chip .def{font-size:13px;color:var(--soft);font-weight:400}
   .chip[aria-pressed="true"]{background:var(--amber);border-color:var(--amber-deep);font-weight:700}
+  .chip[aria-pressed="true"] .def{color:#5c4303}
+  .tagline{font-size:15px;color:var(--soft);margin:6px 0 0}
+  .goalex{display:block;width:100%;text-align:left;margin-top:10px;background:#fff8e6;
+    border:1px dashed var(--amber-deep);border-radius:10px;padding:10px 12px;cursor:pointer;
+    font:inherit;font-size:15px;color:var(--ink);min-height:44px}
+  .goalex strong{color:var(--amber-deep)}
+  .notsure{background:none;border:none;padding:8px 2px;font:inherit;font-size:15px;
+    color:var(--amber-deep);text-decoration:underline;cursor:pointer;min-height:44px}
   .btn{display:block;width:100%;margin-top:16px;background:var(--amber);color:#241a02;
     font:inherit;font-weight:bold;font-size:21px;border:none;border-radius:12px;
     padding:15px 10px;cursor:pointer;min-height:54px}
@@ -59,30 +68,46 @@
     border-radius:10px;padding:12px;margin-top:14px;font-size:16px}
   .fromcheck{display:none;background:#fff8e6;border:1px solid var(--amber);border-radius:10px;
     padding:10px 12px;margin:0 0 14px;font-size:16px}
-  /* progress */
+  /* progress — the live board */
   #progress{display:none;margin-top:22px;background:var(--card);border:1px solid var(--line);
     border-radius:14px;padding:18px;box-shadow:0 2px 14px rgba(90,70,20,.06)}
   #progress .stage{font-size:19px;font-weight:bold;margin:0 0 4px}
-  #progress .secs{font-size:15px;color:var(--soft);margin:0}
+  #progress .secs{font-size:15px;color:var(--soft);margin:0 0 6px}
   .pulse{display:inline-block;width:11px;height:11px;border-radius:50%;background:var(--amber);
     margin-right:9px;animation:pl 1.2s ease-in-out infinite;vertical-align:baseline}
   @keyframes pl{0%,100%{opacity:.35}50%{opacity:1}}
+  .bcard{border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:10px 0 0;background:#fff}
+  .bcard .bname{font-weight:bold;font-size:16px}
+  .bcard .btext{font-size:16px;margin:4px 0;white-space:pre-wrap}
+  .bcard .bstat{font-size:14px;color:var(--soft);margin:2px 0 0}
+  .bcard.bdrop{opacity:.75}
   /* results */
   #results{display:none;margin-top:26px}
   h2{font-size:24px;margin:26px 0 8px}
+  .headline{border:2px solid var(--bad);background:#fdf1f1;border-radius:12px;padding:14px 16px;margin:0 0 14px}
+  .headline h3{margin:0 0 6px;font-size:15px;text-transform:uppercase;letter-spacing:.08em;color:var(--bad)}
+  .headline p{margin:0;font-size:18px}
   .verdict{border:2px solid var(--amber);background:#fff8e6;border-radius:12px;padding:14px 16px}
   .verdict h3{margin:0 0 6px;font-size:15px;text-transform:uppercase;letter-spacing:.08em;color:var(--amber-deep)}
   .verdict p{margin:0;font-size:18px}
+  .versionbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:14px 0 0}
+  .versionbar .vlabel{font-weight:bold;font-size:16px}
+  .versionbar button{font:inherit;font-size:15px;font-weight:bold;background:#fff;
+    border:1.5px solid var(--amber-deep);color:#241a02;border-radius:10px;
+    padding:10px 14px;cursor:pointer;min-height:44px}
   .took{font-size:14px;color:var(--soft);margin:10px 2px 0}
+  .tiehead{font-size:16px;font-weight:bold;color:var(--mid);margin:20px 0 8px}
   .fcard{background:var(--card);border:1px solid var(--line);border-radius:12px;
     padding:14px 16px;margin:0 0 14px}
   .fcard.picked{border:2px solid var(--good)}
+  .fcard.orig{border:1.5px dashed var(--amber-deep)}
   .ftop{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
   .fname{font-weight:bold;font-size:19px}
   .frank{font-size:14px;font-weight:bold;color:var(--amber-deep);white-space:nowrap}
   .ftag{display:inline-block;font-size:12px;font-weight:bold;text-transform:uppercase;
     letter-spacing:.06em;color:#fff;background:var(--mid);border-radius:999px;
     padding:3px 9px;margin-left:8px;vertical-align:2px}
+  .ftag.yours{background:var(--amber-deep)}
   .ftext{font-size:18px;margin:8px 0;white-space:pre-wrap}
   .fev{font-size:15px;color:#3d362a;margin:6px 0 0}
   .fveh{font-size:14px;color:var(--soft);margin:4px 0 0}
@@ -91,6 +116,24 @@
     cursor:pointer;min-height:48px}
   .usebtn[aria-pressed="true"]{background:var(--good);border-color:var(--good);color:#fff}
   .dropped{font-size:15px;color:var(--soft);margin:6px 0}
+  /* fill the holes */
+  #holes{display:none;margin-top:22px;border:2px solid var(--amber);background:#fffdf4;
+    border-radius:12px;padding:16px 18px}
+  #holes h3{margin:0 0 6px;font-size:20px}
+  #holes .holesub{font-size:16px;color:#3d362a;margin:0 0 6px}
+  .hole{border-top:1px solid var(--line);padding:12px 0 4px;margin-top:10px}
+  .hole.skipped{opacity:.5}
+  .holelabel{font-weight:bold;font-size:16px;margin:0}
+  .holewhy{font-size:15px;color:var(--soft);margin:2px 0 0}
+  .holeq{font-size:17px;margin:6px 0}
+  .holechips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0}
+  .holechips button{font:inherit;font-size:15px;background:#fff;border:1.5px solid #d8cdb2;
+    border-radius:999px;padding:7px 14px;cursor:pointer;min-height:44px}
+  .holechips button[aria-pressed="true"]{background:var(--amber);border-color:var(--amber-deep);font-weight:700}
+  .holerow{display:flex;gap:10px;align-items:flex-start}
+  .holerow input{flex:1}
+  .skipbtn{background:none;border:none;font:inherit;font-size:15px;color:var(--amber-deep);
+    text-decoration:underline;cursor:pointer;padding:10px 4px;min-height:44px;white-space:nowrap}
   /* pick panel */
   #pickpanel{display:none;margin-top:22px;border:2px solid var(--good);background:#f4fbf7;
     border-radius:12px;padding:16px 18px}
@@ -116,8 +159,8 @@
   <header>
     <h1>Ways to say it</h1>
     <p class="hook">Spell-check fixes your words. This checks whether anyone will care.</p>
-    <p class="sub">Write your message. Name who it is for and what you want it to do. You get seven ways to say it — each one cold-tested by three readers and ranked for your audience.</p>
-    <p class="honest">Takes about half a minute. Cold readers are not instant.</p>
+    <p class="sub">Write your message. Name who it is for and what you want it to do. You get seven ways to say it — each one cold-tested by three readers and ranked for your audience. Your own words are in the running too, and they can win.</p>
+    <p class="honest">You watch the ways land as they are written — most full runs finish in under half a minute. Cold readers are not instant.</p>
   </header>
 
   <section class="tool" aria-label="Framings form">
@@ -130,13 +173,16 @@
       <p class="hint">Name the person or the group — not &ldquo;everyone.&rdquo;</p>
       <input type="text" id="audience" maxlength="200" placeholder="My team at work. They skim everything.">
 
-      <label for="goal">After they hear it, what should they think, feel, or do?</label>
-      <input type="text" id="goal" maxlength="200" placeholder="Try it once, on one message this week.">
+      <label for="goal">What do you want them to walk away with?</label>
+      <input type="text" id="goal" maxlength="200" placeholder="One line is enough.">
       <div class="chips" role="group" aria-label="Kind of goal">
-        <button type="button" class="chip" data-gt="think" aria-pressed="false">Think</button>
-        <button type="button" class="chip" data-gt="feel" aria-pressed="false">Feel</button>
-        <button type="button" class="chip" data-gt="do" aria-pressed="true">Do</button>
+        <button type="button" class="chip" data-gt="think" aria-pressed="false">Think <span class="def">— believe something</span></button>
+        <button type="button" class="chip" data-gt="feel" aria-pressed="false">Feel <span class="def">— feel something</span></button>
+        <button type="button" class="chip" data-gt="do" aria-pressed="true">Do <span class="def">— do something</span></button>
       </div>
+      <p class="tagline">The readers judge every version against this.</p>
+      <button type="button" class="goalex" id="goalex"></button>
+      <button type="button" class="notsure" id="notsure">Not sure? Use the example</button>
 
       <button class="btn" id="go" type="submit">Find my seven ways</button>
       <div class="err" id="err" role="alert"></div>
@@ -147,16 +193,25 @@
 
   <section id="progress" aria-live="polite">
     <p class="stage"><span class="pulse" aria-hidden="true"></span><span id="stage">Writing seven ways to say it&hellip;</span></p>
-    <p class="secs" id="secs">Cold readers at work — 0 seconds so far. Most runs land between 30 and 60 seconds.</p>
+    <p class="secs" id="secs">0 seconds so far. Each way appears below the moment it is written — you are watching the work, not a timer.</p>
+    <div id="board"></div>
   </section>
 
   <section id="results" aria-live="polite">
-    <h2>Your seven ways, ranked</h2>
+    <h2 id="rtitle">Your ways, ranked</h2>
+    <div class="headline" id="headline" style="display:none"></div>
     <div class="verdict" id="verdict"></div>
+    <div class="versionbar" id="versionbar" style="display:none"></div>
     <p class="took" id="took"></p>
     <div id="cards"></div>
     <div id="unranked"></div>
     <div id="drops"></div>
+    <div id="holes">
+      <h3>Fill the holes?</h3>
+      <p class="holesub">The readers were guessing where your message runs thin. Answer what you can — skip the rest — and the seven ways get one more run with your details in hand. One round only.</p>
+      <div id="holeqs"></div>
+      <button class="btn" id="fillbtn" type="button">Fill them in</button>
+    </div>
     <div id="pickpanel">
       <h3>Your pick</h3>
       <p id="picktext"></p>
@@ -189,15 +244,30 @@ $("sample").onclick = () => {
   setGoalType(SAMPLE.goal_type); $("text").focus();
 };
 
+// Q3: the tag, its plain meaning, and one concrete example per tag.
+// Selecting a tag shows its example; tapping the example (or the
+// "Not sure?" link) fills the field with it.
+const GOAL_EXAMPLES = {
+  think: "Believe the launch is under control.",
+  feel: "Feel at ease — no need to ask follow-ups.",
+  do: "Try it once, on one message this week."
+};
+const GOAL_NAMES = { think: "Think", feel: "Feel", do: "Do" };
 let goalType = "do";
 function setGoalType(t){
   goalType = t;
   document.querySelectorAll(".chip").forEach((c) =>
     c.setAttribute("aria-pressed", c.dataset.gt === t ? "true" : "false"));
+  $("goalex").innerHTML = "<strong>Example for " + GOAL_NAMES[t] + ":</strong> &ldquo;" +
+    GOAL_EXAMPLES[t].replace(/</g, "&lt;") + "&rdquo; — tap to use it";
 }
 document.querySelectorAll(".chip").forEach((chip) => {
   chip.onclick = () => setGoalType(chip.dataset.gt);
 });
+function useExample(){ $("goal").value = GOAL_EXAMPLES[goalType]; $("goal").focus(); }
+$("goalex").onclick = useExample;
+$("notsure").onclick = useExample;
+setGoalType("do");
 
 // Composed path: a check links here with text + goal (and sometimes
 // audience / weakest) in the query string. Prefill what arrived; the
@@ -223,16 +293,87 @@ const CUT_FOR_ELEMENT = { simple:"simple", unexpected:"unexpected", concrete:"co
   credible:"credible", emotional:"emotional", stories:"story" };
 let picked = null;   // {id, name, text}
 let lastGoal = "";
+let lastIntake = null;       // {text, audience, goal, goal_type}
+let versions = { 1: null, 2: null };  // payloads by round
+let shownRound = 1;
+let firstCutSecs = null;
 
 function esc(s){ const d = document.createElement("div"); d.textContent = s || ""; return d.innerHTML; }
 
-function renderResults(r, secs){
+/* ---------- the live board (streaming) ---------- */
+const boardCards = {};
+function boardReset(originalText){
+  $("board").innerHTML = "";
+  for (const k of Object.keys(boardCards)) delete boardCards[k];
+  boardAdd("original", "Your original", originalText, "", "Being read cold by three readers…");
+}
+function boardAdd(id, name, text, vehicle, status){
+  const div = document.createElement("div");
+  div.className = "bcard"; div.id = "b-" + id;
+  div.innerHTML = '<span class="bname">' + esc(name) + "</span>" +
+    '<p class="btext">' + esc(text) + "</p>" +
+    (vehicle ? '<p class="bstat">The comparison: ' + esc(vehicle) + "</p>" : "") +
+    '<p class="bstat" data-stat>' + esc(status) + "</p>";
+  $("board").appendChild(div);
+  boardCards[id] = div;
+  return div;
+}
+function boardStatus(id, status){
+  const c = boardCards[id]; if (!c) return;
+  const s = c.querySelector("[data-stat]"); if (s) s.textContent = status;
+}
+function boardDrop(drop){
+  const div = document.createElement("div");
+  div.className = "bcard bdrop";
+  div.innerHTML = '<span class="bname">No ' + esc(drop.name) + ' cut</span><p class="bstat">' + esc(drop.reason) + "</p>";
+  $("board").appendChild(div);
+}
+function reviewedLine(e){
+  const d = e.dimensions || {};
+  const med = (x) => (x && typeof x.median === "number") ? x.median : "–";
+  return "Read. Composite " + e.composite + " of 10 — lands " + med(d.lands) +
+    " · goal " + med(d.goal) + " · retell " + med(d.retell) + "." +
+    (e.repeat_weakness ? ' Repeat weakness: "' + e.repeat_weakness + '"' : "");
+}
+
+/* ---------- final render ---------- */
+function renderResults(r, meta){
+  meta = meta || {};
   const box = $("results"); box.style.display = "block";
+  const n = (r.framings || []).length;
+  const top = (r.framings || [])[0];
+  const bottom = (r.framings || [])[n - 1];
+  const flat = r.tie && r.tie.clustered && top && bottom &&
+    ((top.tie_size || 1) > 1 || top.composite - bottom.composite <= 1);
+  $("rtitle").textContent = flat
+    ? "Your ways — the readers scored them the same"
+    : "Your ways, ranked";
+  const hl = $("headline");
+  if (r.headline && r.headline.line) {
+    hl.style.display = "block";
+    hl.innerHTML = "<h3>The readers, first</h3><p>" + esc(r.headline.line) + "</p>";
+  } else hl.style.display = "none";
   const v = r.verdict;
   $("verdict").innerHTML = v
     ? "<h3>Our pick</h3><p>" + esc(v.line) + "</p>"
     : "<h3>No pick this run</h3><p>Too few cold readers answered to rank the set fairly. The ways below are still yours to read.</p>";
-  $("took").textContent = "That run took " + secs + " seconds — 28 cold reads on our own open model, nothing stored.";
+  const vb = $("versionbar");
+  if (versions[2]) {
+    vb.style.display = "flex";
+    vb.innerHTML = '<span class="vlabel">' +
+      (shownRound === 2 ? "Version 2 — with the details you added." : "Version 1 — before the details.") +
+      '</span><button type="button" id="vtoggle">' +
+      (shownRound === 2 ? "See the first version" : "See version 2") + "</button>";
+    $("vtoggle").onclick = () => {
+      shownRound = shownRound === 2 ? 1 : 2;
+      renderResults(versions[shownRound], meta);
+    };
+  } else vb.style.display = "none";
+  $("took").textContent = meta.secs
+    ? "That run took " + meta.secs + " seconds" +
+      (meta.firstSecs != null ? " — the first way landed at " + meta.firstSecs + " seconds." : ".") +
+      " Your words were not stored; only a count of the run was kept."
+    : "";
 
   // Display order: evidence rank governs, except on the composed
   // path, where the cut aimed at the check's weakest element is
@@ -243,17 +384,29 @@ function renderResults(r, secs){
     const i = cards.findIndex((f) => f.id === aimId);
     if (i > 0) { const [c] = cards.splice(i, 1); cards.unshift(c); }
   }
-  $("cards").innerHTML = cards.map((f) =>
-    '<article class="fcard" data-id="' + f.id + '">' +
+  let lastTieKey = null;
+  $("cards").innerHTML = cards.map((f) => {
+    let groupHead = "";
+    const tieKey = f.tied ? "tie-" + f.composite : null;
+    if (tieKey && tieKey !== lastTieKey) {
+      groupHead = '<p class="tiehead">These scored the same — they&rsquo;re the same sentence in different hats.</p>';
+    }
+    if (tieKey) lastTieKey = tieKey;
+    const badge = f.tied
+      ? "Tied at " + f.composite + " of 10"
+      : "#" + f.rank + " of " + n;
+    return groupHead +
+    '<article class="fcard' + (f.is_original ? " orig" : "") + '" data-id="' + f.id + '">' +
       '<div class="ftop"><span class="fname">' + esc(f.name) +
+        (f.is_original ? '<span class="ftag yours">Yours</span>' : "") +
         (f.id === aimId ? '<span class="ftag">Aimed at your weakest score</span>' : "") +
-        '</span><span class="frank">#' + f.rank + " of " + (r.framings || []).length + "</span></div>" +
+        '</span><span class="frank">' + badge + "</span></div>" +
       '<p class="ftext">' + esc(f.text) + "</p>" +
       (f.vehicle ? '<p class="fveh">The comparison: ' + esc(f.vehicle) + "</p>" : "") +
       '<p class="fev">' + esc(f.evidence_line) + "</p>" +
       '<button type="button" class="usebtn" data-pick="' + f.id + '">Use this one</button>' +
-    "</article>"
-  ).join("");
+    "</article>";
+  }).join("");
   $("unranked").innerHTML = (r.unranked || []).map((f) =>
     '<article class="fcard"><div class="ftop"><span class="fname">' + esc(f.name) +
     '</span><span class="frank">not ranked</span></div>' +
@@ -264,12 +417,66 @@ function renderResults(r, secs){
   $("drops").innerHTML = (r.dropped || []).map((d) =>
     '<p class="dropped">No ' + esc(d.name) + " cut this run: " + esc(d.reason) + "</p>"
   ).join("");
+  renderHoles(r);
   box.querySelectorAll("[data-pick]").forEach((b) => {
     b.onclick = () => pickFraming(b.dataset.pick, r);
   });
   $("pickpanel").style.display = "none";
   picked = null;
-  box.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+/* ---------- fill the holes ---------- */
+function renderHoles(r){
+  const box = $("holes");
+  const qs = (r.followup && r.followup.questions) || [];
+  if (!qs.length || r.round === 2) { box.style.display = "none"; return; }
+  box.style.display = "block";
+  $("holeqs").innerHTML = qs.map((q, i) =>
+    '<div class="hole" data-hole="' + i + '">' +
+      '<p class="holelabel">' + esc(q.hole) + "</p>" +
+      '<p class="holewhy">' + esc(q.why) + "</p>" +
+      '<p class="holeq">' + esc(q.question) + "</p>" +
+      (q.chips && q.chips.length
+        ? '<div class="holechips">' + q.chips.map((c) =>
+            '<button type="button" data-chip="' + i + '">' + esc(c) + "</button>").join("") + "</div>"
+        : "") +
+      '<div class="holerow"><input type="text" maxlength="300" data-answer="' + i +
+        '" placeholder="A few words is plenty.">' +
+        '<button type="button" class="skipbtn" data-skip="' + i + '">Skip</button></div>' +
+    "</div>"
+  ).join("");
+  box.querySelectorAll("[data-chip]").forEach((b) => {
+    b.onclick = () => {
+      const inp = box.querySelector('[data-answer="' + b.dataset.chip + '"]');
+      inp.value = b.textContent;
+      box.querySelectorAll('[data-chip="' + b.dataset.chip + '"]').forEach((x) =>
+        x.setAttribute("aria-pressed", x === b ? "true" : "false"));
+      inp.closest(".hole").classList.remove("skipped");
+    };
+  });
+  box.querySelectorAll("[data-skip]").forEach((b) => {
+    b.onclick = () => {
+      const h = b.closest(".hole");
+      h.classList.toggle("skipped");
+      b.textContent = h.classList.contains("skipped") ? "Unskip" : "Skip";
+    };
+  });
+  $("fillbtn").onclick = async () => {
+    const answers = [];
+    box.querySelectorAll(".hole").forEach((h, i) => {
+      if (h.classList.contains("skipped")) return;
+      const val = h.querySelector("[data-answer]").value.trim();
+      if (val) answers.push({ question: qs[i].question, answer: val });
+    });
+    if (!answers.length) {
+      const fb = $("fillbtn"); fb.textContent = "Answer at least one first — or leave the results as they are";
+      setTimeout(() => { fb.textContent = "Fill them in"; }, 3000);
+      return;
+    }
+    hideErr();
+    box.style.display = "none";
+    await runStream({ ...lastIntake, round: 2, answers });
+  };
 }
 
 function pickFraming(id, r){
@@ -325,43 +532,112 @@ $("checkbtn").onclick = async () => {
   btn.disabled = false; btn.textContent = "Check this one";
 };
 
-$("fform").addEventListener("submit", async (ev) => {
-  ev.preventDefault(); hideErr();
-  const text = $("text").value.trim(), audience = $("audience").value.trim(), goal = $("goal").value.trim();
-  if (text.length < 40) return showErr("Paste at least a few sentences — a short note is enough.");
-  if (!audience) return showErr("Name who it is for — a person or a group, not “everyone.”");
-  if (!goal) return showErr("Say what they should think, feel, or do after they hear it.");
-  lastGoal = goal;
+/* ---------- the run: streamed, with a plain-fetch fallback ---------- */
+async function runStream(intake){
   const btn = $("go"); btn.disabled = true; btn.textContent = "Working…";
   const prog = $("progress"); prog.style.display = "block";
   $("results").style.display = "none";
+  boardReset(intake.text);
   const t0 = Date.now();
-  const stages = [
-    [0, "Writing seven ways to say it…"],
-    [9000, "Putting each one in front of three cold readers…"],
-    [26000, "Adding up the scores and the split votes…"]
-  ];
+  firstCutSecs = null;
+  let readyCount = 0, reviewedCount = 0;
+  $("stage").textContent = "Writing seven ways to say it…";
   const tick = setInterval(() => {
     const s = Math.floor((Date.now() - t0) / 1000);
-    $("secs").textContent = "Cold readers at work — " + s + " seconds so far. Most runs land between 30 and 60 seconds.";
-    for (const [at, label] of stages) if (s * 1000 >= at) $("stage").textContent = label;
+    $("secs").textContent = s + " seconds so far. Each way appears below the moment it is written — you are watching the work, not a timer.";
   }, 500);
   prog.scrollIntoView({ behavior: "smooth", block: "nearest" });
-  try {
-    const resp = await fetch(API_BASE + "/api/framings", {
-      method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text, audience, goal, goal_type: goalType })
-    });
-    const r = await resp.json();
-    if (!resp.ok || r.error) throw new Error(r.detail || "The readers did not answer.");
-    renderResults(r, Math.round((Date.now() - t0) / 1000));
-  } catch(e) {
-    showErr(e.message || "The readers did not answer. Try again in a moment.");
-  } finally {
+  const finish = (r) => {
     clearInterval(tick);
     prog.style.display = "none";
     btn.disabled = false; btn.textContent = "Find my seven ways";
+    if (!r) return;
+    const round = r.round || 1;
+    versions[round] = r;
+    shownRound = round;
+    renderResults(r, {
+      secs: Math.round((Date.now() - t0) / 1000),
+      firstSecs: firstCutSecs,
+    });
+    $("results").scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+  try {
+    const resp = await fetch(API_BASE + "/api/framings/stream", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(intake)
+    });
+    const ct = resp.headers.get("content-type") || "";
+    if (!resp.ok || ct.includes("application/json")) {
+      const j = await resp.json().catch(() => ({}));
+      throw new Error(j.detail || "The readers did not answer.");
+    }
+    if (!resp.body || !resp.body.getReader) throw new Error("__fallback");
+    const reader = resp.body.getReader();
+    const dec = new TextDecoder();
+    let buf = "";
+    let finalResult = null;
+    const handle = (evt) => {
+      if (evt.type === "cut_ready") {
+        readyCount++;
+        if (firstCutSecs === null) firstCutSecs = Math.round((Date.now() - t0) / 1000);
+        boardAdd(evt.cut.id, evt.cut.name, evt.cut.text, evt.cut.vehicle || "",
+          "Written. Three cold readers are reading this one…");
+        $("stage").textContent = "Writing the seven ways… " + readyCount + " of 7 written.";
+      } else if (evt.type === "cut_dropped") {
+        boardDrop(evt.drop);
+      } else if (evt.type === "cut_reviewed" || evt.type === "original_reviewed") {
+        reviewedCount++;
+        boardStatus(evt.entry.id, reviewedLine(evt.entry));
+        $("stage").textContent = "Three cold readers are scoring… " + reviewedCount + " of 8 read.";
+      } else if (evt.type === "done") {
+        finalResult = evt.result;
+      } else if (evt.type === "error") {
+        throw new Error(evt.detail || "The readers did not answer.");
+      }
+    };
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buf += dec.decode(value, { stream: true });
+      let nl;
+      while ((nl = buf.indexOf("\n")) >= 0) {
+        const line = buf.slice(0, nl).trim(); buf = buf.slice(nl + 1);
+        if (line) handle(JSON.parse(line));
+      }
+    }
+    if (!finalResult) throw new Error("The readers did not answer.");
+    finish(finalResult);
+  } catch(e) {
+    if (e && e.message === "__fallback") {
+      try {
+        const resp = await fetch(API_BASE + "/api/framings", {
+          method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(intake)
+        });
+        const r = await resp.json();
+        if (!resp.ok || r.error) throw new Error(r.detail || "The readers did not answer.");
+        finish(r);
+        return;
+      } catch(e2) { e = e2; }
+    }
+    clearInterval(tick);
+    prog.style.display = "none";
+    btn.disabled = false; btn.textContent = "Find my seven ways";
+    showErr((e && e.message) || "The readers did not answer. Try again in a moment.");
   }
+}
+
+$("fform").addEventListener("submit", async (ev) => {
+  ev.preventDefault(); hideErr();
+  const text = $("text").value.trim(), audience = $("audience").value.trim(), goal = $("goal").value.trim();
+  if (text.length < 10) return showErr("Write at least a sentence — a few words give seven ways nothing to work with. (A short note is fine; it will be scored honestly, not padded.)");
+  if (!audience) return showErr("Name who it is for — a person or a group, not “everyone.”");
+  if (!goal) return showErr("Say what they should think, feel, or do after they hear it.");
+  lastGoal = goal;
+  lastIntake = { text, audience, goal, goal_type: goalType };
+  versions = { 1: null, 2: null };
+  shownRound = 1;
+  await runStream(lastIntake);
 });
 </script>
 </body>
