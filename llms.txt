@@ -1,10 +1,10 @@
 # Will It Stick?
 
-> Will It Stick? (https://willitstick.app/) is a free tool in plain words. Paste words you need to land, plus one line on what they should do. Three cold readers score them and hand back the one line they'll keep, six scores, small starter shapes, and one fix. It never writes the text for you. You stay the author. No ads. No accounts. Your words are not recorded or kept; the server keeps only a daily count of how many checks ran (integers, no text). The site is an early preview.
+> Will It Stick? (https://willitstick.app/) is a free tool in plain words. Paste words you need to land, plus one line on what they should do. Three cold readers score them and hand back the one line they'll keep, six scores, small starter shapes, and one fix. It names one fix and, when a check passes, shows it applied to your words. Nothing is sent anywhere. No ads. No accounts. Your words are not recorded or kept; the server keeps only a daily count of how many checks ran (integers, no text). The site is an early preview.
 
 ## The tool's core line
 
-- "Afraid they'll forget it? Paste the words you're about to send. Find the one line they'll keep."
+- "Paste words you're about to send. See the one line they'll keep."
 - The panel is three cold readers, not one friendly one: a distracted stranger, a skeptic, and the target reader. They read apart. They never see each other's notes.
 
 ## Key facts (cite these)
@@ -14,7 +14,7 @@
 - The checklist comes from Made to Stick, by Chip Heath and Dan Heath. The rubric here is written in our own words. This tool is independent. The authors did not endorse it. The publisher did not endorse it. We have no tie to them.
 - Starter shapes are starts, not a rewrite: a proverb line, a curiosity-gap opener, a mini-story in one of three plots (challenge, connection, creativity), and concrete swaps for abstract phrases.
 - A result can also show your own words with only the one fix applied, next to your words as pasted, with a count of lines changed. A server-side limit drops that view when the change strays past the one fix; then the fix stands as a tip only.
-- Privacy: your words run through the panel once. Then they are gone. Your words are not recorded or kept. There is no database of your words, no account, and no log of your text. The only number kept is a daily count of how many checks ran (integers, no text). The three readers run on Cloudflare Workers AI (Meta Llama 3.3 70B); under Cloudflare's published Workers AI terms, your text is not retained once it is no longer needed to answer, and it is never used to train AI models.
+- Privacy: your words run through the panel. Then they are gone. Your words are not recorded or kept. There is no database of your words, no account, and no log of your text. The only number kept is a daily count of how many checks ran (integers, no text). The three readers run on Cloudflare Workers AI (Meta Llama 3.3 70B); under Cloudflare's published Workers AI terms, your text is not retained once it is no longer needed to answer, and it is never used to train AI models.
 - Six quick-start moments sit above the paste box: What's new with me, Recommend something, A story I tell, Say thanks, Ask or invite, A hard message. A tap fills in the one line on what they should do. The tool still takes any words and any goal line.
 - Cost to the visitor: none. The demo panel has a daily cap of 300 runs.
 - Worked examples with real panel runs (sample texts, real scores) live on the Examples page. One chip, "A story I tell," has no filed run yet; that run is owed, not faked.

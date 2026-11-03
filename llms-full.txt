@@ -6,35 +6,35 @@
 > line on what they should do. Three cold readers score them and hand back the core
 > they heard, six scores, small starter shapes, and one fix. It never writes the text
 > for you. Your words are not recorded or kept; only a daily count of checks is kept. The site is an early preview.
-> Text captured from the site source, 2026-11-01.
+> Text captured from the site source, 2026-11-01, with corrections through 2026-11-03. The live pages are the record.
 
 ## Homepage (https://willitstick.app/)
 
-Afraid they'll forget it?
-Paste the words you're about to send. Find the one line they'll keep.
+Paste words you're about to send.
+See the one line they'll keep.
 
-Three real checks (from real panel runs; the full runs are on the Examples page). A work note that hid the risk: Before: "Status update: The project is progressing." After: "Status update: The project is at risk of delay." Three cold readers all heard "The project is at risk." Every score was 1 or 2 of 10. One line changed; the rest stayed the same. A hard text to a friend: the text never says what happened last weekend. Readers kept "Friend hurt last weekend." Feeling scored 7 of 10; the scene scored 4. The one fix: "Say what happened last weekend to show why you want to talk." A toast with no one scene: all three readers kept "Thanks to all for being here," and not one kept a thing about Sarah. Stories scored 1 of 10. The one fix: "Name one thing Sarah did that was great. Cut the rest."
+Three real checks (from real panel runs; the full runs are on the Examples page). A work note that hid the risk: Before: "Status update: The project is progressing. Several workstreams are underway and we are addressing various issues as they arise. Stakeholders have been engaged. We expect continued progress in the coming period and will provide further updates as things develop." After: "Status update: The project is at risk of delay. Several workstreams are underway and we are addressing various issues as they arise. Stakeholders have been engaged. We expect continued progress in the coming period and will provide further updates as things develop." Three cold readers all heard "The project is at risk." Every score was 1 or 2 of 10. One line changed; the rest stayed the same. A hard text to a friend: the text never says what happened last weekend. Readers kept "Friend hurt last weekend." Feeling scored 7 of 10; the scene scored 4. The one fix: "Say what happened last weekend to show why you want to talk." A toast with no one scene: all three readers kept "Thanks to all for being here," and not one kept a thing about Sarah. Stories scored 1 of 10. The one fix: "Name one thing Sarah did that was great. Cut the rest."
 
 Quick-start moments: What's new with me · Recommend something · A story I tell · Say thanks · Ask or invite · A hard message.
 
 Your words (paste a note, a toast, a post, a hard message, or drop a .txt or .md file).
 What should it do? (one line)
 Button: Check if it sticks.
-Your words run through the panel once. Then they are gone. Your words are not recorded or kept; the server keeps only a daily count of how many checks ran (integers, no text).
+Your words run through the panel. Then they are gone. Your words are not recorded or kept; the server keeps only a daily count of how many checks ran (integers, no text).
 Try a sample: A repair night note · A work memo.
 
-A result shows: six scores (Simple, Unexpected, Concrete, Credible, Emotional, Stories, each the mid score of three cold readers, with a one-line reason and a note on whether readers agreed or split); what they'll hear (one quoted line, or the plain split when readers heard three different points); before and after (your words as pasted beside your words with only the one fix applied, changed words marked, with a count of lines changed; when the server-side limit drops the after view, the one fix stands as a tip only); starters beside the after card (the proverb, start with a question, the story, words you can picture), labeled "Shapes to start from. Not your text."; and the one fix. Every result ends: "We don't write it for you. You stay the author."
+A result shows: six scores (Simple, Unexpected, Concrete, Credible, Emotional, Stories, each the mid score of three cold readers, with a one-line reason and a note on whether readers agreed or split); what they'll hear (one quoted line, or the plain split when readers heard three different points); before and after (your words as pasted beside your words with only the one fix applied, changed words marked, with a count of lines changed; when the server-side limit drops the after view, the one fix stands as a tip only); starters beside the after card (the proverb, start with a question, the story, words you can picture), labeled "Shapes to start from. Not your text."; and the one fix. Every result ends: "One fix, shown applied to your words when it passes. Nothing is sent anywhere — what goes out is your call."
 
 ### How it works
 
 1. Three cold readers score your words. They never see each other's notes.
 2. You get what they'll hear, the one fix, six scores, and starter shapes.
-3. No rewrite. We don't write it for you. You stay the author.
+3. One fix, shown on your words. You decide what to send.
 
 ### Method and sources
 
 The SUCCESs checklist comes from Made to Stick, by Chip Heath and Dan Heath, backed by Tversky and Shafir (1992), Loewenstein (1994), and Paivio (1971).
-We test this tool against plain AI. Scores post here once the tests run.
+We test this tool against plain AI: the same ten messages, the same six-part rubric for both sides, judged blind. Across three runs the panel won 7, 5, and 7 of 10.
 This tool is independent. The authors and the publisher did not endorse it, and we have no tie to them.
 
 ## Examples (https://willitstick.app/examples)
@@ -68,7 +68,7 @@ Goal: "Recommend a podcast to a close friend so she actually presses play this w
 Core heard: "Listen to this interesting podcast."
 Scores: Simple 3, Unexpected 1, Concrete 1, Credible 2, Emotional 2, Stories 1.
 One fix: "Cut the vague parts. Just say the podcast's name."
-The text names no show, so the fix stays a tip, not a rewrite.
+The text names no show, so the rewrite could only drop 'really'. The real fix needs a fact only you can add: the show's name.
 
 ### A toast with no scene (chip: Say thanks; sample text from the test set)
 
@@ -104,7 +104,7 @@ No run yet fits "A story I tell," and we will not fake one. The run is still owe
 ## Starters (https://willitstick.app/starters)
 
 Six small starts. Shapes to start from. Not your text.
-Each check hands back six shapes: starts, not a rewrite. You pick what fits and write the rest. Each sample below came from a real run.
+Each check hands back four starts: a proverb line, a question start, one small story, and plainer words for your foggy phrases. Each sample below came from a real run.
 
 1. The proverb. Your point in one short line a friend can repeat. Long is not this shape. From a real run: "Fix it free, save money."
 2. Start with a question. A first line that withholds one fact and opens a question. The next line pays it off. From a real run: "What happens on first Saturdays?"
@@ -113,12 +113,12 @@ Each check hands back six shapes: starts, not a rewrite. You pick what fits and 
 5. The story: a new spark. A small plot of three or four lines: a spark hits, and a new thought forms. Your facts only; add none. From a real run: "We make new plans. We use best practices. We grow." (From the work memo sample in the tool. Flat words make flat tales.)
 6. Use words you can picture. Vague words hide the point. A swap trades them for a scene you can see and keep. From a real run: "cross-functional synergies" → "teams work together" (From the work memo sample in the tool. The swap is plainer, not grander.)
 
-What you do with them: Pick one shape and start from it. We don't write the rest for you; you stay the author.
+What you do with them: Pick one shape and start from it. The one fix comes back applied to your words when it passes; what you send is your call.
 
 ## Privacy (https://willitstick.app/privacy)
 
 Your words are private to you.
-When you run a check, your text goes once to three AI readers. They score it, and the result comes back to your screen.
+When you run a check, your text goes to three AI readers. They score it, and the result comes back to your screen.
 We do not record or keep your words. There is no database of your words. There is no account, and there are no saved checks.
 The three readers run on Cloudflare Workers AI (Meta Llama 3.3 70B); under Cloudflare's published Workers AI terms, your text is not retained once it is no longer needed to answer, and it is never used to train AI models. Those terms name narrow exceptions, for safety and legal duties. Cloudflare does keep operational records about each request — its time, its size, and its count — to run and bill the service; those records hold no words.
 Each day, the server keeps one count: how many checks ran. The count is integers only, with no text. It keeps the demo within its budget.
@@ -130,7 +130,7 @@ Closing the page closes the run. Nothing follows you.
 ## Terms (https://willitstick.app/terms)
 
 This is an early preview of an independent tool.
-It gives a diagnosis and small starter forms. It does not write for you, and it does not promise your words will land.
+It gives a diagnosis and small starter forms. It names one fix and shows it applied when a check passes, and it does not promise your words will land.
 Scores use the SUCCESs checklist from Made to Stick, by Chip Heath and Dan Heath.
 This tool is independent. It is not endorsed by, and not affiliated with, the authors or the publisher.
 Use it free. Do not paste words that are secret or unsafe to share with an AI reader.
