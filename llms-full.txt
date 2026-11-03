@@ -5,7 +5,9 @@
 > guides, the Method page, Ways to say it, and the question pages.
 > Will It Stick? is a free tool in plain words. Paste words you need to land, plus one
 > line on what they should do. Three cold readers score them and hand back the core
-> they heard, six scores, small starter shapes, and one fix. It names one fix and, when
+> they heard, other ways to say it (seven cold read versions of the same words, ranked,
+> with a short question round when the readers hit a gap only you can fill), small starter
+> shapes, one fix, and the six scores last. It names one fix and, when
 > a check passes, shows it applied to your words. Nothing sends itself; what goes out
 > is your call. Your words are not recorded or kept; only a daily count of checks is kept. The site is an early preview.
 > Text captured from the site source, 2026-11-03. The live pages are the record.
@@ -25,13 +27,15 @@ Try a sample: A repair night note · A work memo.
 
 Three real checks (from real panel runs; the full runs are on the Examples page). A work note that hid the risk: Before: "Status update: The project is progressing. Several workstreams are underway and we are addressing various issues as they arise. Stakeholders have been engaged. We expect continued progress in the coming period and will provide further updates as things develop." After: "Status update: The project is at risk of delay. Several workstreams are underway and we are addressing various issues as they arise. Stakeholders have been engaged. We expect continued progress in the coming period and will provide further updates as things develop." The line the readers kept named the risk her goal named: "The project is at risk." The note itself never said it, and every score was 1 or 2 of 10. 1 line changed. The rest stayed the same. The fix asked for one more line, 'I need your help this week.' The rewrite never added it. A hard text to a friend: the text never says what happened last weekend. Readers kept "Friend hurt last weekend." Feeling scored 7 of 10; the scene scored 4. The one fix: "Say what happened last weekend to show why you want to talk." A toast with no one scene: all three readers kept "Thanks to all for being here," and not one kept a thing about Sarah. Stories scored 1 of 10. The one fix: "Name one thing Sarah did that was great. Cut the rest."
 
-A result shows: six scores (Simple, Unexpected, Concrete, Credible, Emotional, Stories, each the mid score of three cold readers, with a one-line reason and a note on whether readers agreed or split); what they'll hear (one quoted line, or the plain split when readers heard three different points); before and after (your words as pasted beside your words with only the one fix applied, changed words marked, with a count of lines changed; when the server-side limit drops the after view, the one fix stands as a tip only); starters beside the after card (the proverb, start with a question, the story, words you can picture), labeled "Shapes to start from. Not your text."; and the one fix. Every result ends: "One fix, shown applied to your words when it passes. Nothing is sent anywhere; what goes out is your call."
+A result shows, in this order: what they'll hear (one quoted line, or the plain split when readers heard three different points), with each reader's own heard line under it; other ways to say it (seven versions of the same words, each read cold and ranked, strongest first in the result and the rest one tap away; when the readers hit a gap only you can fill, they ask two or three questions, one at a time, your answers run a second set, and the result shows what changed); the one fix; before and after (your words as pasted beside your words with only the one fix applied, changed words marked, with a count of lines changed; when the server-side limit drops the after view, the one fix stands as a tip only); starters beside the after card (the proverb, start with a question, the story, words you can picture), labeled "Shapes to start from. Not your text."; and the six scores last, in a compact strip (Simple, Unexpected, Concrete, Credible, Emotional, Stories, each the mid score of three cold readers, the weakest named, the full scores with a one-line reason and the spread one tap down). Every result ends: "One fix, shown applied to your words when it passes. Nothing is sent anywhere; what goes out is your call."
 
 ### How it works
 
 1. Three cold readers score your words. They never see each other's notes.
-2. You get what they'll hear, the one fix, six scores, and starter shapes.
-3. One fix, shown on your words. You decide what to send.
+2. You get what they'll hear first, then other ways to say it. If the readers hit a gap only
+you can fill, they ask, and your answers sharpen a second set.
+3. One fix, shown on your words. The six scores sit last, in full one tap down. You decide
+what to send.
 
 ### Method and sources
 
@@ -255,7 +259,7 @@ After the fix: "I am playing basketball on my leave of work." Shown as the check
 ## Made to Stick message checker (https://willitstick.app/made-to-stick-message-checker)
 
 Made to Stick message checker. Will It Stick? is a message checker built on the SUCCESs checklist from Made to Stick.
-What this checker is: the checklist is the SUCCESs framework from Made to Stick, by Chip Heath and Dan Heath. This site is independent. The authors did not endorse it. Paste your words and one goal line. Three cold readers (a distracted stranger, a skeptic, your target reader) read them apart. You get the line they kept, six scores, and one fix. Your words are not recorded or kept. The server keeps only a daily count of how many checks ran.
+What this checker is: the checklist is the SUCCESs framework from Made to Stick, by Chip Heath and Dan Heath. This site is independent. The authors did not endorse it. Paste your words and one goal line. Three cold readers (a distracted stranger, a skeptic, your target reader) read them apart. You get the line they kept, other ways to say it, one fix, and the six scores last. Your words are not recorded or kept. The server keeps only a daily count of how many checks ran.
 A real check, start to finish (a real panel run; more are on Examples). The goal: "Give a short birthday toast for my friend Sarah that guests will remember tomorrow." The words: "I just want to say thank you to everyone for being here. Sarah is a wonderful person and a great friend to all of us. We are so lucky to know her. Here is to many more years of happiness and good times together."
 The one point they remembered: "Thanks to all for being here." All three readers kept the same line. It is the greeting, not a memory. Simple scored 8 of 10: the point arrived whole.
 Scores: Simple 8, Unexpected 2, Concrete 2, Credible 4, Emotional 5, Stories 1.

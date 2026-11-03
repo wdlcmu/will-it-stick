@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Will It Stick? Three cold readers score your words.</title>
-<meta name="description" content="Paste your words. Three cold readers show what stuck. You get the one line they heard, six scores, and one fix. Your words are not recorded or kept; only a daily count of checks is kept.">
+<meta name="description" content="Paste your words. Three cold readers show what stuck. You get the one line they heard, other ways to say it, one fix shown on your words, and the six scores last. Your words are not recorded or kept; only a daily count of checks is kept.">
 <link rel="canonical" href="https://willitstick.app/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Will It Stick?">
 <meta property="og:title" content="Will It Stick? Three cold readers score your words.">
-<meta property="og:description" content="Paste your words. Three cold readers show what stuck. You get the one line they heard, six scores, and one fix. Your words are not recorded or kept; only a daily count of checks is kept.">
+<meta property="og:description" content="Paste your words. Three cold readers show what stuck. You get the one line they heard, other ways to say it, one fix shown on your words, and the six scores last. Your words are not recorded or kept; only a daily count of checks is kept.">
 <meta property="og:url" content="https://willitstick.app/">
 <meta property="og:image" content="https://willitstick.app/og-card.png">
 <meta property="og:image:width" content="1200">
@@ -17,7 +17,7 @@
 <meta property="og:image:alt" content="A real panel run: a work note before and after the one fix.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Will It Stick? Three cold readers score your words.">
-<meta name="twitter:description" content="Paste your words. Three cold readers show what stuck. You get the one line they heard, six scores, and one fix. Your words are not recorded or kept; only a daily count of checks is kept.">
+<meta name="twitter:description" content="Paste your words. Three cold readers show what stuck. You get the one line they heard, other ways to say it, one fix shown on your words, and the six scores last. Your words are not recorded or kept; only a daily count of checks is kept.">
 <meta name="twitter:image" content="https://willitstick.app/og-card.png">
 <style>
   :root{
@@ -147,12 +147,118 @@
   a,button,input,textarea{touch-action:manipulation}
   footer a{display:inline-block;padding:12px 4px;min-height:44px}
   .dropbtn{font:inherit;font-size:14px;background:none;border:none;padding:12px 4px;min-height:44px;color:var(--amber-deep);text-decoration:underline;cursor:pointer}
-  .nextsteps{display:grid;gap:8px;margin-top:18px}
-  @media(min-width:760px){.nextsteps{grid-template-columns:1fr 1fr 1fr 1fr}}
+  .nextsteps{margin-top:20px}
   .next{display:block;background:#fff;border:1.5px solid var(--amber-deep);color:var(--amber-deep);
     font-weight:bold;font-size:17px;border-radius:12px;padding:12px 10px;text-align:center;
     text-decoration:none;min-height:48px;cursor:pointer;font-family:inherit}
   .next.main{background:var(--amber);color:#241a02;border-color:var(--amber)}
+  [hidden]{display:none !important}
+  .nextlinks{display:flex;flex-wrap:wrap;gap:4px 24px;margin-top:6px}
+  .nextlinks a,.nextlinks button{display:inline-block;background:none;border:none;padding:12px 2px;
+    min-height:44px;font:inherit;font-size:16px;font-weight:bold;color:var(--amber-deep);
+    text-decoration:underline;cursor:pointer}
+  .runstatus{display:none;font-size:15px;color:var(--soft);margin:12px 2px 0}
+  /* reader notes: each seat's own heard line and weakest pick */
+  .readernotes{margin-top:12px}
+  .readernotes .rn-label{font-size:13px;font-weight:bold;text-transform:uppercase;
+    letter-spacing:.08em;color:var(--amber-deep);margin:0 0 4px}
+  .readernotes p{font-size:15px;color:#3d362a;margin:3px 0}
+  /* other ways to say it, in the result */
+  .ways-lead{font-size:17px;margin:2px 0 12px;max-width:38em}
+  .ways-row{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end}
+  .ways-row .grow{flex:1;min-width:210px}
+  .ways-row label{margin:0 0 6px}
+  .waysbtn{font:inherit;font-weight:bold;font-size:17px;background:#fff;
+    border:1.5px solid var(--amber-deep);color:#241a02;border-radius:10px;
+    padding:12px 18px;cursor:pointer;min-height:48px}
+  .waysbtn[disabled]{opacity:.55;cursor:wait}
+  .ways-err{display:none;background:#fdeeee;border:1px solid #efc4c4;color:#7c2222;
+    border-radius:10px;padding:12px;margin-top:12px;font-size:16px}
+  #ways-live{display:none;margin-top:14px}
+  .ways-stage{font-size:16px;color:var(--soft);margin:0 0 6px}
+  .pulse{display:inline-block;width:11px;height:11px;border-radius:50%;background:var(--amber);
+    margin-right:9px;animation:pl 1.2s ease-in-out infinite;vertical-align:baseline}
+  @keyframes pl{0%,100%{opacity:.35}50%{opacity:1}}
+  .bcard{border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:10px 0 0;background:#fff}
+  .bcard .bname{font-weight:bold;font-size:16px}
+  .bcard .btext{font-size:16px;margin:4px 0;white-space:pre-wrap}
+  .bcard .bstat{font-size:14px;color:var(--soft);margin:2px 0 0}
+  .bcard.bdrop{opacity:.75}
+  #ways-final{display:none;margin-top:14px}
+  .ways-headline{border:2px solid var(--bad);background:#fdf1f1;border-radius:12px;
+    padding:14px 16px;margin:0 0 14px}
+  .ways-headline h3{margin:0 0 6px;font-size:15px;text-transform:uppercase;
+    letter-spacing:.08em;color:var(--bad)}
+  .ways-headline p{margin:0;font-size:18px}
+  .ways-verdict{font-size:17px;margin:0 0 12px;max-width:38em}
+  .ways-verdict strong{color:var(--amber-deep)}
+  .fcard{background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:14px 16px;margin:0 0 14px}
+  .fcard.picked{border:2px solid var(--good)}
+  .fcard.orig{border:1.5px dashed var(--amber-deep)}
+  .ftop{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  .fname{font-weight:bold;font-size:19px}
+  .frank{font-size:14px;font-weight:bold;color:var(--amber-deep);white-space:nowrap}
+  .ftag{display:inline-block;font-size:12px;font-weight:bold;text-transform:uppercase;
+    letter-spacing:.06em;color:#fff;background:var(--mid);border-radius:999px;
+    padding:3px 9px;margin-left:8px;vertical-align:2px}
+  .ftag.yours{background:var(--amber-deep)}
+  .ftext{font-size:18px;margin:8px 0;white-space:pre-wrap}
+  .fev{font-size:15px;color:#3d362a;margin:6px 0 0}
+  .fveh{font-size:14px;color:var(--soft);margin:4px 0 0}
+  .copyway{margin-top:12px;background:#fff;border:1.5px solid var(--amber-deep);color:#241a02;
+    font:inherit;font-weight:bold;font-size:16px;border-radius:10px;padding:11px 16px;
+    cursor:pointer;min-height:44px}
+  .tiehead{font-size:16px;font-weight:bold;color:var(--mid);margin:18px 0 8px}
+  .dropped{font-size:15px;color:var(--soft);margin:6px 0}
+  details.ways-more{margin-top:4px}
+  details.ways-more summary,details.scores-full summary{min-height:44px;padding:12px 4px;
+    cursor:pointer;font-weight:bold;font-size:16px;color:var(--amber-deep)}
+  .ways-orignote{font-size:16px;color:#3d362a;margin:0 0 10px}
+  .ways-full{font-size:16px;margin:14px 0 0}
+  .ways-full a{color:var(--amber-deep);font-weight:bold}
+  /* the readers ask back: one question at a time */
+  .qacard{border:2px solid var(--amber);background:#fffdf4;border-radius:12px;
+    padding:16px 18px;margin:0 0 16px}
+  .qa-progress{font-size:14px;font-weight:bold;color:var(--amber-deep);margin:0 0 8px;
+    text-transform:uppercase;letter-spacing:.06em}
+  .qa-hole{font-size:15px;color:var(--soft);margin:0}
+  .qa-q{font-size:21px;font-weight:bold;margin:6px 0 4px}
+  .qa-why{font-size:16px;color:#3d362a;margin:0 0 6px}
+  .qa-chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 4px}
+  .qa-chips button{font:inherit;font-size:16px;background:#fff;border:1.5px solid #d8cdb2;
+    border-radius:999px;padding:9px 16px;cursor:pointer;min-height:44px;color:var(--ink)}
+  .qa-chips button:active{background:var(--amber)}
+  .qa-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+  .qa-row input{flex:1;min-width:200px}
+  .qa-use{font:inherit;font-weight:bold;font-size:16px;background:var(--amber);color:#241a02;
+    border:1.5px solid var(--amber-deep);border-radius:10px;padding:11px 16px;cursor:pointer;min-height:48px}
+  .qa-foot{display:flex;flex-wrap:wrap;gap:6px 22px;margin-top:8px}
+  .qa-foot button{background:none;border:none;font:inherit;font-size:15px;color:var(--amber-deep);
+    text-decoration:underline;cursor:pointer;padding:10px 2px;min-height:44px}
+  .qa-done{font-size:17px;margin:0}
+  .ways-changed{background:#f4fbf7;border:1px solid var(--good);border-radius:12px;
+    padding:14px 16px;margin:0 0 14px}
+  .ways-changed h3{margin:0 0 6px;font-size:15px;text-transform:uppercase;
+    letter-spacing:.08em;color:var(--good)}
+  .ways-changed p{margin:4px 0;font-size:16px}
+  .versionbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:0 0 14px}
+  .versionbar .vlabel{font-weight:bold;font-size:16px}
+  .versionbar button{font:inherit;font-size:15px;font-weight:bold;background:#fff;
+    border:1.5px solid var(--amber-deep);color:#241a02;border-radius:10px;
+    padding:10px 14px;cursor:pointer;min-height:44px}
+  /* six scores, compact and last */
+  .scorestrip{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  @media(min-width:760px){.scorestrip{grid-template-columns:1fr 1fr 1fr}}
+  .mini{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 10px}
+  .mini .m-top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+  .mini .m-name{font-weight:bold;font-size:15px}
+  .mini .m-score{font-weight:bold;font-size:17px;white-space:nowrap}
+  .mini .m-track{height:8px;background:#efe8d8;border-radius:4px;overflow:hidden;margin-top:6px}
+  .mini .m-fill{height:100%;width:0;border-radius:4px;transition:width .9s ease}
+  .weakline{font-size:16px;color:#3d362a;margin:10px 0 0}
+  details.scores-full{margin-top:6px}
+  details.scores-full .bars{margin-top:6px}
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
@@ -184,7 +290,7 @@
   "url": "https://willitstick.app/",
   "applicationCategory": "BusinessApplication",
   "operatingSystem": "Any",
-  "description": "Paste your words. Three cold readers show what stuck. You get the one line they heard, six scores, and one fix. Your words are not recorded or kept; only a daily count of checks is kept.",
+  "description": "Paste your words. Three cold readers show what stuck. You get the one line they heard, other ways to say it, one fix shown on your words, and the six scores last. Your words are not recorded or kept; only a daily count of checks is kept.",
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
 }
 </script>
@@ -364,6 +470,7 @@ window.FLEET_CFG = {
     <input type="text" id="motivation" maxlength="140" aria-describedby="motivation-hint" placeholder="Make my partner feel thanked, not lectured.">
     <button class="btn" id="run">Check if it sticks</button>
     <div class="err" id="err"></div>
+    <p class="runstatus" id="run-status" aria-live="polite"></p>
     <p class="privacy">Your words are not recorded or kept; only a daily count of checks is kept.</p>
     <p class="samples">Try a sample:
       <button type="button" id="sample-strong">A repair night note</button> ·
@@ -374,12 +481,51 @@ window.FLEET_CFG = {
   <section id="results" aria-live="polite">
     <h2>What they'll hear</h2>
     <div id="core"></div>
+    <div class="readernotes" id="readernotes"></div>
+
+    <h2>Other ways to say it</h2>
+    <div id="ways">
+      <p class="ways-lead">Your words and your goal come with you. Name who it is for, and three readers write seven other ways to say it, each one read cold and ranked as it lands. If they hit a gap only you can fill, they ask here, one question at a time.</p>
+      <div class="ways-row">
+        <div class="grow">
+          <label for="ways-audience">Who is it for?</label>
+          <input type="text" id="ways-audience" maxlength="200" placeholder="My team at work. They skim everything.">
+        </div>
+        <button type="button" class="waysbtn" id="ways-go">Show me the other ways</button>
+      </div>
+      <div class="ways-err" id="ways-err" role="alert"></div>
+      <div id="ways-live" aria-live="polite">
+        <p class="ways-stage"><span class="pulse" aria-hidden="true"></span><span id="ways-stage">Writing seven ways to say it…</span></p>
+        <div id="ways-board"></div>
+      </div>
+      <div id="ways-final">
+        <div class="ways-headline" id="ways-headline" hidden>
+          <h3>The readers, first</h3>
+          <p id="ways-headline-line"></p>
+        </div>
+        <div id="ways-qa"></div>
+        <p class="ways-verdict" id="ways-verdict"></p>
+        <div class="ways-changed" id="ways-changed" hidden>
+          <h3>What your answers changed</h3>
+          <div id="ways-changed-lines"></div>
+        </div>
+        <div class="versionbar" id="ways-versionbar" hidden>
+          <span class="vlabel" id="ways-vlabel"></span>
+          <button type="button" id="ways-vtoggle"></button>
+        </div>
+        <div id="ways-top"></div>
+        <p class="ways-orignote" id="ways-orig-note"></p>
+        <details class="ways-more" id="ways-more">
+          <summary>See all the ways</summary>
+          <div id="ways-rest"></div>
+          <div id="ways-drops"></div>
+        </details>
+        <p class="ways-full">Writing a different message? <a id="ways-full-link" href="ways-to-say-it.html">The full Ways to say it page</a> starts from a blank page.</p>
+      </div>
+    </div>
 
     <h2>The one fix</h2>
     <div class="card fix"><p id="fix"></p></div>
-
-    <h2>Six scores</h2>
-    <div class="bars" id="bars"></div>
 
     <h2>Before and after</h2>
     <div class="ba-grid">
@@ -408,11 +554,22 @@ window.FLEET_CFG = {
 
     <p class="deal">One fix, shown applied to your words when it passes. Nothing is sent anywhere; what goes out is your call.</p>
     <p class="fineprint" id="fineprint"></p>
+
+    <h2>Six scores</h2>
+    <div class="scorestrip" id="scorestrip"></div>
+    <p class="weakline" id="weakline"></p>
+    <details class="scores-full" id="scores-full">
+      <summary>See all six scores in full</summary>
+      <div class="bars" id="bars"></div>
+    </details>
+
     <div class="nextsteps" aria-label="What next">
       <a class="next main" href="#tool">Check another text</a>
-      <button type="button" class="next" id="share-site">Share this checker</button>
-      <a class="next" href="examples.html">See six real checks</a>
-      <a class="next" href="#method">Read the method</a>
+      <div class="nextlinks">
+        <button type="button" id="share-site">Share this checker</button>
+        <a href="examples.html">See six real checks</a>
+        <a href="#method">Read the method</a>
+      </div>
     </div>
   </section>
 
@@ -475,8 +632,8 @@ window.FLEET_CFG = {
   <section class="how">
     <h2>How it works</h2>
     <p><strong>1. Three cold readers score your words.</strong> They never see each other's notes.</p>
-    <p><strong>2. You get what they'll hear,</strong> the one fix, six scores, and starter shapes.</p>
-    <p><strong>3. One fix, shown on your words.</strong> You decide what to send.</p>
+    <p><strong>2. You get what they'll hear first,</strong> then other ways to say it. If the readers hit a gap only you can fill, they ask, and your answers sharpen a second set.</p>
+    <p><strong>3. One fix, shown on your words.</strong> The six scores sit last, in full one tap down. You decide what to send.</p>
   </section>
 
   <span id="method" aria-hidden="true"></span>
@@ -590,6 +747,8 @@ function paintDiff(el, tokens, changed, cls){
 }
 
 let lastAfter = "";
+var lastCheck = null;
+let lastGoalText = "";
 $("copy-after").onclick = async () => {
   if (!lastAfter) return;
   const b = $("copy-after");
@@ -623,6 +782,8 @@ function firstLine(s){
 }
 
 function render(r, original){
+  lastCheck = { text: original, goal: lastGoalText, weakest: r.weakest };
+  if (window.resetWays) window.resetWays();
   const bars = $("bars"); bars.innerHTML = "";
   for (const el of r.elements){
     const row = document.createElement("div"); row.className = "bar-row";
@@ -641,6 +802,28 @@ function render(r, original){
     row.querySelector(".bar-why").textContent = why;
     row.querySelector(".bar-note").textContent = note;
     bars.appendChild(row);
+  }
+  const strip = $("scorestrip"); strip.innerHTML = "";
+  for (const el of r.elements){
+    const cell = document.createElement("div"); cell.className = "mini";
+    cell.innerHTML =
+      '<div class="m-top"><span class="m-name"></span><span class="m-score"></span></div>' +
+      '<div class="m-track"><div class="m-fill"></div></div>';
+    cell.querySelector(".m-name").textContent = el.name;
+    cell.querySelector(".m-score").textContent = el.median + " / 10";
+    const mf = cell.querySelector(".m-fill");
+    mf.style.background = barColor(el.median);
+    requestAnimationFrame(() => { mf.style.width = (el.median * 10) + "%"; });
+    strip.appendChild(cell);
+  }
+  const wElS = r.elements.find(e => e.key === r.weakest);
+  if (wElS){
+    const midS = wElS.values.indexOf(wElS.median);
+    const rawS = (wElS.whys[midS >= 0 ? midS : 0] || "").replace(/[.\s]+$/, "");
+    $("weakline").textContent = "Weakest: " + wElS.name + " at " + wElS.median + " of 10" +
+      (rawS ? ": " + rawS.charAt(0).toLowerCase() + rawS.slice(1) + "." : ".");
+  } else {
+    $("weakline").textContent = "";
   }
   const core = $("core"); core.innerHTML = "";
   if (r.core_split){
@@ -672,6 +855,20 @@ function render(r, original){
         rp.textContent = "It lands that way because " + wEl.name + " scored " + wEl.median + " of 10: " + why + ".";
         core.appendChild(rp);
       }
+    }
+  }
+  const rn = $("readernotes"); rn.innerHTML = "";
+  if (!r.core_split && r.seats && r.seats.length){
+    const lab = document.createElement("p"); lab.className = "rn-label";
+    lab.textContent = "The readers, one by one";
+    rn.appendChild(lab);
+    for (const s of r.seats){
+      const line = document.createElement("p");
+      let t = s.name + " heard \u201C" + s.core + "\u201D";
+      const wN = s.weakest ? (r.elements.find(e => e.key === s.weakest) || {}).name : "";
+      if (wN) t += " Weakest: " + wN + ".";
+      line.textContent = t;
+      rn.appendChild(line);
     }
   }
   $("proverb").textContent = r.proverb;
@@ -747,6 +944,12 @@ $("run").onclick = async () => {
   if (!motivation){ err.textContent = "Add one line: what should these words do?"; err.style.display = "block"; return; }
   btn.disabled = true;
   btn.innerHTML = '<span class="spin"></span>Three readers are reading…';
+  const statusEl = $("run-status");
+  const runT0 = Date.now();
+  const statusTick = () => { statusEl.textContent = "The readers are reading apart. " + Math.floor((Date.now() - runT0) / 1000) + " seconds in. Most checks land in under a minute."; };
+  statusEl.style.display = "block";
+  statusTick();
+  const runTick = setInterval(statusTick, 500);
   try {
     const ctl = new AbortController();
     const timer = setTimeout(() => ctl.abort(), 90000);
@@ -767,11 +970,14 @@ $("run").onclick = async () => {
       err.style.display = "block";
       return;
     }
+    lastGoalText = motivation;
     render(data, text);
   } catch(e) {
     err.textContent = "The panel did not answer. Your words were not stored. Try again in a moment.";
     err.style.display = "block";
   } finally {
+    clearInterval(runTick);
+    statusEl.style.display = "none";
     btn.disabled = false;
     btn.textContent = "Check if it sticks";
   }
@@ -846,6 +1052,395 @@ $("run").onclick = async () => {
       else { try { localStorage.setItem("wis_visited", "1"); } catch(e){} }
     }
   } catch(e){}
+})();
+</script>
+<script>
+(function(){
+  var API = (location.port === "8791") ? "" : "https://will-it-stick-panel.wdlcmu.workers.dev";
+  var $ = function(id){ return document.getElementById(id); };
+  var CUT_FOR_ELEMENT = { simple:"simple", unexpected:"unexpected", concrete:"concrete",
+    credible:"credible", emotional:"emotional", stories:"story" };
+  var versions = { 1: null, 2: null };
+  var shownRound = 1;
+  var intake = null;
+  var qa = null;
+  var lastQA = null;
+
+  function esc(s){ var d = document.createElement("div"); d.textContent = (s == null ? "" : s); return d.innerHTML; }
+  function med(x){ return (x && typeof x.median === "number") ? x.median : "-"; }
+  function reviewedLine(e){
+    var d = e.dimensions || {};
+    return "Read. Composite " + e.composite + " of 10. Lands " + med(d.lands) +
+      ", goal " + med(d.goal) + ", retell " + med(d.retell) + "." +
+      (e.repeat_weakness ? " Repeat weakness: \u201C" + e.repeat_weakness + "\u201D" : "");
+  }
+
+  var boardCards = {};
+  function boardReset(){ $("ways-board").innerHTML = ""; boardCards = {}; }
+  function boardAdd(id, name, text, vehicle, status){
+    var div = document.createElement("div");
+    div.className = "bcard";
+    div.innerHTML = '<span class="bname">' + esc(name) + "</span>" +
+      '<p class="btext">' + esc(text) + "</p>" +
+      (vehicle ? '<p class="bstat">The comparison: ' + esc(vehicle) + "</p>" : "") +
+      '<p class="bstat" data-stat>' + esc(status) + "</p>";
+    $("ways-board").appendChild(div);
+    boardCards[id] = div;
+  }
+  function boardStatus(id, status){
+    var c = boardCards[id]; if (!c) return;
+    var s = c.querySelector("[data-stat]"); if (s) s.textContent = status;
+  }
+  function boardDrop(drop){
+    var div = document.createElement("div");
+    div.className = "bcard bdrop";
+    div.innerHTML = '<span class="bname">No ' + esc(drop.name) + ' cut</span><p class="bstat">' + esc(drop.reason) + "</p>";
+    $("ways-board").appendChild(div);
+  }
+
+  function showErr(msg){ var e = $("ways-err"); e.textContent = msg; e.style.display = "block"; }
+  function hideErr(){ $("ways-err").style.display = "none"; }
+
+  function cardHTML(f, n, aimId){
+    var badge = f.tied ? "Tied at " + f.composite + " of 10" : "#" + f.rank + " of " + n;
+    return '<article class="fcard' + (f.is_original ? " orig" : "") + '" data-id="' + f.id + '">' +
+      '<div class="ftop"><span class="fname">' + esc(f.name) +
+        (f.is_original ? '<span class="ftag yours">Yours</span>' : "") +
+        (f.id === aimId ? '<span class="ftag">Aimed at your weakest score</span>' : "") +
+        '</span><span class="frank">' + badge + "</span></div>" +
+      '<p class="ftext">' + esc(f.text) + "</p>" +
+      (f.vehicle ? '<p class="fveh">The comparison: ' + esc(f.vehicle) + "</p>" : "") +
+      '<p class="fev">' + esc(f.evidence_line) + "</p>" +
+      '<button type="button" class="copyway" data-copy="' + f.id + '">Copy this one</button>' +
+      "</article>";
+  }
+
+  function renderWays(r){
+    var n = (r.framings || []).length;
+    var headline = $("ways-headline");
+    if (r.headline && r.headline.line){
+      headline.hidden = false;
+      $("ways-headline-line").textContent = r.headline.line;
+    } else headline.hidden = true;
+    var v = r.verdict;
+    $("ways-verdict").innerHTML = v
+      ? "<strong>Our pick.</strong> " + esc(v.line)
+      : "<strong>No pick this run.</strong> Too few cold readers answered to rank the set fairly. The ways below are still yours to read.";
+    var vb = $("ways-versionbar");
+    if (versions[2]){
+      vb.hidden = false;
+      $("ways-vlabel").textContent = shownRound === 2
+        ? "Version 2, with your answers in."
+        : "Version 1, before your answers.";
+      $("ways-vtoggle").textContent = shownRound === 2 ? "See version 1" : "See version 2";
+    } else vb.hidden = true;
+    var changed = $("ways-changed");
+    if (shownRound === 2 && versions[1] && versions[2]){
+      changed.hidden = false;
+      $("ways-changed-lines").innerHTML = compareWays(versions[1], versions[2])
+        .map(function(l){ return "<p>" + esc(l) + "</p>"; }).join("");
+    } else changed.hidden = true;
+    var aimId = CUT_FOR_ELEMENT[(window.lastCheck || {}).weakest || ""];
+    var cards = (r.framings || []).slice();
+    var htmlList = [];
+    var lastTieKey = null;
+    cards.forEach(function(f){
+      var head = "";
+      var tieKey = f.tied ? "tie-" + f.composite : null;
+      if (tieKey && tieKey !== lastTieKey)
+        head = '<p class="tiehead">These scored the same. They are the same sentence in different hats.</p>';
+      if (tieKey) lastTieKey = tieKey;
+      htmlList.push(head + cardHTML(f, n, aimId));
+    });
+    $("ways-top").innerHTML = htmlList.slice(0, 3).join("");
+    var rest = htmlList.slice(3).join("") + (r.unranked || []).map(function(f){
+      return '<article class="fcard"><div class="ftop"><span class="fname">' + esc(f.name) +
+        '</span><span class="frank">not ranked</span></div>' +
+        '<p class="ftext">' + esc(f.text) + "</p>" +
+        '<p class="fev">' + esc(f.note || "") + "</p>" +
+        '<button type="button" class="copyway" data-copy="' + f.id + '">Copy this one</button></article>';
+    }).join("");
+    $("ways-rest").innerHTML = rest;
+    $("ways-more").style.display = rest ? "" : "none";
+    $("ways-drops").innerHTML = (r.dropped || []).map(function(d){
+      return '<p class="dropped">No ' + esc(d.name) + " cut this run: " + esc(d.reason) + "</p>";
+    }).join("");
+    var orig = null, inTop = false;
+    cards.forEach(function(f, i){ if (f.is_original){ orig = f; inTop = i < 3; } });
+    $("ways-orig-note").textContent = (orig && !inTop)
+      ? "Your original ranked #" + orig.rank + " of " + n + " at " + orig.composite + " of 10. It is in the full set below."
+      : "";
+    buildFullLink();
+  }
+
+  function compareWays(v1, v2){
+    var lines = [];
+    var t1 = (v1.framings || [])[0], t2 = (v2.framings || [])[0];
+    if (t1 && t2){
+      lines.push(t1.id === t2.id
+        ? "The top way is still " + t2.name + ", at " + t2.composite + " of 10."
+        : "The top way changed: " + t1.name + " (" + t1.composite + " of 10) gave way to " + t2.name + " (" + t2.composite + " of 10).");
+    }
+    var o1 = null, o2 = null;
+    (v1.framings || []).forEach(function(f){ if (f.is_original) o1 = f; });
+    (v2.framings || []).forEach(function(f){ if (f.is_original) o2 = f; });
+    if (o1 && o2){
+      lines.push(o1.rank === o2.rank
+        ? "Your original held its place at #" + o2.rank + " (" + o2.composite + " of 10)."
+        : "Your original moved from #" + o1.rank + " to #" + o2.rank + " (" + o1.composite + " to " + o2.composite + " of 10).");
+    }
+    var ids1 = {}, ids2 = {};
+    (v1.framings || []).forEach(function(f){ ids1[f.id] = 1; });
+    (v2.framings || []).forEach(function(f){ ids2[f.id] = 1; });
+    var back = (v2.framings || []).filter(function(f){ return !ids1[f.id]; }).map(function(f){ return f.name; });
+    var gone = (v1.framings || []).filter(function(f){ return !ids2[f.id]; }).map(function(f){ return f.name; });
+    if (back.length) lines.push(back.join(", ") + " made the set this time.");
+    if (gone.length) lines.push(gone.join(", ") + " did not make the second set.");
+    return lines;
+  }
+
+  function buildFullLink(){
+    if (!intake) return;
+    var q = new URLSearchParams();
+    q.set("goal", intake.goal);
+    q.set("audience", intake.audience);
+    if (window.lastCheck && window.lastCheck.weakest) q.set("weakest", window.lastCheck.weakest);
+    var withText = new URLSearchParams(q);
+    withText.set("text", intake.text);
+    var url = "ways-to-say-it.html?" + withText.toString();
+    $("ways-full-link").href = url.length <= 1900 ? url : "ways-to-say-it.html?" + q.toString();
+  }
+
+  /* one question at a time, generated from this text's gaps */
+  function startQA(questions){
+    qa = { qs: questions, i: 0, answers: [] };
+    renderQA();
+  }
+  function renderQA(){
+    var box = $("ways-qa");
+    if (!qa){ box.innerHTML = ""; return; }
+    if (qa.i >= qa.qs.length) return finishQA();
+    var q = qa.qs[qa.i];
+    var dots = qa.qs.map(function(_, k){ return k <= qa.i ? "\u25CF" : "\u25CB"; }).join(" ");
+    box.innerHTML =
+      '<div class="qacard">' +
+        '<p class="qa-progress">Question ' + (qa.i + 1) + " of " + qa.qs.length + " &nbsp;" + dots + "</p>" +
+        '<p class="qa-hole">The readers kept hitting this gap: ' + esc(q.hole) + "</p>" +
+        '<p class="qa-q">' + esc(q.question) + "</p>" +
+        '<p class="qa-why">' + esc(q.why) + "</p>" +
+        (q.chips && q.chips.length
+          ? '<div class="qa-chips">' + q.chips.map(function(c){
+              return '<button type="button" data-chip>' + esc(c) + "</button>";
+            }).join("") + "</div>"
+          : "") +
+        '<div class="qa-row"><input type="text" id="qa-text" maxlength="300" placeholder="Or answer in your own words">' +
+        '<button type="button" class="qa-use" id="qa-use">Use my words</button></div>' +
+        '<div class="qa-foot"><button type="button" id="qa-skip">Skip this one</button>' +
+        '<button type="button" id="qa-skipall">Skip all the questions</button></div>' +
+      "</div>";
+    Array.prototype.forEach.call(box.querySelectorAll("[data-chip]"), function(b){
+      b.onclick = function(){ answerNow(b.textContent); };
+    });
+    $("qa-use").onclick = function(){
+      var val = $("qa-text").value.trim();
+      if (!val){ $("qa-text").focus(); return; }
+      answerNow(val);
+    };
+    $("qa-text").addEventListener("keydown", function(e){
+      if (e.key === "Enter"){ e.preventDefault(); $("qa-use").click(); }
+    });
+    $("qa-skip").onclick = function(){ qa.i++; renderQA(); };
+    $("qa-skipall").onclick = function(){ qa.i = qa.qs.length; renderQA(); };
+  }
+  function answerNow(value){
+    qa.answers.push({ question: qa.qs[qa.i].question, answer: value });
+    qa.i++;
+    renderQA();
+  }
+  function finishQA(){
+    var box = $("ways-qa");
+    var answered = qa.answers.length, total = qa.qs.length;
+    var mine = qa.answers.slice();
+    qa = null;
+    lastQA = { answered: answered, total: total };
+    if (!answered){
+      box.innerHTML = '<div class="qacard"><p class="qa-done">You skipped the questions. Your first ways stand as they are.</p></div>';
+      return;
+    }
+    box.innerHTML = '<div class="qacard"><p class="qa-done">You answered ' + answered + " of " + total +
+      ". The readers are writing your ways again, with your answers in.</p></div>";
+    var body = {};
+    for (var k in intake) body[k] = intake[k];
+    body.round = 2;
+    body.answers = mine;
+    runStream(body, 2);
+  }
+
+  /* the streamed run: real intermediate outputs only */
+  function runStream(body, round){
+    var btn = $("ways-go");
+    btn.disabled = true; btn.textContent = "Working\u2026";
+    hideErr();
+    $("ways-final").style.display = "none";
+    var live = $("ways-live"); live.style.display = "block";
+    boardReset();
+    boardAdd("original", "Your original", body.text, "", "Being read cold by three readers\u2026");
+    var stage = $("ways-stage");
+    stage.textContent = round === 2 ? "Writing your ways again, with your answers in\u2026" : "Writing seven ways to say it\u2026";
+    live.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    var readyCount = 0, reviewedCount = 0;
+    function fail(msg){
+      live.style.display = "none";
+      btn.disabled = false; btn.textContent = "Show me the other ways";
+      if (round === 2 && versions[1]){
+        $("ways-qa").innerHTML = '<div class="qacard"><p class="qa-done">The second run did not answer. Your first ways stand as they are.</p></div>';
+        $("ways-final").style.display = "block";
+        shownRound = 1;
+        renderWays(versions[1]);
+      }
+      showErr(msg);
+    }
+    function finish(r){
+      live.style.display = "none";
+      btn.disabled = false; btn.textContent = "Show me the other ways";
+      versions[round] = r;
+      shownRound = round;
+      $("ways-final").style.display = "block";
+      if (round === 2 && lastQA){
+        $("ways-qa").innerHTML = '<div class="qacard"><p class="qa-done">You answered ' + lastQA.answered +
+          " of " + lastQA.total + ". Version 2 below is written with your answers in.</p></div>";
+      }
+      renderWays(r);
+      if (round === 1){
+        var qs = (r.followup && r.followup.questions) || [];
+        if (qs.length) startQA(qs);
+      }
+      $("ways-final").scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    function fallback(){
+      return fetch(API + "/api/framings", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body)
+      }).then(function(res){
+        return res.json().then(function(j){
+          if (!res.ok) throw new Error(j.detail || ("HTTP " + res.status));
+          return j;
+        });
+      });
+    }
+    fetch(API + "/api/framings/stream", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body)
+    }).then(function(resp){
+      var ct = resp.headers.get("content-type") || "";
+      if (!resp.ok || ct.indexOf("application/json") !== -1){
+        return resp.json().then(function(j){
+          throw new Error(j.detail || ("HTTP " + resp.status));
+        });
+      }
+      if (!resp.body || !resp.body.getReader) return fallback().then(finish);
+      var reader = resp.body.getReader();
+      var decoder = new TextDecoder();
+      var buf = "";
+      var result = null;
+      var cancelled = false;
+      (function pump(){
+        return reader.read().then(function(step){
+          if (step.done){
+            if (!cancelled) fail("The stream ended early.");
+            return;
+          }
+          if (cancelled) return;
+          buf += decoder.decode(step.value, { stream: true });
+          var idx;
+          while ((idx = buf.indexOf("\n")) >= 0){
+            var line = buf.slice(0, idx); buf = buf.slice(idx + 1);
+            if (!line.trim()) continue;
+            var ev;
+            try { ev = JSON.parse(line); } catch (e) { continue; }
+            if (ev.type === "cut_ready"){
+              readyCount++;
+              stage.textContent = "Way " + readyCount + " of 7 written. Three cold readers are reading it now\u2026";
+              boardAdd(ev.id, ev.name, ev.text, ev.vehicle, "Written. Three cold readers are reading this one\u2026");
+            }
+            else if (ev.type === "cut_dropped"){ boardDrop(ev.drop); }
+            else if (ev.type === "cut_reviewed"){
+              reviewedCount++;
+              stage.textContent = "Read " + reviewedCount + " of 7 versions so far\u2026";
+              boardStatus(ev.id, reviewedLine(ev));
+            }
+            else if (ev.type === "original_reviewed"){ boardStatus("original", reviewedLine(ev)); }
+            else if (ev.type === "done"){ result = ev.result; cancelled = true; }
+            else if (ev.type === "error"){ cancelled = true; fail(ev.detail || "The readers did not answer."); return; }
+          }
+          if (cancelled){ reader.cancel().catch(function(){}); finish(result); return; }
+          return pump();
+        }).catch(function(){ });
+      })();
+      return null;
+    }).catch(function(e){
+      if (e && /stream|network|load failed|Failed to fetch/i.test(e.message || "")){
+        fallback().then(finish).catch(function(e2){ fail("The readers did not answer. " + (e2.message || "")); });
+      } else {
+        fail("The readers did not answer. " + ((e && e.message) || ""));
+      }
+    });
+  }
+
+  function legacyCopy(txt){
+    var ta = document.createElement("textarea");
+    ta.value = txt; document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand("copy"); } catch (err) {}
+    ta.remove();
+  }
+
+  $("ways-go").onclick = function(){
+    if (!window.lastCheck){ showErr("Run a check first. The ways are written from your checked words."); return; }
+    var text = window.lastCheck.text;
+    if (text.trim().length < 40){ showErr("The checked words are too short for seven ways. A few sentences give them something to work with."); return; }
+    var audience = $("ways-audience").value.trim();
+    if (!audience){ showErr("Name who it is for first. A person or a group, not everyone."); $("ways-audience").focus(); return; }
+    intake = { text: text, audience: audience, goal: window.lastCheck.goal || "", goal_type: "", dual_type: "" };
+    versions = { 1: null, 2: null }; shownRound = 1; qa = null; lastQA = null;
+    $("ways-qa").innerHTML = "";
+    runStream(intake, 1);
+  };
+
+  $("ways-vtoggle").onclick = function(){
+    shownRound = shownRound === 2 ? 1 : 2;
+    if (versions[shownRound]) renderWays(versions[shownRound]);
+  };
+
+  $("ways-final").addEventListener("click", function(e){
+    var b = e.target && e.target.closest ? e.target.closest("[data-copy]") : null;
+    if (!b) return;
+    var r = versions[shownRound]; if (!r) return;
+    var all = (r.framings || []).concat(r.unranked || []);
+    var f = null;
+    all.forEach(function(x){ if (x.id === b.getAttribute("data-copy")) f = x; });
+    if (!f) return;
+    var doneLabel = function(){ b.textContent = "Copied"; setTimeout(function(){ b.textContent = "Copy this one"; }, 2000); };
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(f.text).then(doneLabel).catch(function(){ legacyCopy(f.text); doneLabel(); });
+    } else { legacyCopy(f.text); doneLabel(); }
+  });
+
+  window.resetWays = function(){
+    versions = { 1: null, 2: null }; shownRound = 1; intake = null; qa = null; lastQA = null;
+    boardReset();
+    $("ways-live").style.display = "none";
+    $("ways-final").style.display = "none";
+    hideErr();
+    var btn = $("ways-go"); btn.disabled = false; btn.textContent = "Show me the other ways";
+    ["ways-top", "ways-rest", "ways-drops", "ways-qa"].forEach(function(id){ $(id).innerHTML = ""; });
+    $("ways-orig-note").textContent = "";
+    $("ways-verdict").innerHTML = "";
+    var more = $("ways-more"); more.open = false; more.style.display = "";
+    $("ways-headline").hidden = true;
+    $("ways-changed").hidden = true;
+    $("ways-versionbar").hidden = true;
+  };
 })();
 </script>
 </body>
