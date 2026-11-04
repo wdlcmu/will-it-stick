@@ -38,7 +38,7 @@
 - Health: GET /api/health answers ok, the model name, runs today, the daily cap, and stores_text: false.
 - MCP server: POST /mcp (stateless, protocol 2025-06-18) with two tools. check_if_it_sticks: same inputs and outputs as /api/check. make_it_stick: hand it a draft and its goal; it scans the draft, writes three transformations (a concrete comparison, the one-line core, a scene), drops any whose numbers the draft does not state or plainly derive, and returns the winner a cold-reader gist test picks, with the original competing and able to win. Its instructions tell the host to show results exactly as returned and never to rewrite the winner or turn the starters into a full rewrite.
 - Words sent to any door are not recorded or kept. The server keeps only a daily count of how many checks ran (integers, no text). There are no accounts and no saved checks.
-- The ChatGPT and Claude store listings are not live. Nothing has been submitted. The server can be connected directly at the URL above.
+- The ChatGPT plugin was submitted on Nov 3, 2026 and is in review; it is not live yet. The Claude store listing has not been submitted. The server can be connected directly at the URL above.
 
 ## Optional
 
