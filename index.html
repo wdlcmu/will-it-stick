@@ -507,7 +507,7 @@ window.FLEET_CFG = {
     <p class="drop">or <button type="button" class="dropbtn" id="drop-link">drop a text file (.txt or .md)</button><input type="file" id="file" accept=".txt,.md,text/plain,text/markdown" hidden></p>
     <label for="motivation">What should your words do?</label>
     <p class="hint" id="motivation-hint">One line: who reads them, and what should they do, feel, or remember?</p>
-    <input type="text" id="motivation" maxlength="140" aria-describedby="motivation-hint" placeholder="Make my partner feel thanked, not lectured.">
+    <input type="text" id="motivation" maxlength="140" aria-describedby="motivation-hint" placeholder="Example: Make my partner feel thanked, not lectured.">
     <button class="btn" id="run">Make it stick</button>
     <div class="err" id="err"></div>
     <div class="runstatus" id="run-status" aria-live="polite"></div>
@@ -644,12 +644,12 @@ window.FLEET_CFG = {
 
   <section class="story strip" aria-label="A work note that hid the risk">
     <h2>A work note that hid the risk</h2>
-    <p class="for">A status update to her manager. The launch was at risk, and the note never says so. Her goal line did, and the readers still scored the note itself 1s and 2s.</p>
+    <p class="for">A status update to her manager. The launch was at risk, and the note never says so. Her goal line did, and the readers still graded the note itself at the bottom of the scale.</p>
     <div class="pair">
       <p><span class="tag">Before</span>&ldquo;Status update: The project is <mark class="out">progressing</mark>. Several workstreams are underway and we are addressing various issues as they arise. Stakeholders have been engaged. We expect continued progress in the coming period and will provide further updates as things develop.&rdquo;</p>
       <p class="afterline"><span class="tag">After</span>&ldquo;Status update: The project is <mark>at risk of delay</mark>. Several workstreams are underway and we are addressing various issues as they arise. Stakeholders have been engaged. We expect continued progress in the coming period and will provide further updates as things develop.&rdquo;</p>
     </div>
-    <p class="heard">The line the readers kept named the risk her goal named: &ldquo;The project is at risk.&rdquo; The note itself never said it, and every score was 1 or 2 of 10.</p>
+    <p class="heard">The line the readers kept named the risk her goal named: &ldquo;The project is at risk.&rdquo; The note itself never said it, and the readers graded the note itself at the bottom on every count.</p>
     <p class="count-line">1 line changed. The rest stayed the same. The fix asked for one more line, 'I need your help this week.' The rewrite never added it.</p>
   </section>
 
@@ -662,7 +662,7 @@ window.FLEET_CFG = {
       <div class="pair">
       <p><span class="tag">Before</span>&ldquo;Hey, I need to talk about something. I have been feeling kind of off about how things went last weekend and I do not want it to be weird. You matter to me and I value our friendship a lot. Can we talk sometime?&rdquo;</p>
     </div>
-      <p class="heard">Readers kept the hurt, not the reason: &ldquo;Friend hurt last weekend.&rdquo; Feeling scored 7 of 10. The scene scored 4.</p>
+      <p class="heard">Readers kept the hurt, not the reason: &ldquo;Friend hurt last weekend.&rdquo; The feeling landed; the scene never formed.</p>
     </details>
   </section>
 
@@ -675,7 +675,7 @@ window.FLEET_CFG = {
       <div class="pair">
       <p><span class="tag">Before</span>&ldquo;I just want to say thank you to everyone for being here. Sarah is a wonderful person and a great friend to all of us. We are so lucky to know her. Here is to many more years of happiness and good times together.&rdquo;</p>
     </div>
-      <p class="heard">All three readers kept the same line: &ldquo;Thanks to all for being here.&rdquo; Not one kept a thing about Sarah. Stories scored 1 of 10.</p>
+      <p class="heard">All three readers kept the same line: &ldquo;Thanks to all for being here.&rdquo; Not one kept a thing about Sarah.</p>
     </details>
     <p class="links"><a class="try" href="examples.html">All six real checks</a></p>
   </section>
@@ -742,12 +742,18 @@ const CHIP_MOTIVATIONS = {
   invite: "Invite friends so they say yes and show up.",
   hard: "Say the hard thing and keep the friendship."
 };
+// F-W4 (Lane D, Nov 3, 2026): a chip's example goal is an
+// example, never the visitor's own words in the box. Chips set
+// the ghost placeholder (labeled "Example:") and remember the
+// example as the run's goal only when the box is left empty.
+let chipGoal = "";
 document.querySelectorAll(".chip").forEach((chip) => {
   chip.setAttribute("aria-pressed", "false");
   chip.onclick = () => {
     document.querySelectorAll(".chip").forEach((c) => c.setAttribute("aria-pressed", "false"));
     chip.setAttribute("aria-pressed", "true");
-    $("motivation").value = CHIP_MOTIVATIONS[chip.dataset.chip] || "";
+    chipGoal = CHIP_MOTIVATIONS[chip.dataset.chip] || "";
+    $("motivation").placeholder = chipGoal ? "Example: " + chipGoal : "What should your words do?";
     $("text").focus();
   };
 });
@@ -888,7 +894,7 @@ function render(r, original){
   if (wElS){
     const midS = wElS.values.indexOf(wElS.median);
     const rawS = (wElS.whys[midS >= 0 ? midS : 0] || "").replace(/[.\s]+$/, "");
-    $("weakline").textContent = "Weakest: " + wElS.name + " at " + wElS.median + " of 10" +
+    $("weakline").textContent = "Weakest: " + wElS.name +
       (rawS ? ": " + rawS.charAt(0).toLowerCase() + rawS.slice(1) + "." : ".");
   } else {
     $("weakline").textContent = "";
@@ -940,7 +946,7 @@ function render(r, original){
       if (rawWhy){
         const why = rawWhy.charAt(0).toLowerCase() + rawWhy.slice(1);
         const rp = document.createElement("p"); rp.className = "core-reason";
-        rp.textContent = "It lands that way because " + wEl.name + " scored " + wEl.median + " of 10: " + why + ".";
+        rp.textContent = "It lands that way because " + wEl.name + " is the weak spot: " + why + ".";
         core.appendChild(rp);
       }
     }
@@ -1103,9 +1109,9 @@ async function runCheckPlain(text, motivation){
 $("run").onclick = async () => {
   const btn = $("run"), err = $("err");
   err.style.display = "none";
-  const text = $("text").value.trim(), motivation = $("motivation").value.trim();
+  const text = $("text").value.trim(), motivation = $("motivation").value.trim() || chipGoal;
   if (text.length < 40){ err.textContent = "Paste a bit more first. A few sentences is enough."; err.style.display = "block"; return; }
-  if (!motivation){ err.textContent = "Add one line: what should these words do?"; err.style.display = "block"; return; }
+  if (!motivation){ err.textContent = "Add one line: what should these words do? Or tap a moment above and its example goal is used."; err.style.display = "block"; return; }
   btn.disabled = true;
   btn.innerHTML = '<span class="spin"></span>Three AI readers are on it…';
   const statusEl = $("run-status");
