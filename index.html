@@ -309,6 +309,23 @@
   #transform .t-heard em{font-style:italic}
   #transform .t-note{font-size:15px;color:#3d362a;margin:8px 0 0}
   #transform .t-lever{font-size:14px;line-height:1.5;color:#14532d;font-weight:650;margin:8px 0 0}
+  /* Working state + result additions (Nov 5, 2026): the status
+     line pulses, real reader gists stream in under it, the result
+     leads with a tight before -> after, and each lever line gets
+     its one-line why. Scoped to the transform flow only. */
+  #transform .t-status .pulse{margin-right:8px}
+  #transform .t-live{margin:0 0 10px}
+  #transform .t-live-line{font-size:14.5px;line-height:1.55;color:var(--soft);margin:5px 0 0}
+  #transform .t-live-line em{color:#3d362a}
+  #transform .t-why,#transform-others .t-why{font-size:14px;color:var(--soft);margin:2px 0 0}
+  #transform .t-ba{display:grid;gap:10px;margin:0 0 12px}
+  #transform .t-ba .t-card{margin:0}
+  #transform .t-bpanel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px}
+  #transform .t-bpanel p{margin:0;white-space:pre-wrap}
+  #transform .t-bpanel .t-kind{margin:0 0 6px}
+  #transform .t-readers{margin:0 0 12px}
+  #transform .t-readers .t-kind{margin:0 0 2px}
+  #transform .t-readers p{margin:4px 0 0;font-size:15px;color:#3d362a}
   #transform .t-copy{margin-top:12px}
   #transform .t-orig{background:var(--card);border:1px dashed var(--line);border-radius:12px;padding:12px 16px;margin:0 0 12px}
   #transform .t-orig p{margin:0;white-space:pre-wrap}
@@ -1208,9 +1225,40 @@ $("run").onclick = async () => {
     if (text != null) n.textContent = text;
     return n;
   }
+  function capFirst(s){
+    return s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
+  }
+  // Working state (Nov 5, 2026): a pulsing status line whose
+  // stage text updates in place, plus a live list the stream
+  // fills as drafts and readers' gists land. The old setStatus
+  // wiped the box on every call, so stage changes erased each
+  // other and the answers pass — which never streamed at all —
+  // showed one static line for its whole run.
   function setStatus(msg){
     box.innerHTML = "";
+    var p = el("p", "t-status");
+    var pulse = el("span", "pulse");
+    pulse.setAttribute("aria-hidden", "true");
+    p.appendChild(pulse);
+    p.appendChild(el("span", "t-stage", msg));
+    box.appendChild(p);
+    box.appendChild(el("div", "t-live"));
+  }
+  function setStage(msg){
+    var st = box.querySelector(".t-stage");
+    if (st) st.textContent = msg;
+    else setStatus(msg);
+  }
+  function setNote(msg){
+    box.innerHTML = "";
     box.appendChild(el("p", "t-status", msg));
+  }
+  function addLive(build){
+    var live = box.querySelector(".t-live");
+    if (!live) return;
+    var p = el("p", "t-live-line");
+    build(p);
+    live.appendChild(p);
   }
   function copyText(txt, btn){
     function done(){ btn.textContent = "Copied"; setTimeout(function(){ btn.textContent = "Copy this version"; }, 1600); }
@@ -1230,34 +1278,43 @@ $("run").onclick = async () => {
     box.innerHTML = "";
     if (othersBox) othersBox.innerHTML = "";
     if (heardBox) heardBox.innerHTML = "";
-    if (!r || !r.status){ setStatus("The transformation pass did not answer. Your check below stands."); return; }
+    if (!r || !r.status){ setNote("The transformation pass did not answer. Your check below stands."); return; }
     if (r.status === "questions_first"){ renderQuestions(r); return; }
-    // Beat 1: the core idea named first, then the winning version.
-    if (r.core){
+    // Beat 1 (Nov 5, 2026): when a version won, the result leads
+    // with a tight before -> after — his words, then the winner —
+    // readable in seconds, before any detail. The core line
+    // follows the pair. Without a winner to pair against, the
+    // core leads as it did before.
+    function appendCore(){
+      if (!r.core) return;
       var coreLine = el("p", "t-core");
-      var lab = el("span", "t-core-label", "The core idea: ");
-      coreLine.appendChild(lab);
+      coreLine.appendChild(el("span", "t-core-label", "The core idea: "));
       coreLine.appendChild(document.createTextNode(r.core));
       box.appendChild(coreLine);
     }
+    var w = r.winner || {};
+    var leadBA = r.status === "transformed" && r.original && r.original.text && w.text;
+    if (!leadBA) appendCore();
     // Conversation moments (steering add, Nov 3, 2026): frame the
     // winner as an instead-of / try-saying pair against the words
-    // as they stand.
+    // as they stand. Skipped when the before -> after lead already
+    // shows his words — the pair would repeat the panel.
     var convoCue = /what'?s new|hard text|conversation|convo|catch[\s-]?up|small talk/i.test(tState.goal || "");
-    if (convoCue && r.status === "transformed" && r.original && r.original.text){
+    if (!leadBA && convoCue && r.status === "transformed" && r.original && r.original.text){
       var instead = el("p", "t-note");
       instead.appendChild(el("span", "t-core-label", "Instead of: "));
       instead.appendChild(document.createTextNode("\u201C" + r.original.text + "\u201D"));
       box.appendChild(instead);
     }
     if (r.status === "reorder_only")
-      setStatus("No version earned the name transformation. Here is why, and the verdict on your words as they stand.");
-    var w = r.winner || {};
+      setNote("No version earned the name transformation. Here is why, and the verdict on your words as they stand.");
     var card = el("div", "t-card");
-    card.appendChild(el("p", "t-kind", (convoCue && r.status === "transformed" ? "Try saying · " : "") + (w.label || "The version that sticks")));
+    card.appendChild(el("p", "t-kind", (leadBA ? "After · " : (convoCue && r.status === "transformed" ? "Try saying · " : "")) + (w.label || "The version that sticks")));
     card.appendChild(el("p", "t-win", w.text || ""));
     if (w.lever_line)
       card.appendChild(el("p", "t-lever", w.lever_line));
+    if (w.lever_why)
+      card.appendChild(el("p", "t-why", "Why it sticks: " + w.lever_why));
     if (r.status === "already_sticks")
       card.appendChild(el("p", "t-note", "Your original beat every transformation the cold readers tested. Send it as it stands."));
     if (r.note)
@@ -1266,7 +1323,33 @@ $("run").onclick = async () => {
     copy.type = "button";
     copy.addEventListener("click", function(){ copyText(w.text || "", copy); });
     card.appendChild(copy);
-    box.appendChild(card);
+    if (leadBA){
+      var ba = el("div", "t-ba");
+      var before = el("div", "t-bpanel");
+      before.appendChild(el("p", "t-kind", "Before · your words"));
+      before.appendChild(el("p", null, r.original.text));
+      ba.appendChild(before);
+      ba.appendChild(card);
+      box.appendChild(ba);
+    } else {
+      box.appendChild(card);
+    }
+    // The gist test, shown (Nov 5, 2026): what each cold reader
+    // actually carried away from the winning version, in the
+    // readers' own words, right under the winner.
+    if (w.readers && w.readers.length){
+      var readers = el("div", "t-readers");
+      readers.appendChild(el("p", "t-kind", "What the readers carried away from this version"));
+      w.readers.forEach(function(rd){
+        var p = el("p", null);
+        p.appendChild(el("strong", null, capFirst(rd.persona || "A cold reader")));
+        p.appendChild(document.createTextNode(" heard: "));
+        p.appendChild(el("em", null, "\u201C" + rd.gist + "\u201D"));
+        readers.appendChild(p);
+      });
+      box.appendChild(readers);
+    }
+    if (leadBA) appendCore();
 
     // Beat 3: what a cold reader carried away from the winner.
     if (heardBox && r.heard && r.heard.winner){
@@ -1276,8 +1359,9 @@ $("run").onclick = async () => {
       heard.appendChild(em);
       heardBox.appendChild(heard);
     }
-    // Beat 2: the original alongside, the alternates below.
-    if (othersBox && r.status !== "already_sticks" && r.status !== "reorder_only" && r.original && r.original.text){
+    // Beat 2: the original alongside (unless the before -> after
+    // lead already showed it), the alternates below.
+    if (othersBox && !leadBA && r.status !== "already_sticks" && r.status !== "reorder_only" && r.original && r.original.text){
       var orig = el("div", "t-orig");
       orig.appendChild(el("p", "t-kind", "Your words, as they stand"));
       orig.appendChild(el("p", null, r.original.text));
@@ -1292,10 +1376,15 @@ $("run").onclick = async () => {
         c.appendChild(el("p", "t-kind", a.label || a.kind || ""));
         c.appendChild(el("p", null, a.text || ""));
         if (a.lever_line) c.appendChild(el("p", "t-lever", a.lever_line));
+        if (a.lever_why) c.appendChild(el("p", "t-why", "Why it sticks: " + a.lever_why));
         alts.appendChild(c);
       });
       if (alts.children.length > 1) othersBox.appendChild(alts);
     }
+    // Land on the result (Nov 5, 2026): the winner is what he
+    // sees when the run finishes — not whatever section he
+    // happened to be scrolled to while he waited.
+    if (wrap.scrollIntoView) wrap.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   function renderQuestions(r){
@@ -1349,24 +1438,93 @@ $("run").onclick = async () => {
     skip.addEventListener("click", function(){ submitTransform({ skip_questions: true }); });
     actions.appendChild(use); actions.appendChild(skip);
     box.appendChild(actions);
+    if (wrap.scrollIntoView) wrap.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   function submitTransform(extra){
     var mine = ++tRun;
-    setStatus("Writing the versions that could beat yours\u2026");
     var body = { text: tState.text, goal: tState.goal };
     if (extra && extra.answers) body.answers = extra.answers;
     if (extra && extra.skip_questions) body.skip_questions = true;
-    fetch(T_API + "/api/transform", {
-      method: "POST", headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(body)
-    }).then(function(resp){ return resp.json(); }).then(function(data){
+    // Anchor the working state where he can see it: the moment
+    // the answers go in, the flow scrolls to the panel that is
+    // about to do the work.
+    if (wrap.scrollIntoView) wrap.scrollIntoView({ behavior: "smooth", block: "start" });
+    runTransform(body, mine, "Writing the versions that could beat yours\u2026");
+  }
+
+  // One stream runner for both passes (Nov 5, 2026). The first
+  // pass already streamed; the answers pass used a plain POST, so
+  // for its whole run the page showed one static line below where
+  // he was looking — the "never saw it thinking" defect. Now both
+  // passes stream: stage lines update in place on a pulsing
+  // status, drafts accumulate under it, and every cold reader's
+  // real gist lands in the live list the moment it finishes.
+  function runTransform(bodyObj, mine, firstStage){
+    setStatus(firstStage);
+    var body = JSON.stringify(bodyObj);
+    var ctl = ("AbortController" in window) ? new AbortController() : null;
+    var timer = ctl ? setTimeout(function(){ try { ctl.abort(); } catch(e){} }, 240000) : null;
+    var settled = false;
+    function finish(data){
+      if (timer) clearTimeout(timer);
       if (mine !== tRun) return;
       if (data && data.ok) renderResult(data);
-      else setStatus("The transformation pass did not answer. Your check below stands.");
-    }).catch(function(){
-      if (mine === tRun) setStatus("The transformation pass did not answer. Your check below stands.");
-    });
+      else setNote("The transformation pass did not answer. Your check below stands.");
+    }
+    function fail(){
+      if (timer) clearTimeout(timer);
+      if (mine !== tRun || settled) return;
+      settled = true;
+      // Stream unavailable: one plain call instead.
+      fetch(T_API + "/api/transform", {
+        method: "POST", headers: {"Content-Type": "application/json"}, body: body
+      }).then(function(resp){ return resp.json(); }).then(finish)
+        .catch(function(){ if (mine === tRun) setNote("The transformation pass did not answer. Your check below stands."); });
+    }
+    fetch(T_API + "/api/transform/stream", {
+      method: "POST", headers: {"Content-Type": "application/json"}, body: body,
+      signal: ctl ? ctl.signal : undefined
+    }).then(function(resp){
+      if (!resp.ok || !resp.body) throw new Error("stream");
+      var reader = resp.body.getReader();
+      var dec = new TextDecoder();
+      var buf = "";
+      (function pump(){
+        reader.read().then(function(step){
+          if (mine !== tRun) return;
+          if (step.done){ fail(); return; }
+          buf += dec.decode(step.value, { stream: true });
+          var lines = buf.split("\n");
+          buf = lines.pop();
+          lines.forEach(function(line){
+            if (!line.trim()) return;
+            var ev;
+            try { ev = JSON.parse(line); } catch(e){ return; }
+            if (ev.type === "scan_ready") setStage("Scanned. Writing the versions of it\u2026");
+            else if (ev.type === "candidate_ready"){
+              if (!ev.gated) addLive(function(p){ p.textContent = "Drafted: " + (ev.label || "a version") + "."; });
+            }
+            else if (ev.type === "gist" && ev.gist){
+              var low = (ev.label || "a version");
+              low = low.charAt(0).toLowerCase() + low.slice(1);
+              addLive(function(p){
+                p.appendChild(document.createTextNode("From " + low + ", " + (ev.persona || "a cold reader") + " carried away: "));
+                p.appendChild(el("em", null, "\u201C" + ev.gist + "\u201D"));
+              });
+            }
+            else if (ev.type === "selected") setStage("A cold reader picked the winner. Finishing\u2026");
+            else if (ev.type === "done"){ settled = true; finish(ev.result); }
+            else if (ev.type === "error"){
+              settled = true;
+              if (timer) clearTimeout(timer);
+              if (mine === tRun) setNote("The transformation pass did not answer. Your check below stands.");
+            }
+          });
+          pump();
+        }).catch(function(){ fail(); });
+      })();
+    }).catch(function(){ fail(); });
   }
 
   function startTransform(){
@@ -1378,46 +1536,7 @@ $("run").onclick = async () => {
     if (othersBox) othersBox.innerHTML = "";
     if (heardBox) heardBox.innerHTML = "";
     var mine = ++tRun;
-    setStatus("Scanning your words for the point\u2026");
-    var body = JSON.stringify({ text: text, goal: goal });
-    fetch(T_API + "/api/transform/stream", {
-      method: "POST", headers: {"Content-Type": "application/json"}, body: body
-    }).then(function(resp){
-      if (!resp.ok || !resp.body) throw new Error("stream");
-      var reader = resp.body.getReader();
-      var dec = new TextDecoder();
-      var buf = "";
-      (function pump(){
-        reader.read().then(function(step){
-          if (mine !== tRun) return;
-          if (step.done) return;
-          buf += dec.decode(step.value, { stream: true });
-          var lines = buf.split("\n");
-          buf = lines.pop();
-          lines.forEach(function(line){
-            if (!line.trim()) return;
-            var ev;
-            try { ev = JSON.parse(line); } catch(e){ return; }
-            if (ev.type === "scan_ready") setStatus("Scanned. Writing the versions of it\u2026");
-            else if (ev.type === "candidate_ready") setStatus("Wrote " + (ev.label || "a version") + ". Cold readers are carrying each version away\u2026");
-            else if (ev.type === "selected") setStatus("A cold reader picked the winner. Finishing\u2026");
-            else if (ev.type === "done") renderResult(ev.result);
-            else if (ev.type === "error") setStatus("The transformation pass did not answer. Your check below stands.");
-          });
-          pump();
-        }).catch(function(){ if (mine === tRun) setStatus("The transformation pass did not answer. Your check below stands."); });
-      })();
-    }).catch(function(){
-      if (mine !== tRun) return;
-      // Stream unavailable: one plain call instead.
-      fetch(T_API + "/api/transform", {
-        method: "POST", headers: {"Content-Type": "application/json"}, body: body
-      }).then(function(resp){ return resp.json(); }).then(function(data){
-        if (mine !== tRun) return;
-        if (data && data.ok) renderResult(data);
-        else setStatus("The transformation pass did not answer. Your check below stands.");
-      }).catch(function(){ if (mine === tRun) setStatus("The transformation pass did not answer. Your check below stands."); });
-    });
+    runTransform({ text: text, goal: goal }, mine, "Scanning your words for the point\u2026");
   }
 
   document.getElementById("run").addEventListener("click", startTransform);
