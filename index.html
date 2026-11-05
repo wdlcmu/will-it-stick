@@ -308,6 +308,7 @@
   #transform .t-heard{font-size:16px;color:#3d362a;margin:10px 0 0}
   #transform .t-heard em{font-style:italic}
   #transform .t-note{font-size:15px;color:#3d362a;margin:8px 0 0}
+  #transform .t-lever{font-size:14px;line-height:1.5;color:#14532d;font-weight:650;margin:8px 0 0}
   #transform .t-copy{margin-top:12px}
   #transform .t-orig{background:var(--card);border:1px dashed var(--line);border-radius:12px;padding:12px 16px;margin:0 0 12px}
   #transform .t-orig p{margin:0;white-space:pre-wrap}
@@ -644,17 +645,27 @@ window.FLEET_CFG = {
 
   <section class="story strip" aria-label="A work note that hid the risk">
     <h2>A work note that hid the risk</h2>
-    <p class="for">A status update to her manager. The launch was at risk, and the note never says so. Her goal line did, and the readers still graded the note itself at the bottom of the scale.</p>
     <div class="pair">
-      <p><span class="tag">Before</span>&ldquo;Status update: The project is <mark class="out">progressing</mark>. Several workstreams are underway and we are addressing various issues as they arise. Stakeholders have been engaged. We expect continued progress in the coming period and will provide further updates as things develop.&rdquo;</p>
-      <p class="afterline"><span class="tag">After</span>&ldquo;Status update: The project is <mark>at risk of delay</mark>. Several workstreams are underway and we are addressing various issues as they arise. Stakeholders have been engaged. We expect continued progress in the coming period and will provide further updates as things develop.&rdquo;</p>
+      <p><span class="tag">Before</span>&ldquo;Status update: The project is <mark class="out">progressing</mark>.&rdquo;</p>
+      <p class="afterline"><span class="tag">After</span>&ldquo;Status update: The project is <mark>at risk of delay</mark>.&rdquo;</p>
     </div>
-    <p class="heard">The line the readers kept named the risk her goal named: &ldquo;The project is at risk.&rdquo; The note itself never said it, and the readers graded the note itself at the bottom on every count.</p>
-    <p class="count-line">1 line changed. The rest stayed the same. The fix asked for one more line, 'I need your help this week.' The rewrite never added it.</p>
+    <details class="fullcheck">
+      <summary>Read the full check</summary>
+      <p class="for">A status update to her manager. The launch was at risk, and the note never says so. Her goal line did, and the readers still graded the note itself at the bottom of the scale.</p>
+      <div class="pair">
+        <p><span class="tag">Before</span>&ldquo;Status update: The project is progressing. Several workstreams are underway and we are addressing various issues as they arise. Stakeholders have been engaged. We expect continued progress in the coming period and will provide further updates as things develop.&rdquo;</p>
+        <p class="afterline"><span class="tag">After</span>&ldquo;Status update: The project is at risk of delay. Several workstreams are underway and we are addressing various issues as they arise. Stakeholders have been engaged. We expect continued progress in the coming period and will provide further updates as things develop.&rdquo;</p>
+      </div>
+      <p class="heard">The line the readers kept named the risk her goal named: &ldquo;The project is at risk.&rdquo; The note itself never said it, and the readers graded the note itself at the bottom on every count.</p>
+      <p class="count-line">1 line changed. The rest stayed the same. The fix asked for one more line, 'I need your help this week.' The rewrite never added it.</p>
+    </details>
   </section>
 
   <section class="story strip" aria-label="A hard text to a friend">
     <h2>A hard text to a friend</h2>
+    <div class="pair">
+      <p><span class="tag">Before</span>&ldquo;I have been feeling kind of off about how things went <mark class="out">last weekend</mark>&hellip;&rdquo;</p>
+    </div>
     <p class="fixline"><strong>The one fix</strong>&ldquo;Say what happened last weekend to show why you want to talk.&rdquo;</p>
     <details class="fullcheck">
       <summary>Read the full check</summary>
@@ -668,6 +679,9 @@ window.FLEET_CFG = {
 
   <section class="story strip" aria-label="A toast with no scene">
     <h2>A toast with no scene</h2>
+    <div class="pair">
+      <p><span class="tag">Before</span>&ldquo;Sarah is a <mark class="out">wonderful person</mark> and a great friend to all of us.&rdquo;</p>
+    </div>
     <p class="fixline"><strong>The one fix</strong>&ldquo;Name one thing Sarah did that was great. Cut the rest.&rdquo;</p>
     <details class="fullcheck">
       <summary>Read the full check</summary>
@@ -712,37 +726,7 @@ window.FLEET_CFG = {
     <p><strong>This tool is independent.</strong> The authors and the publisher did not endorse it, and we have no tie to them.</p>
   </section>
 
-  <!-- Works with your AI (fleet AI section, 2026-11-04) -->
-<section class="works-with-ai" aria-label="Works with your AI" style="max-width:44rem;margin:2.5rem auto;padding:1.25rem 1rem;border:1px solid rgba(127,127,127,.45);border-radius:14px;font-family:inherit;line-height:1.55">
-<h2 style="margin:.1rem 0 .5rem;font-size:1.35rem">Works with your AI</h2>
-<p style="margin:.4rem 0">Your AI can run this site's check on words before you send them, and tell you if the point will land.</p>
-<p style="margin:.4rem 0">Connect this site to Claude, Cursor, or any other MCP client. It is free, and it takes about a minute.</p>
-<p style="margin:.8rem 0 .3rem"><strong>1. Copy the server address</strong></p>
-<div style="display:flex;gap:.5rem;flex-wrap:wrap;align-items:stretch">
-<code id="wai-url" style="flex:1 1 16rem;display:flex;align-items:center;padding:.6rem .7rem;border:1px solid rgba(127,127,127,.45);border-radius:10px;word-break:break-all">https://mcp.willitstick.app/mcp</code>
-<button type="button" class="wai-copy" data-copy-target="wai-url" style="min-height:44px;min-width:44px;padding:.6rem 1.1rem;border-radius:10px;border:1px solid rgba(127,127,127,.55);background:transparent;color:inherit;font:inherit;cursor:pointer">Copy</button>
-</div>
-<p style="margin:.9rem 0 .3rem"><strong>2. Add it to your AI</strong></p>
-<details>
-<summary style="min-height:44px;display:flex;align-items:center;cursor:pointer;font-weight:600">Claude Code — one command</summary>
-<pre style="overflow-x:auto;padding:.7rem;border:1px solid rgba(127,127,127,.35);border-radius:10px"><code>claude mcp add --transport http will-it-stick https://mcp.willitstick.app/mcp</code></pre>
-</details>
-<details>
-<summary style="min-height:44px;display:flex;align-items:center;cursor:pointer;font-weight:600">Claude Desktop or Cursor — paste into the MCP settings</summary>
-<pre style="overflow-x:auto;padding:.7rem;border:1px solid rgba(127,127,127,.35);border-radius:10px"><code>{
-  "mcpServers": {
-    "will-it-stick": {
-      "url": "https://mcp.willitstick.app/mcp"
-    }
-  }
-}</code></pre>
-</details>
-<p style="margin:.8rem 0 .2rem"><strong>3. Ask your AI:</strong> &ldquo;Will this message land? Here is what I am about to send…&rdquo;</p>
-</section>
-<script>
-(function(){var b=document.querySelector('.wai-copy');if(!b)return;b.addEventListener('click',function(){var el=document.getElementById(b.getAttribute('data-copy-target'));var t=el?el.textContent.trim():'';function done(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy';},2000);}function failed(){if(el){try{var r=document.createRange();r.selectNodeContents(el);var s=window.getSelection();s.removeAllRanges();s.addRange(r);}catch(e){}}b.textContent='Select + copy manually';setTimeout(function(){b.textContent='Copy';},4000);}function fallback(){var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();var ok=false;try{ok=document.execCommand('copy');}catch(e){ok=false;}document.body.removeChild(ta);if(ok){done();}else{failed();}}if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(done,fallback);}else{fallback();}});})();
-</script>
-<footer>
+  <footer>
     Built with Muse. · <a href="examples.html">Examples</a> · <a href="starters.html">Starters</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a>
   </footer>
 </div>
@@ -1266,10 +1250,14 @@ $("run").onclick = async () => {
       instead.appendChild(document.createTextNode("\u201C" + r.original.text + "\u201D"));
       box.appendChild(instead);
     }
+    if (r.status === "reorder_only")
+      setStatus("No version earned the name transformation. Here is why, and the verdict on your words as they stand.");
     var w = r.winner || {};
     var card = el("div", "t-card");
     card.appendChild(el("p", "t-kind", (convoCue && r.status === "transformed" ? "Try saying · " : "") + (w.label || "The version that sticks")));
     card.appendChild(el("p", "t-win", w.text || ""));
+    if (w.lever_line)
+      card.appendChild(el("p", "t-lever", w.lever_line));
     if (r.status === "already_sticks")
       card.appendChild(el("p", "t-note", "Your original beat every transformation the cold readers tested. Send it as it stands."));
     if (r.note)
@@ -1289,7 +1277,7 @@ $("run").onclick = async () => {
       heardBox.appendChild(heard);
     }
     // Beat 2: the original alongside, the alternates below.
-    if (othersBox && r.status !== "already_sticks" && r.original && r.original.text){
+    if (othersBox && r.status !== "already_sticks" && r.status !== "reorder_only" && r.original && r.original.text){
       var orig = el("div", "t-orig");
       orig.appendChild(el("p", "t-kind", "Your words, as they stand"));
       orig.appendChild(el("p", null, r.original.text));
@@ -1303,6 +1291,7 @@ $("run").onclick = async () => {
         var c = el("div", "t-alt");
         c.appendChild(el("p", "t-kind", a.label || a.kind || ""));
         c.appendChild(el("p", null, a.text || ""));
+        if (a.lever_line) c.appendChild(el("p", "t-lever", a.lever_line));
         alts.appendChild(c);
       });
       if (alts.children.length > 1) othersBox.appendChild(alts);
@@ -1409,7 +1398,7 @@ $("run").onclick = async () => {
             if (!line.trim()) return;
             var ev;
             try { ev = JSON.parse(line); } catch(e){ return; }
-            if (ev.type === "scan_ready") setStatus("Scanned. Writing three versions of it\u2026");
+            if (ev.type === "scan_ready") setStatus("Scanned. Writing the versions of it\u2026");
             else if (ev.type === "candidate_ready") setStatus("Wrote " + (ev.label || "a version") + ". Cold readers are carrying each version away\u2026");
             else if (ev.type === "selected") setStatus("A cold reader picked the winner. Finishing\u2026");
             else if (ev.type === "done") renderResult(ev.result);
