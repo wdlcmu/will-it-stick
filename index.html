@@ -109,6 +109,11 @@
   .story .try{display:inline-block;margin-top:8px;font-weight:bold;font-size:17px;line-height:1.2;
     color:var(--amber-deep);padding:12px 4px;min-height:44px}
   .hint{font-size:15px;color:var(--soft);margin:-2px 0 8px}
+  .goalbar{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:0 0 14px}
+  .goalbar-row{display:flex;flex-wrap:wrap;gap:10px}
+  .goalbar-row input{flex:1;min-width:200px;min-height:48px}
+  .goalbtn{font:inherit;font-size:16px;font-weight:bold;background:var(--amber);color:#241a02;border:none;border-radius:10px;padding:12px 16px;cursor:pointer;min-height:48px}
+  .goalbtn[disabled]{opacity:.55;cursor:wait}
   .strip details.fullcheck{margin:10px 0 0}
   .strip details.fullcheck summary{min-height:44px;padding:12px 4px;cursor:pointer;
     font-weight:bold;font-size:16px;color:var(--amber-deep)}
@@ -525,8 +530,8 @@ window.FLEET_CFG = {
     <label for="text">Your words</label>
     <textarea id="text" placeholder="Paste a note, a toast, a post, a hard message…"></textarea>
     <p class="drop">or <button type="button" class="dropbtn" id="drop-link">drop a text file (.txt or .md)</button><input type="file" id="file" accept=".txt,.md,text/plain,text/markdown" hidden></p>
-    <label for="motivation">What should your words do?</label>
-    <p class="hint" id="motivation-hint">One line: who reads them, and what should they do, feel, or remember?</p>
+    <label for="motivation">What should your words do? (optional)</label>
+    <p class="hint" id="motivation-hint">Leave it blank and the check uses this goal: Make it clear and kind. Or write one line: who reads them, and what should they do, feel, or remember?</p>
     <input type="text" id="motivation" maxlength="140" aria-describedby="motivation-hint" placeholder="Example: Make my partner feel thanked, not lectured.">
     <button class="btn" id="run">Make it stick</button>
     <div class="err" id="err"></div>
@@ -539,6 +544,15 @@ window.FLEET_CFG = {
   </section>
 
   <section id="results" aria-live="polite">
+    <div class="goalbar" id="goalbar">
+      <label for="result-goal">Goal used for this check</label>
+      <p class="hint" id="result-goal-note"></p>
+      <div class="goalbar-row">
+        <input type="text" id="result-goal" maxlength="140" aria-describedby="result-goal-note">
+        <button type="button" class="goalbtn" id="recheck-goal">Re-check with this goal</button>
+      </div>
+      <p class="hint" id="goalbar-msg" aria-live="polite"></p>
+    </div>
     <div class="beatbar" id="beatbar" aria-label="Result steps">
       <button type="button" data-beat="1" class="on">1 · Your version</button>
       <button type="button" data-beat="2">2 · Other versions</button>
@@ -786,6 +800,7 @@ document.querySelectorAll(".chip").forEach((chip) => {
     document.querySelectorAll(".chip").forEach((c) => c.setAttribute("aria-pressed", "false"));
     chip.setAttribute("aria-pressed", "true");
     chipGoal = CHIP_MOTIVATIONS[chip.dataset.chip] || "";
+    window.__wisChipGoal = chipGoal;
     $("motivation").placeholder = chipGoal ? "Example: " + chipGoal : "What should your words do?";
     $("text").focus();
   };
@@ -855,6 +870,8 @@ function paintDiff(el, tokens, changed, cls){
 let lastAfter = "";
 var lastCheck = null;
 let lastGoalText = "";
+const DEFAULT_GOAL = "Make it clear and kind.";
+let lastGoalSource = "";
 $("copy-after").onclick = async () => {
   if (!lastAfter) return;
   const b = $("copy-after");
@@ -882,6 +899,34 @@ $("recheck-after").onclick = () => {
   else $("text").focus();
 };
 
+// SPEC-FUNNEL-WIS-1: the goal stays editable on the result. Editing
+// alone never claims the result changed — the message says a re-check
+// is needed, and the button re-runs the whole check (panel + transform)
+// with the new goal, so no stale result sits under a new goal.
+const resultGoalInput = $("result-goal");
+if (resultGoalInput) resultGoalInput.addEventListener("input", () => {
+  const gm = $("goalbar-msg");
+  if (!gm) return;
+  const v = resultGoalInput.value.trim();
+  gm.textContent = (v && v !== lastGoalText)
+    ? "Goal changed. This result still used the old goal. Tap Re-check with this goal to update it."
+    : (!v ? "Blank goal. Re-checking will use the default goal: Make it clear and kind." : "");
+});
+const recheckGoalBtn = $("recheck-goal");
+if (recheckGoalBtn) recheckGoalBtn.onclick = () => {
+  if (!lastCheck) return;
+  const gm = $("goalbar-msg");
+  let v = resultGoalInput.value.trim();
+  if (!v) v = DEFAULT_GOAL;
+  if (v === lastGoalText){ if (gm) gm.textContent = "That is the goal this result already used. Change the words above first."; return; }
+  $("motivation").value = v;
+  chipGoal = "";
+  window.__wisChipGoal = "";
+  if (gm) gm.textContent = "Re-checking with the new goal…";
+  $("tool").scrollIntoView({behavior:"smooth", block:"start"});
+  $("run").click();
+};
+
 function firstLine(s){
   const m = String(s || "").match(/[^.!?]+[.!?]+/);
   return (m ? m[0] : String(s || "")).trim();
@@ -889,6 +934,16 @@ function firstLine(s){
 
 function render(r, original){
   lastCheck = { text: original, goal: lastGoalText, weakest: r.weakest };
+  const rg = $("result-goal");
+  if (rg) rg.value = lastGoalText;
+  const rn2 = $("result-goal-note");
+  if (rn2) rn2.textContent = lastGoalSource === "default"
+    ? "You left the goal blank, so this check used the default goal: Make it clear and kind. Change it here and re-check."
+    : lastGoalSource === "chip"
+    ? "This check used the example goal from the moment you picked. Change it here and re-check."
+    : "This check used the goal you wrote. Change it here and re-check.";
+  const gm = $("goalbar-msg");
+  if (gm) gm.textContent = "";
   if (window.resetWays) window.resetWays();
   const bars = $("bars"); bars.innerHTML = "";
   for (const el of r.elements){
@@ -1142,9 +1197,11 @@ async function runCheckPlain(text, motivation){
 $("run").onclick = async () => {
   const btn = $("run"), err = $("err");
   err.style.display = "none";
-  const text = $("text").value.trim(), motivation = $("motivation").value.trim() || chipGoal;
+  const typedGoal = $("motivation").value.trim();
+  const text = $("text").value.trim(), motivation = typedGoal || chipGoal || DEFAULT_GOAL;
+  lastGoalSource = typedGoal ? "typed" : (chipGoal ? "chip" : "default");
+  window.__wisGoal = motivation;
   if (text.length < 40){ err.textContent = "Paste a bit more first. A few sentences is enough."; err.style.display = "block"; return; }
-  if (!motivation){ err.textContent = "Add one line: what should these words do? Or tap a moment above and its example goal is used."; err.style.display = "block"; return; }
   btn.disabled = true;
   btn.innerHTML = '<span class="spin"></span>Three AI readers are on it…';
   const statusEl = $("run-status");
@@ -1531,8 +1588,8 @@ $("run").onclick = async () => {
 
   function startTransform(){
     var text = document.getElementById("text").value.trim();
-    var goal = document.getElementById("motivation").value.trim();
-    if (text.length < 40 || !goal){ wrap.hidden = true; return; }
+    var goal = document.getElementById("motivation").value.trim() || (window.__wisChipGoal || "") || "Make it clear and kind.";
+    if (text.length < 40){ wrap.hidden = true; return; }
     tState = { text: text, goal: goal };
     wrap.hidden = false;
     if (othersBox) othersBox.innerHTML = "";
