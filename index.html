@@ -916,10 +916,16 @@ const recheckGoalBtn = $("recheck-goal");
 if (recheckGoalBtn) recheckGoalBtn.onclick = () => {
   if (!lastCheck) return;
   const gm = $("goalbar-msg");
-  let v = resultGoalInput.value.trim();
-  if (!v) v = DEFAULT_GOAL;
+  const rawGoal = resultGoalInput.value.trim();
+  const v = rawGoal || DEFAULT_GOAL;
   if (v === lastGoalText){ if (gm) gm.textContent = "That is the goal this result already used. Change the words above first."; return; }
-  $("motivation").value = v;
+  // SPEC-FUNNEL-WIS-2: a blanked edit reaches the Run handler as a
+  // blank #motivation, so the run's own fallback resolves the
+  // default goal AND its source classifier labels the run
+  // "default". Substituting the default text here made the run
+  // read it as a typed goal, and the result note lied ("the goal
+  // you wrote") about a goal the visitor never wrote.
+  $("motivation").value = rawGoal;
   chipGoal = "";
   window.__wisChipGoal = "";
   if (gm) gm.textContent = "Re-checking with the new goal…";
